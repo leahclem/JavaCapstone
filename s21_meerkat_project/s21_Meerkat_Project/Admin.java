@@ -1,11 +1,19 @@
 package s21_Meerkat_Project;
 
 public class Admin extends User {
-	private boolean newAdmin;
+	private String fname;
+	private String lname;
+	private boolean baseAdmin = false;
 	
-	
-	public Admin() {
+	Admin(){
 		
+	}
+	
+	Admin(String userName, String password, String fname, String lname, boolean base){
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		baseAdmin = base;
 	}
 	
 	
@@ -14,6 +22,29 @@ public class Admin extends User {
 	// update auction details method
 	
 	// 
+	public String getFname() {
+		return this.fname;
+	}
+	
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	
+	public String getLname() {
+		return this.lname;
+	}
+	
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+	
+	public boolean isBaseAdmin() {
+		return this.baseAdmin;
+	}
+	
+	public void setBaseAdmin(boolean base) {
+		this.baseAdmin = base;
+	}
 	
 	
 }
