@@ -1,6 +1,7 @@
 package s21_Meerkat_Project;
 
 import java.util.Date;
+import java.util.Scanner;
 
 public class Bids {
 
@@ -38,5 +39,4 @@ public class Bids {
 	
 	// 
 	
-
 }

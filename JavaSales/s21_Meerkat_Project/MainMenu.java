@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 public class MainMenu {
 
 	private Scanner scan = new Scanner(System.in);
-	
+
 	public BufferedReader openRead() {
 		Frame f = new Frame();
 		// decide from where to read the file
@@ -142,7 +142,8 @@ public class MainMenu {
 	public void printPups(ArrayList<Puppies> pupList) {
 		Scanner scan = new Scanner(System.in);
 		int selection = 0;
-		System.out.println("Would you prefer to sort by breed or price? \n1. Breed\n2. Price ");
+
+		System.out.println("Would you prefer to search by breed or price? \n1. Name \n2. Price ");
 		boolean validNum = false;
 		while (!validNum) {
 			try {
@@ -180,8 +181,8 @@ public class MainMenu {
 			int counter = 0;
 
 			for (int i = 0; i < pupList.size(); i++) {
-				String pupName = (String) pupList.get(i).getBreed();
-				if (pupName.equalsIgnoreCase(breed)) {
+				String pupBreed = (String) pupList.get(i).getBreed();
+				if (pupBreed.equalsIgnoreCase(breed)) {
 					System.out.println(pupList.get(i).toString());
 					counter++;
 				}
@@ -189,6 +190,7 @@ public class MainMenu {
 			if (counter == 0) {
 				System.out.println("We do not have that breed. ");
 			}
+
 		} else if (selection == 2) {
 			System.out.println("How much is your budget? ");
 			validNum = false;
@@ -303,19 +305,19 @@ public class MainMenu {
 	}
 
 	public void createDefaultPuppy(ArrayList<Puppies> pupList) {
-		pupList.add(new Puppies("Jolly","poodle","male",true,2000.0,false,true));
-		pupList.add(new Puppies("Happy","beagle","male",true,1000.0,false,true));
-		pupList.add(new Puppies("Sugar","German Shepherd","female",true,1500.0,false,true));
-		pupList.add(new Puppies("Valley","Alsation","female",false,200,true,false));
+		pupList.add(new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true));
+		pupList.add(new Puppies("Happy", "beagle", "male", true, 1000.0, false, true));
+		pupList.add(new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true));
+		pupList.add(new Puppies("Valley", "Alsation", "female", false, 200, true, false));
 	}
-	
+
 	public int menu() {
 		int value = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven!");
 		System.out.println("1. Search puppies: ");
 		System.out.println("2. Sign in: ");
-		System.out.println("3. Load sample data: ");  /// display random 5 dogs, Will
+		System.out.println("3. Load sample data: "); /// display random 5 dogs, Will
 		System.out.println("4. Process the backloged data: ");
 		System.out.println("5. Exit: ");
 		System.out.print("Choice: ");
@@ -327,10 +329,10 @@ public class MainMenu {
 		}
 		return value;
 	}
-	
+
 	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users) {
 		User loggedIn = null;
-		
+
 		if (choice == 1) {
 			printPups(pupList);
 		} else if (choice == 2) {
@@ -346,7 +348,7 @@ public class MainMenu {
 		} else {
 			System.out.println("I don't understand, please enter a number from 1-5? ");
 		}
-		
+
 		return loggedIn;
 	}
 	// Main/Start Menu: Leah
