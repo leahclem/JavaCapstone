@@ -1,6 +1,7 @@
 package s21_Meerkat_Project;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AuctionHouse {
 	private boolean open; // this should be update based on a time stamp, implement later when we have business hours
@@ -28,6 +29,35 @@ public class AuctionHouse {
 		this.allPups = allPups;
 		this.allUsers = allUsers;
 	}
+	
+	
+	public void checkTime() {//will check if any bids are over
+		Date curTime = new Date(System.currentTimeMillis());//The current time and date
+		if(this.allBids != null) {//if there are any bids active
+			for(Bids b: this.allBids) {
+				if(b.getEndBy().before(curTime) && b.getPup().isAvailable() == true) {//Checks if the current time is before the end date and the bid is active
+					//print and call something in bids to end this bid
+					System.out.println("The bid for " + b.getPup().getName() + " is over the winner is " + b.getWinner().getUserName());
+					b.getPup().setAvailable(false);
+					
+				}
+				
+			}//end of for loop
+		}
+	}//end of checkTime
+	
+	public void activeBids() {//prints all active bids
+		if(this.allBids != null) {//if there are any active bids
+			for(Bids b: this.allBids) {
+				if(b.getPup().isAvailable()) {
+					System.out.println(b.getPup().toString() + "\n It ends on " + b.getEndBy().toString());//add a to string for the date
+				}//end of if
+			}//end of for
+		} else {
+			System.out.println("No bids are currently active, have an admin set one up");
+		}
+		
+	}//end of method
 
 	public boolean isOpen() {
 		return open;

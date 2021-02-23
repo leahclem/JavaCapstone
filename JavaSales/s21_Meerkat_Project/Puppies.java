@@ -9,7 +9,7 @@ public class Puppies extends Bids {
 	private boolean pedigree; // who parents are if true, if false no need to capture parent's names
 	private double price; // opening price
 	private boolean hypo;
-	private boolean sold; // true if already sold, false if still up for auction
+	private boolean available; // true if available, false if already sold
 	
 	public Puppies() {
 		
@@ -28,18 +28,18 @@ public class Puppies extends Bids {
 		this.pedigree = pedigree;
 		this.price = price;
 		this.hypo = hypo;
-		this.sold = sold;
+		this.available = sold;
 	}
 	
 	public String toString() {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		return "Named: " +name+" is a "+breed+". Is "+sex+". Is pedigreed: "+pedigree+". Opening priced at: "+nf.format(price)+
-				". Is hypo-allergenic: "+hypo+". Is available: "+sold+".";
+				". Is hypo-allergenic: "+hypo+". Is available: "+available+".";
 				
 	}
 	
 	public String toStringF() {
-		return name+","+breed+","+sex+","+pedigree+","+price+","+hypo+","+sold;
+		return name+","+breed+","+sex+","+pedigree+","+price+","+hypo+","+available;
 	}
 
 	public String getName() {
@@ -90,12 +90,12 @@ public class Puppies extends Bids {
 		this.hypo = hypo;
 	}
 
-	public boolean isSold() {
-		return sold;
+	public boolean isAvailable() {
+		return available;
 	}
 
-	public void setSold(boolean sold) {
-		this.sold = sold;
+	public void setAvailable(boolean sold) {
+		this.available = sold;
 	}
 
 	

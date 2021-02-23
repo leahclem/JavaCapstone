@@ -142,8 +142,7 @@ public class MainMenu {
 	public void printPups(ArrayList<Puppies> pupList) {
 		Scanner scan = new Scanner(System.in);
 		int selection = 0;
-
-		System.out.println("Would you prefer to search by breed or price? \n1. Name \n2. Price ");
+		System.out.println("Would you prefer to sort by breed or price? \n1. Breed\n2. Price ");
 		boolean validNum = false;
 		while (!validNum) {
 			try {
@@ -181,8 +180,8 @@ public class MainMenu {
 			int counter = 0;
 
 			for (int i = 0; i < pupList.size(); i++) {
-				String pupBreed = (String) pupList.get(i).getBreed();
-				if (pupBreed.equalsIgnoreCase(breed)) {
+				String pupName = (String) pupList.get(i).getBreed();
+				if (pupName.equalsIgnoreCase(breed)) {
 					System.out.println(pupList.get(i).toString());
 					counter++;
 				}
@@ -190,7 +189,6 @@ public class MainMenu {
 			if (counter == 0) {
 				System.out.println("We do not have that breed. ");
 			}
-
 		} else if (selection == 2) {
 			System.out.println("How much is your budget? ");
 			validNum = false;
@@ -291,9 +289,10 @@ public class MainMenu {
 		password = scan.nextLine();
 		System.out.println("Enter you address so we can ship your purchased products:");
 		address = scan.nextLine();
-		System.out.println("You can add credit card information later, but before you purchase something");
+		System.out.println("What is your Paypal email address? ");
+		String payPal = scan.nextLine();
 
-		users.add(new Customer(username, password, address));
+		users.add(new Customer(username, password, address, payPal));
 		// sign in now
 		return returningUser(users);
 	}
@@ -301,7 +300,9 @@ public class MainMenu {
 	// Default stuff, going to change, to read from a file
 	public void createDefaultAdmin(ArrayList<User> users) {
 		users.add(new Admin("dwolff", "CutePups", "Diane", "Wolff", true));
-		users.add(new Customer("jdoe", "idkTu", "31 Old Warren Rd."));
+		users.add(new Customer("jdoe", "apple", "31 Old Warren Rd.","schmoe@gmail.com"));
+		users.add(new Admin("willzy", "apple", "Will", "McCoy", true));
+		users.add(new Admin("assteroids", "123", "Leah", "Clemens", true));
 	}
 
 	public void createDefaultPuppy(ArrayList<Puppies> pupList) {
@@ -318,7 +319,7 @@ public class MainMenu {
 		System.out.println("1. Search puppies: ");
 		System.out.println("2. Sign in: ");
 		System.out.println("3. Load sample data: "); /// display random 5 dogs, Will
-		System.out.println("4. Process the backloged data: ");
+		System.out.println("4. Display active bids: ");
 		System.out.println("5. Exit: ");
 		System.out.print("Choice: ");
 		try {
@@ -330,7 +331,7 @@ public class MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users) {
+	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users, AuctionHouse ah) {
 		User loggedIn = null;
 
 		if (choice == 1) {
@@ -340,7 +341,7 @@ public class MainMenu {
 		} else if (choice == 3) {
 			;
 		} else if (choice == 4) {
-			;
+			ah.activeBids();
 		} else if (choice == 5) {
 			System.out.println("Bye!!!!!");
 			System.exit(0);
@@ -350,6 +351,101 @@ public class MainMenu {
 		}
 
 		return loggedIn;
+	}
+
+	public Puppies addPup() {
+		String name = "";
+		String breed = "";
+		String sex = "";
+		boolean ped = true;
+		boolean hypo = true;
+		boolean available = true;
+		boolean valid = false;
+		double price = 0;
+		System.out.println("What is the name of the new pup for sale? ");
+		while (!valid) {
+			try {
+				name = scan.nextLine();
+				valid = true;
+			} catch (InputMismatchException e) {
+				System.out.println("That isn't a puppy name, try again. ");
+				scan.nextLine();
+			}
+		}
+		valid = false;
+		System.out.println("What is the breed of the puppy? ");
+		while (!valid) {
+			try {
+				breed = scan.nextLine();
+				valid = true;
+			} catch (InputMismatchException e) {
+				System.out.println("That isn't a puppy breed, try again. ");
+				scan.nextLine();
+			}
+		}
+		valid = false;
+		System.out.println("What is the sex of the new puppy (male/female)? ");
+		while (!valid) {
+			try {
+				sex = scan.nextLine();
+				if (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("Female")) {
+					valid = true;
+				} else {
+					System.out.println("I don't understand, please enter male or female. ");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("I don't understand, please enter male or female. ");
+				scan.nextLine();
+			}
+		}
+		valid = false;
+		System.out.println("Does the puppy have a pedigree (true/false)? ");
+		while (!valid) {
+			try {
+				ped = scan.nextBoolean();
+				if (ped == true || ped == false) {
+					valid = true;
+				} else {
+					System.out.println("I don't understand, please enter true or false. ");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("I don't understand, please enter true or false. ");
+				scan.nextLine();
+			}
+		}
+		valid = false;
+		System.out.println("What is the starting price for the puppy? ");
+		while (!valid) {
+			try {
+				price = scan.nextDouble();
+				if (price > 0) {
+					valid = true;
+				} else {
+					System.out.println("Please enter a starting price above $0. ");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("I don't understand, please enter a numerical price. ");
+				scan.nextLine();
+			}
+		}
+		valid = false;
+		System.out.println("Is the puppy hypoallergenic (true/false)? ");
+		while (!valid) {
+			try {
+				hypo = scan.nextBoolean();
+				if (hypo == true || hypo == false) {
+					valid = true;
+				} else {
+					System.out.println("I don't understand, please enter true or false. ");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("I don't understand, please enter true or false. ");
+				scan.nextLine();
+			}
+		}
+		available = true;
+		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo, available);
+		return pup;
 	}
 	// Main/Start Menu: Leah
 	// search puppies : Will printPup method

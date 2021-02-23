@@ -20,9 +20,10 @@ public class AdminMenu extends MainMenu{
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
 		System.out.println("1. Search puppies: ");
 		System.out.println("2. Logout: ");
-		System.out.println("3. Load sample data: ");  /// display random 5 dogs, Will
-		System.out.println("4. Process the backloged data: ");
-		System.out.println("5. Exit: ");
+		System.out.println("3. Add a new puppy for sale: ");  
+		System.out.println("4. Display active bids: ");
+		System.out.println("5. Process the backloged data: ");
+		System.out.println("6. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -33,7 +34,7 @@ public class AdminMenu extends MainMenu{
 		return value;
 	}
 	
-	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users) {
+	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users, AuctionHouse ah) {
 		User loggedIn = this.curUser;
 		
 		if (choice == 1) {
@@ -42,14 +43,15 @@ public class AdminMenu extends MainMenu{
 			loggedIn = null;
 			System.out.println("Bye Admin " + curUser.getUserName());
 		} else if (choice == 3) {
-			;
+			pupList.add(addPup());
 		} else if (choice == 4) {
-			;
+			ah.activeBids();
 		} else if (choice == 5) {
+			;
+		} else if (choice == 6) {
 			System.out.println("Bye!!!!!");
 			System.exit(0);
-			;
-		} else {
+		}else {
 			System.out.println("I don't understand, please enter a number from 1-5? ");
 		}
 		

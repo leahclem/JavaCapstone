@@ -20,8 +20,8 @@ public class CustomerMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Customer user " + curUser.getUserName());
 		System.out.println("1. View puppies: ");
-		System.out.println("2. Search puppy: ");
-		System.out.println("3. Load sample data: "); /// display random 5 dogs, Will
+		System.out.println("2. Place bid on Puppy: ");
+		System.out.println("3. Display active bids: ");
 		System.out.println("4. Logout: ");
 		System.out.println("5. Exit: ");
 		System.out.print("Choice: ");
@@ -34,13 +34,13 @@ public class CustomerMenu extends MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users) {
+	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users, AuctionHouse ah) {
 		User loggedIn = this.curUser;
 
 		if (choice == 1) {
 			printPups(pupList);
 		} else if (choice == 2) {
-			Customer.newBid(pupList, 0, curUser);
+			Customer.newBid(ah.getAllBids(), curUser);
 		} else if (choice == 3) {
 			;
 		} else if (choice == 4) {
