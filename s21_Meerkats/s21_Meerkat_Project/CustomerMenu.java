@@ -4,28 +4,59 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Customer extends User {
-	private String payPal;
-	private ArrayList<Bids> hiBids; // customer's current high bid
-	private String address;
+public class CustomerMenu extends MainMenu {
 
-	Customer() {
+	private User curUser;
 
+	CustomerMenu() {
 	}
 
-	Customer(String userName, String password, String address) {
-		super(userName, password, 'C');
-		this.address = address;
-		this.hiBids = new ArrayList<Bids>();
+	CustomerMenu(User u) {
+		this.curUser = u;
 	}
 
-	Customer(String userName, String password, String address, String payPal) {
-		super(userName, password, 'C');
-		this.address = address;
-		this.payPal = payPal;
-		this.hiBids = new ArrayList<Bids>();
+	public int menu() {
+		int value = 0;
+		Scanner scan = new Scanner(System.in);
+		System.out.println(" Welcome to Puppy Heaven! Customer user " + curUser.getUserName());
+		System.out.println("1. View puppies: ");
+		System.out.println("2. Place bid on Puppy: ");
+		System.out.println("3. Display active bids: ");
+		System.out.println("4. Logout: ");
+		System.out.println("5. Exit: ");
+		System.out.print("Choice: ");
+		try {
+			value = scan.nextInt();
+		} catch (InputMismatchException e) {
+			System.out.print("Input Error. ");
+			scan.nextLine();
+		}
+		return value;
 	}
 
+	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users, AuctionHouse ah) {
+		User loggedIn = this.curUser;
+
+		if (choice == 1) {
+			printPups(pupList);
+		} else if (choice == 2) {
+			newBid(ah.getAllBids(), curUser);
+		} else if (choice == 3) {
+			ah.activeBids();
+		} else if (choice == 4) {
+			loggedIn = null;
+			System.out.println("Bye Customer " + curUser.getUserName());
+		} else if (choice == 5) {
+			System.out.println("Bye!!!!!");
+			System.exit(0);
+			;
+		} else {
+			System.out.println("I don't understand, please enter a number from 1-5? ");
+		}
+
+		return loggedIn;
+	}
+	
 	public static void newBid(ArrayList<Bids> curBid, User customer) {
 		double maxBid = 0;
 		Scanner scan = new Scanner(System.in);
@@ -77,17 +108,11 @@ public class Customer extends User {
 		else
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
+
+
+		
+//if payEnt = true call newBid method from Customer?
+		
+//searchPup return puppy to bid on with newBid in Customer class
+	
 }
-
-// make-bid method here: ensure ending date of auction is referenced, get max
-// bid from customer, and display global current bid, check if
-// bid is sufficient to become current bid, then update current global bid.
-// winning bids are auctions you are currently winning
-// available bids are auctions you are bidding in, but not currently winning
-// global bid is current bid viewable to all
-
-// checkWinBid method
-
-// updateBid method
-
-// view current auctions method

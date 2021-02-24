@@ -10,14 +10,14 @@ public class Puppies_Run_Me {
 		//Variable Declaration
 		User loggedIn = null;
 		MainMenu mm = new MainMenu();
-		
+		ArrayList<Bids> bid = new ArrayList<Bids>();
 		ArrayList<Puppies> pupList = new ArrayList<Puppies>();
 		//ArrayList<Puppies> pupList = mm.loadData();
 		ArrayList<User> users = new ArrayList<User>();
 		mm.createDefaultAdmin(users);
 		// create default puppy objects similar to above
 		mm.createDefaultPuppy(pupList);
-		AuctionHouse ah = new AuctionHouse(true,pupList, users); // set open to true
+		AuctionHouse ah = new AuctionHouse(true,bid, pupList, users); // set open to true
 		// ArrayList<Puppies> pupList = loadData();
 		// printPups(pupList);
 		// ArrayList<User> users = new ArrayList<User>();
