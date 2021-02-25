@@ -11,12 +11,12 @@ public class User {
 		
 	}
 	
-	User(String userName, String password, String type){
+	User(String userName, String password, char type){
 		this.userName = userName;
 		this.password = password;
 		this.tempid++;
 		this.userType = type;
-		this.id = type + this.tempid;
+		this.id = "" + type + this.tempid;
 	}
 
 	public char getUserType(){

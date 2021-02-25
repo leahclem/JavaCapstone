@@ -10,7 +10,7 @@ public class Admin extends User {
 	}
 	
 	Admin(String userName, String password, String fname, String lname, boolean base){
-		super();
+		super(userName, password, 'A');
 		this.fname = fname;
 		this.lname = lname;
 		baseAdmin = base;
