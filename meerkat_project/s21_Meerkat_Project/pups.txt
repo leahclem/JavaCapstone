@@ -1,9 +1,0 @@
-Bowser,boxer, Male,true,2500.0,false,true
-Sophie,maltese, Female,true,1200.0,true,true
-BooBoo,maltese, Male,false,800.0,true,true
-Tootsie,boxer, Female,true,1000.0,false,true
-Muffet,beagle, Female,false,900.0,false,false
-Tuffet,mutt, Male,false,100.0,false,false
-Siebert,blue heeler, male,false,1000.0,false,false
-Rover,mutt, male,false,100.0,false,true
-Mr. Pink Whistle, pomeranian, male,false,800.0,false,true
