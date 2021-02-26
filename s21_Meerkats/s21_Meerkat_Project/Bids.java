@@ -43,7 +43,7 @@ public class Bids {
 		active = true;
 	}
 
-	public String toString() { // FINISH
+	public String toString() { 
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.pup.getName() + " is ");
