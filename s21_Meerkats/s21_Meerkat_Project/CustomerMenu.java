@@ -81,7 +81,7 @@ public class CustomerMenu extends MainMenu {
 
 			}
 			if (counter == 0) {
-				System.out.println("That puppy is not availble. ");
+				System.out.println("That puppy is not available. ");
 			} else {
 				System.out.println("Would you like to bid on " + name + "?(yes/no)");
 				String placeBid = scan.nextLine();
