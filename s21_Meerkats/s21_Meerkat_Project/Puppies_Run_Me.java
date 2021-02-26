@@ -9,6 +9,8 @@ public class Puppies_Run_Me {
 	public static void main(String[] args) {
 		//Variable Declaration
 		User loggedIn = null;
+		
+		// comment apple
 		MainMenu mm = new MainMenu();
 		ArrayList<Bids> bid = new ArrayList<Bids>();
 		ArrayList<Puppies> pupList = new ArrayList<Puppies>();
