@@ -117,24 +117,7 @@ public class AdminMenu extends MainMenu {
 			}
 
 		}
-		validNum = false;
-		scan.nextLine();
-		// clean up for different dates in months... eg feb =28, etc.
-		System.out.println("What is the ending day (1-31)? ");
-		while (!validNum) {
-			try {
-				day = scan.nextInt();
-				if (day <= 31 && day >= 1) {
-					validNum = true;
-				} else {
-					System.out.println("Please day a number between 1-31: ");
-				}
-			} catch (InputMismatchException e) {
-				System.out.println("Input a day between 1-31: ");
-				scan.nextLine();
-			}
-
-		}
+		
 		validNum = false;
 		scan.nextLine();
 		System.out.println("What is the ending year? ");
@@ -152,6 +135,29 @@ public class AdminMenu extends MainMenu {
 			}
 
 		}
+		
+		int validDay = getNumberOfDays(month, year);
+				
+		
+		validNum = false;
+		scan.nextLine();
+		// clean up for different dates in months... eg feb =28, etc. // done WAM
+		System.out.println("What is the ending day (1-"+validDay+")? ");
+		while (!validNum) {
+			try {
+				day = scan.nextInt();
+				if (day <= validDay && day >= 1) {
+					validNum = true;
+				} else {
+					System.out.println("Please day a number between 1-"+validDay+": ");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Input a day between 1-"+validDay+": ");
+				scan.nextLine();
+			}
+
+		}
+		
 
 		scan.nextLine();
 		validNum = false;
@@ -190,6 +196,27 @@ public class AdminMenu extends MainMenu {
 		LocalDateTime date = LocalDateTime.of(year, month, day, hour, min, 0, 0);
 
 		return date;
+	}
+	
+	public int getNumberOfDays(int month, int year) {
+		// Local variable for the number of days,
+		// initialized to 31.
+		int days = 31;
+
+		// Determine the number of days in the month.
+		
+		if(month==9 || month == 4 || month ==6 || month == 11)
+			days = 30;
+		else if (month ==2) {
+			// Determine if the year is a leap year.
+			if ((year % 100 == 0 && year % 400 == 0) || (year % 100 !=0 && year % 4 == 0))
+				days = 29; // If so, February has 29 days.
+			else
+				days = 28; // If not, February has 28 days.
+		}
+		
+		// Return the number of days.
+		return days;
 	}
 	
 	public void createAdmin(ArrayList<User> users) {
