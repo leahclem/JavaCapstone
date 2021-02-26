@@ -53,11 +53,11 @@ public class AdminMenu extends MainMenu {
 			createBid(ah);
 		} else if (choice == 6) {
 			createAdmin(users);
-		} else if(choice == 7) {
+		} else if (choice == 7) {
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 		} else {
-		
+
 			System.out.println("I don't understand, please enter a number from 1-6? ");
 		}
 
@@ -68,6 +68,8 @@ public class AdminMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		// query admin for which puppy to create a bid for, using name as the primary
 		// key
+		boolean noBids = true;
+		int counter = 0;
 		System.out.println("Which puppy are we auctioning? (provide Puppie's name) ");
 		String name = scan.nextLine();
 		Puppies pup = null;
@@ -76,22 +78,36 @@ public class AdminMenu extends MainMenu {
 		for (int i = 0; i < ah.getAllPups().size(); i++) {
 			if (ah.getAllPups().get(i).getName().equalsIgnoreCase(name)) {
 				pup = ah.getAllPups().get(i);
-
 			}
 
 		} // end for loop for pup name search
-			//
+
+		// for loop to determine if there is already a Bid object for the puppy
+		for (int j = 0; j < ah.getAllPups().size(); j++) {
+			try {
+				if (pup.getName().equalsIgnoreCase(ah.getAllBids().get(j).getPup().getName())) {
+					// if the name equals an existing Bid object, then return false
+					counter += 1;
+				}
+
+			} catch (IndexOutOfBoundsException iob) {
+				counter=0;
+			}
+		} // end loop to determine if there is an existing Bid for the puppy
+
 		if (pup == null) {
 			System.out.println("We did not find a puppy with that name. ");
 			// this should pull us out of the method if no puppy is found
-		} else {
-			
+		} else if (counter==1) {
+			System.out.println("There is already an auction for this puppy. ");
+		} else if (counter==0) {
 			LocalDateTime endDate = validDate();
 			ah.addBid(new Bids(pup, endDate));
+		} else {
+			System.out.println("Something isn't right. ");
 		}
 	}
-	
-	
+
 	public LocalDateTime validDate() {
 		Scanner scan = new Scanner(System.in);
 
@@ -117,7 +133,7 @@ public class AdminMenu extends MainMenu {
 			}
 
 		}
-		
+
 		validNum = false;
 		scan.nextLine();
 		System.out.println("What is the ending year? ");
@@ -135,29 +151,27 @@ public class AdminMenu extends MainMenu {
 			}
 
 		}
-		
+
 		int validDay = getNumberOfDays(month, year);
-				
-		
+
 		validNum = false;
 		scan.nextLine();
 		// clean up for different dates in months... eg feb =28, etc. // done WAM
-		System.out.println("What is the ending day (1-"+validDay+")? ");
+		System.out.println("What is the ending day (1-" + validDay + ")? ");
 		while (!validNum) {
 			try {
 				day = scan.nextInt();
 				if (day <= validDay && day >= 1) {
 					validNum = true;
 				} else {
-					System.out.println("Please day a number between 1-"+validDay+": ");
+					System.out.println("Please day a number between 1-" + validDay + ": ");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("Input a day between 1-"+validDay+": ");
+				System.out.println("Input a day between 1-" + validDay + ": ");
 				scan.nextLine();
 			}
 
 		}
-		
 
 		scan.nextLine();
 		validNum = false;
@@ -197,37 +211,37 @@ public class AdminMenu extends MainMenu {
 
 		return date;
 	}
-	
+
 	public int getNumberOfDays(int month, int year) {
 		// Local variable for the number of days,
 		// initialized to 31.
 		int days = 31;
 
 		// Determine the number of days in the month.
-		
-		if(month==9 || month == 4 || month ==6 || month == 11)
+
+		if (month == 9 || month == 4 || month == 6 || month == 11)
 			days = 30;
-		else if (month ==2) {
+		else if (month == 2) {
 			// Determine if the year is a leap year.
-			if ((year % 100 == 0 && year % 400 == 0) || (year % 100 !=0 && year % 4 == 0))
+			if ((year % 100 == 0 && year % 400 == 0) || (year % 100 != 0 && year % 4 == 0))
 				days = 29; // If so, February has 29 days.
 			else
 				days = 28; // If not, February has 28 days.
 		}
-		
+
 		// Return the number of days.
 		return days;
 	}
-	
+
 	public void createAdmin(ArrayList<User> users) {
-		//Ask for name and sign in information
+		// Ask for name and sign in information
 		Scanner scan = new Scanner(System.in);
 		String userName;
 		String password;
 		String fname;
 		String lname;
 		boolean base = false;
-		
+
 		System.out.print("Enter the first name of the new Admin: ");
 		fname = scan.nextLine();
 		System.out.print("Enter the last name of the new Admin: ");
@@ -236,17 +250,17 @@ public class AdminMenu extends MainMenu {
 		userName = scan.nextLine();
 		System.out.println("Finally enter the password of the new Admin: ");
 		password = scan.nextLine();
-		
+
 		users.add(new Admin(userName, password, fname, lname, base));
-		
+
 		System.out.println("Created user: " + userName);
-	}//end of create admin
-	// Admin menu:
-	// List all ongoing auctions
-	// Select an auction and check bidding history
-	// list information about completed auctions
-	// list summary of winning bids
-	// add an activate a new auction
-	// return to main menu
+	}// end of create admin
+		// Admin menu:
+		// List all ongoing auctions
+		// Select an auction and check bidding history
+		// list information about completed auctions
+		// list summary of winning bids
+		// add an activate a new auction
+		// return to main menu
 
 }
