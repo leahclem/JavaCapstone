@@ -1,5 +1,6 @@
 package s21_Meerkat_Project;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -19,47 +20,58 @@ public class Bids {
 	private User winner;
 
 	private Puppies pup;
-	
+
 	private boolean active;
-	
+
 	public Bids() {
 
 	}
-	
+
 	public Bids(Puppies pup, LocalDateTime end) {
-		this.pup=pup;
-		currentBid=pup.getPrice();
-		maxBid=0;
-		if(pup.getPrice()<1000) {
+		this.pup = pup;
+		currentBid = pup.getPrice();
+		maxBid = 0;
+		if (pup.getPrice() < 1000) {
 			increment = 10;
-		}else{
+		} else {
 			increment = 50;
 		}
-		startBy=LocalDateTime.now();
-		endBy=end;
-		
-		winner=new User("no one", "apple", 'C');
+		startBy = LocalDateTime.now();
+		endBy = end;
+
+		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method 
 		active = true;
 	}
-	
+
 	public String toString() { // FINISH
-		return this.pup.getName() + " is on auction for ";
-	}
-	
-	
-	public void checkBid(User cust, double newBid) {
-		if(winner == null) {
-			winner=cust;
-			maxBid=newBid;
-		} else if(winner == cust) {
-			maxBid=newBid;
+		NumberFormat nf = NumberFormat.getCurrencyInstance();
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.pup.getName() + " is ");
+		if (active == false) {
+			sb.append("not on auction. The winner was " + this.winner.getUserName() + ". The auction ended on " + endBy
+					+ " and the final price was " + nf.format(getCurrentBid()) + ".");
 		} else {
-			if (newBid>currentBid+increment && newBid<maxBid+increment){
-				currentBid=currentBid+increment;
-			} else if(newBid>maxBid+increment) {
-				winner=cust;
-				currentBid=maxBid+increment;
-				maxBid=newBid;
+			sb.append("on auction for " + nf.format(currentBid) + ". The current winner of the auction is "
+					+ this.winner.getUserName() + ". This auction started on " + startBy + " and ends on " + endBy
+					+ ".");
+		}
+		String bidString = sb.toString();
+		return bidString;
+	}
+
+	public void checkBid(User cust, double newBid) {
+		if (winner == null) { // fix from constructor change
+			winner = cust;
+			maxBid = newBid;
+		} else if (winner == cust) {
+			maxBid = newBid;
+		} else {
+			if (newBid > currentBid + increment && newBid < maxBid + increment) {
+				currentBid = currentBid + increment;
+			} else if (newBid > maxBid + increment) {
+				winner = cust;
+				currentBid = maxBid + increment;
+				maxBid = newBid;
 			}
 		}
 	}
@@ -88,7 +100,6 @@ public class Bids {
 		this.increment = increment;
 	}
 
-	
 	public LocalDateTime getEndBy() {
 		return endBy;
 	}
@@ -128,5 +139,5 @@ public class Bids {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 }
