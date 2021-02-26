@@ -36,7 +36,7 @@ public class CustomerMenu extends MainMenu {
 
 	public User menuChoice(int choice, AuctionHouse ah) {
 		User loggedIn = this.curUser;
-
+		// apple
 		if (choice == 1) {
 			printPups(ah.getAllPups());
 		} else if (choice == 2) {
