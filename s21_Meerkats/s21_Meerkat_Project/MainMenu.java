@@ -331,13 +331,13 @@ public class MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users, AuctionHouse ah) {
+	public User menuChoice(int choice, AuctionHouse ah) {
 		User loggedIn = null;
 
 		if (choice == 1) {
-			printPups(pupList);
+			printPups(ah.getAllPups());
 		} else if (choice == 2) {
-			loggedIn = loginInMenu(users);
+			loggedIn = loginInMenu(ah.getAllUsers());
 		} else if (choice == 3) {
 			;
 		} else if (choice == 4) {

@@ -34,11 +34,11 @@ public class CustomerMenu extends MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users, AuctionHouse ah) {
+	public User menuChoice(int choice, AuctionHouse ah) {
 		User loggedIn = this.curUser;
 
 		if (choice == 1) {
-			printPups(pupList);
+			printPups(ah.getAllPups());
 		} else if (choice == 2) {
 			newBid(ah.getAllBids(), curUser);
 		} else if (choice == 3) {

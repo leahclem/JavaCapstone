@@ -35,7 +35,7 @@ public class Puppies_Run_Me {
 			if(loggedIn == null) {
 				choice = mm.menu();//moved menu to main menu so I can overwrite it for each menu
 				//moved the choices to the main menu to be overwritten by other menus
-				loggedIn = mm.menuChoice(choice, ah.getAllPups(), ah.getAllUsers(), ah);//in main menu, if no one is signed in null is returned
+				loggedIn = mm.menuChoice(choice, ah);//in main menu, if no one is signed in null is returned
 			} else {
 				//set up a new Menu
 				MainMenu cm;
@@ -51,7 +51,7 @@ public class Puppies_Run_Me {
 				//get the user choice
 				choice = cm.menu();
 				//do the user choice
-				loggedIn = cm.menuChoice(choice, ah.getAllPups(), ah.getAllUsers(), ah);
+				loggedIn = cm.menuChoice(choice, ah);
 				
 			}
 			ah.checkTime(); // this checks if the bids are over

@@ -37,22 +37,22 @@ public class AdminMenu extends MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, ArrayList<Puppies> pupList, ArrayList<User> users, AuctionHouse ah) {
+	public User menuChoice(int choice, AuctionHouse ah) {
 		User loggedIn = this.curUser;
 
 		if (choice == 1) {
-			printPups(pupList);
+			printPups(ah.getAllPups());
 		} else if (choice == 2) {
 			loggedIn = null;
 			System.out.println("Bye Admin " + curUser.getUserName());
 		} else if (choice == 3) {
-			pupList.add(addPup());
+			ah.getAllPups().add(addPup());
 		} else if (choice == 4) {
 			ah.activeBids();
 		} else if (choice == 5) {
 			createBid(ah);
 		} else if (choice == 6) {
-			createAdmin(users);
+			createAdmin(ah.getAllUsers());
 		} else if (choice == 7) {
 			System.out.println("Bye!!!!!");
 			System.exit(0);
