@@ -83,9 +83,9 @@ public class AdminMenu extends MainMenu {
 		} // end for loop for pup name search
 
 		// for loop to determine if there is already a Bid object for the puppy
-		for (int j = 0; j < ah.getAllPups().size(); j++) {
+		for (int j = 0; j < ah.getAllBids().size(); j++) {
 			try {
-				if (pup.getName().equalsIgnoreCase(ah.getAllBids().get(j).getPup().getName())) {
+				if (ah.getAllBids().get(j).getPup().getName().equalsIgnoreCase(name)) {
 					// if the name equals an existing Bid object, then return false
 					counter += 1;
 				}
