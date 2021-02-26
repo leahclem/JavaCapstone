@@ -100,17 +100,13 @@ public class CustomerMenu extends MainMenu {
 					} while (maxBid <= (pupBid.getCurrentBid() + pupBid.getIncrement()));
 					// for now comparing to opening price but need to compare to current max??
 					pupBid.checkBid(customer, maxBid);
-				}//end if they place a bid
+				} // end if they place a bid
 
-			}//end else if puppy is found
+			} // end else if puppy is found
 
 		} // ends if(curBid!= null)
 		else
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
-
-	// if payEnt = true call newBid method from Customer?
-
-	// searchPup return puppy to bid on with newBid in Customer class
 
 }
