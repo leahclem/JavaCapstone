@@ -56,7 +56,7 @@ public class CustomerMenu extends MainMenu {
 
 		return loggedIn;
 	}
-	
+
 	public static void newBid(ArrayList<Bids> curBid, User customer) {
 		double maxBid = 0;
 		Scanner scan = new Scanner(System.in);
@@ -78,10 +78,10 @@ public class CustomerMenu extends MainMenu {
 
 					counter++;
 				}
-				// pupName = name;
+
 			}
 			if (counter == 0) {
-				System.out.println("We do not have that puppy. ");
+				System.out.println("That puppy is not availble. ");
 			} else {
 				System.out.println("Would you like to bid on " + name + "?(yes/no)");
 				String placeBid = scan.nextLine();
@@ -99,20 +99,18 @@ public class CustomerMenu extends MainMenu {
 
 					} while (maxBid <= (pupBid.getCurrentBid() + pupBid.getIncrement()));
 					// for now comparing to opening price but need to compare to current max??
+					pupBid.checkBid(customer, maxBid);
+				}//end if they place a bid
 
-				}
+			}//end else if puppy is found
 
-			}
-			pupBid.checkBid(customer, maxBid);
 		} // ends if(curBid!= null)
 		else
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
 
+	// if payEnt = true call newBid method from Customer?
 
-		
-//if payEnt = true call newBid method from Customer?
-		
-//searchPup return puppy to bid on with newBid in Customer class
-	
+	// searchPup return puppy to bid on with newBid in Customer class
+
 }
