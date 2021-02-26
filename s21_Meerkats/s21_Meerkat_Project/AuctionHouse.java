@@ -53,13 +53,10 @@ public class AuctionHouse {
 	}// end of checkTime
 
 	public void activeBids() {// prints all active bids
-		if (this.allBids != null) {// if there are any active bids
+		if (this.allBids.size() != 0) {// if there are any active bids
 			for (Bids b : this.allBids) {
 				if (b.isActive()) {
-					System.out.println(b.getPup().toString() + "\n It ends on " + b.getEndBy().toString());// add a to
-																											// string
-																											// for the
-																											// date
+					System.out.println(b.getPup().toString() + "\n It ends on " + b.getEndBy().toString());
 				} // end of if
 			} // end of for
 		} else {
