@@ -1,3 +1,6 @@
+To follow along you can CTRL-F to // for a guided tour. 
+
+// Our tour starts on the first menu as soon as you run the Puppies_Run_Me.java:
 Here is the initial menu:
 
  Welcome to Puppy Heaven!
@@ -8,7 +11,7 @@ Here is the initial menu:
 5. Exit: 
 Choice: 
 
-Option 1: Working to search by name or price. Preloaded with several Puppies objects:
+Option 1: Working to search by name or price. Pre-loaded with several Puppies objects:
 		pupList.add(new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true));
 		pupList.add(new Puppies("Happy", "beagle", "male", true, 1000.0, false, true));
 		pupList.add(new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true));
@@ -32,7 +35,7 @@ Option 4: Works, shows any active auctions.
 
 Option 5: Works, ends program.
 
-Select Option 2 to sign in. The following menu will be displayed:
+// Now you can select Option 2 to sign in. The following menu will be displayed:
 
 1. Sign in
 2. Create Customer Account
@@ -41,7 +44,7 @@ Option 1: This option works. To sign in as Admin use option 1 and your UserName 
 
 Option 2: This option works. This brings up a separate menu to set up a new Customer.
 
-Once you choose option 1 it will query you for user name and password, then bring up the following menu (you are an Admin, so this is 
+// Choose option 1 then it will query you for user name and password, then bring up the following menu (you are an Admin, so this is 
 the Admin menu, later in the tutorial you can log in as a Customer and we will detail the Customer Menu):
 
 Welcome dwolff
@@ -55,25 +58,27 @@ Welcome dwolff
 7. Exit: 
 Choice: 
 
-1. Works. Is the same method as in the main menu to search by puppy name or price.
+Option 1. Works. Is the same method as in the main menu to search by puppy name or price.
 
-2. Works. Logs the Admin out.
+Option 2. Works. Logs the Admin out, returns to Main Menu.
 
-3. Works. 	Adds a new puppy to the ArrayList of Puppies objects. This prompts the Admin for all the fields for the new puppy object. 
+Option 3. Works. 	Adds a new puppy to the ArrayList of Puppies objects. This prompts the Admin for all the fields for the new puppy object. 
 			This can be tested by using option 1 to search and enter a large value like 100000 for price. It will list any puppies under 
 			that value.
 
-4. Works. Will show any active bids.
+Option 4. Works. Will show any active bids.
 
-5. Works. 	Allows the Admin to create a new auction. This prompts the Admin for the details to search for a puppy and set up a 
-			new auction for the puppy. 
+Option 5. Works. 	Allows the Admin to create a new auction. This prompts the Admin for the details to search for a puppy and set up a 
+			new auction for the puppy ending on a certain date and time (prompts Admin for date/time). This can be set up with the same date
+			and perhaps an hour in the future to allow this to be tested when logged in as a Customer later. 
 
-6. Works. Allows the Admin to create a new Admin.
+Option 6. Works. Allows the Admin to create a new Admin.
 
-7. Works. Exits program.
+Option 7. Works. Exits program.
 
 
-To view the Customer Menu, select option 2. This brings us back to the main menu. Select 2 sign in: Use Username: jdoe, PassWord: apple.
+// To view the Customer Menu, select option 2 to log out. This brings us back to the main menu. Select 2 sign in: 
+	Use Username: jdoe, PassWord: apple.
 
 This brings up the Customer Menu:
 
@@ -88,13 +93,17 @@ Choice:
 
 Option 1: Works. Same method as in Main Menu.
 
-Option 2: Works. Checks for an existing auction, must be created by Admin. Then allows the user to place a bid. Updates the winner or sets t
-				as winner if they are the first bidder.
+Option 2: Works. Checks for an existing auction, must be created by Admin. If the auction was created by the Admin in the above menu then
+			this option allows the Customer to place a bid. Updates the winner or sets the Customer as the winner if they are the first bidder.
 				
-Option 3: Works. Same method as in the Admin, displays all bids.
+Option 3: Works. Same method as in the Admin, displays all bids. Work in progress to have this display bids just for the customer themselves,
+			instead of all the bids in general.
 
 Option 4: Works. Logs the customer out and returns to main menu.
 
 Option 5: Works. Exits program.
 
-Here ends your tutorial.
+// Here ends the tutorial. 
+
+Notes: Much of the data is not persistent yet. We have pre-loaded some puppies and Users for testing, but the Auctions/Bids are not 
+saved when the program is closed. 
