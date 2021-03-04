@@ -2,8 +2,6 @@ package s21_Meerkat_Project;
 
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 public class Bids {
 

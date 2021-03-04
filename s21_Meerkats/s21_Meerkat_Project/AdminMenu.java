@@ -23,10 +23,11 @@ public class AdminMenu extends MainMenu {
 		System.out.println("1. Search puppies: ");
 		System.out.println("2. Logout: ");
 		System.out.println("3. Add a new puppy for sale: ");
-		System.out.println("4. Display active bids: ");
-		System.out.println("5. Create new bid: ");
+		System.out.println("4. Display active auctions: ");
+		System.out.println("5. Create new auction: ");
 		System.out.println("6. Create new Admin: ");
-		System.out.println("7. Exit: ");
+		System.out.println("7. View closed auctions: ");
+		System.out.println("8. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -54,10 +55,11 @@ public class AdminMenu extends MainMenu {
 		} else if (choice == 6) {
 			createAdmin(ah.getAllUsers());
 		} else if (choice == 7) {
+			ah.closedBids();
+		} else if (choice == 8) {
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 		} else {
-
 			System.out.println("I don't understand, please enter a number from 1-6? ");
 		}
 

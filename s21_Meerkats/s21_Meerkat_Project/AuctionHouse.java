@@ -2,7 +2,6 @@ package s21_Meerkat_Project;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class AuctionHouse {
 	private boolean open; // this should be update based on a time stamp, implement later when we have
@@ -60,10 +59,23 @@ public class AuctionHouse {
 				} // end of if
 			} // end of for
 		} else {
-			System.out.println("No bids are currently active, have an admin set one up");
+			System.out.println("There are no auctions yet, have an admin set one up. ");
 		}
 
 	}// end of method
+	
+	public void closedBids() { // prints all closed bids
+		if(this.allBids.size() != 0) { // if there are any bids
+			for(Bids b : this.allBids) {
+				if (b.getEndBy().isBefore(LocalDateTime.now())) { // if bids that are past the endBy date
+					System.out.println(b.getPup().toString() +"\n Ended on "+ b.getEndBy().toString());
+				} // end if
+			} // end for
+			
+		}else {
+			System.out.println("There are no closed bids yet. ");
+		}
+	}
 	
 	public void addBid(Bids bid) {
 		this.allBids.add(bid);
