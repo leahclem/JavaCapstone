@@ -29,7 +29,7 @@ Option 2: Sign in is working, we have several profiles created for Customers as 
 
 		The 2nd case is a customer: user name: jdoe, password: apple, address, email for PayPal
 		
-Option 3: Does not work, yet.
+Option 3: Does not work, yet. Program auto loads sample data for testing purposes, will be implemented later
 
 Option 4: Works, shows any active auctions.
 
