@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -296,7 +297,12 @@ public class MainMenu {
 		// sign in now
 		return returningUser(users);
 	}
-
+	public void defaultBid(AuctionHouse ah) {
+		//plus different default times for testing purposes
+		ah.addBid(new Bids(ah.getAllPups().get(0), LocalDateTime.now().plusHours(2)));
+		ah.addBid(new Bids(ah.getAllPups().get(3), LocalDateTime.now().plusMinutes(1)));
+		ah.addBid(new Bids(ah.getAllPups().get(1), LocalDateTime.now().plusMinutes(5)));
+	}
 	// Default stuff, going to change, to read from a file
 	public void createDefaultAdmin(ArrayList<User> users) {
 		users.add(new Admin("dwolff", "CutePups", "Diane", "Wolff", true));

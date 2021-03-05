@@ -65,7 +65,7 @@ public class AdminMenu extends MainMenu {
 
 		return loggedIn;
 	}
-
+	
 	public void createBid(AuctionHouse ah) {
 		Scanner scan = new Scanner(System.in);
 		// query admin for which puppy to create a bid for, using name as the primary
@@ -75,7 +75,6 @@ public class AdminMenu extends MainMenu {
 		System.out.println("Which puppy are we auctioning? (provide Puppie's name) ");
 		String name = scan.nextLine();
 		Puppies pup = null;
-
 		// for loop beginning to find pup by name
 		for (int i = 0; i < ah.getAllPups().size(); i++) {
 			if (ah.getAllPups().get(i).getName().equalsIgnoreCase(name)) {
@@ -108,6 +107,7 @@ public class AdminMenu extends MainMenu {
 		} else {
 			System.out.println("Something isn't right. ");
 		}
+		
 	}
 
 	public LocalDateTime validDate() {

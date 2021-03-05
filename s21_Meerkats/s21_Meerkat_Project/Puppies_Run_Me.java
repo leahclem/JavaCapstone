@@ -9,8 +9,7 @@ public class Puppies_Run_Me {
 	public static void main(String[] args) {
 		//Variable Declaration
 		User loggedIn = null;
-		
-		// comment apple
+	
 		MainMenu mm = new MainMenu();
 		ArrayList<Bids> bid = new ArrayList<Bids>();
 		ArrayList<Puppies> pupList = new ArrayList<Puppies>();
@@ -20,6 +19,7 @@ public class Puppies_Run_Me {
 		// create default puppy objects similar to above
 		mm.createDefaultPuppy(pupList);
 		AuctionHouse ah = new AuctionHouse(true,bid, pupList, users); // set open to true
+		mm.defaultBid(ah);
 		// ArrayList<Puppies> pupList = loadData();
 		// printPups(pupList);
 		// ArrayList<User> users = new ArrayList<User>();
