@@ -298,7 +298,7 @@ public class MainMenu {
 		return returningUser(users);
 	}
 	public void defaultBid(AuctionHouse ah) {
-		//plus different default times for testing purposes
+		//plus different default times for testing purposes Jolly
 		ah.addBid(new Bids(ah.getAllPups().get(0), LocalDateTime.now().plusHours(2)));
 		ah.addBid(new Bids(ah.getAllPups().get(3), LocalDateTime.now().plusMinutes(1)));
 		ah.addBid(new Bids(ah.getAllPups().get(1), LocalDateTime.now().plusMinutes(5)));
