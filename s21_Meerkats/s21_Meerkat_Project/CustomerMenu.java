@@ -21,9 +21,10 @@ public class CustomerMenu extends MainMenu {
 		System.out.println(" Welcome to Puppy Heaven! Customer user " + curUser.getUserName());
 		System.out.println("1. View puppies: ");
 		System.out.println("2. Place bid on Puppy: ");
-		System.out.println("3. Display active bids: ");
-		System.out.println("4. Logout: ");
-		System.out.println("5. Exit: ");
+		System.out.println("3. Display active auctions: ");
+		System.out.println("4. Display all my winning auctions:");
+		System.out.println("5. Logout: ");
+		System.out.println("6. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -38,15 +39,17 @@ public class CustomerMenu extends MainMenu {
 		User loggedIn = this.curUser;
 		// apple
 		if (choice == 1) {
-			printPups(ah.getAllPups());
+			printPups(ah.getAllPups());//print or search a puppy in the system
 		} else if (choice == 2) {
-			newBid(ah.getAllBids(), curUser);
+			newBid(ah.getAllBids(), curUser);//bid on a active auction
 		} else if (choice == 3) {
-			ah.activeBids();
-		} else if (choice == 4) {
+			ah.activeBids();//displays all bids currently active
+		} else if(choice == 4) {
+			checkWinning(ah);//display all winning auctions for the current user
+		} else if (choice == 5) {//logs out current user
 			loggedIn = null;
 			System.out.println("Bye Customer " + curUser.getUserName());
-		} else if (choice == 5) {
+		} else if (choice == 6) {//exits the program
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 			;
@@ -108,5 +111,25 @@ public class CustomerMenu extends MainMenu {
 		else
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
-
+	
+	
+	public void checkWinning(AuctionHouse ah) {
+		//Variable Declaration
+		boolean winCheck = false;//stays false if the user is not winning in any auctions
+		
+		if (ah.getAllBids().size() != 0) {// if there are any active bids
+			for (Bids b : ah.getAllBids()) {//for all the bids
+				if (b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName()) ) {//if the winner has the same name
+					System.out.println(b.getPup().toString() + "\n It ends on " + b.getEndBy().toString());
+					winCheck = true;//the user is winning in an auction
+				} // end of if
+			} // end of for
+			
+			if(winCheck = false) {
+				System.out.println("You are not currently winning in any auctions, display active auctions to see who is winning.");
+			}
+		} else {//if there are no auctions right now
+			System.out.println("There are no auctions, have an admin set one up.");
+		}
+	}//end of method checkWinning
 }
