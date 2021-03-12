@@ -453,25 +453,5 @@ public class MainMenu {
 		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo, available);
 		return pup;
 	}
-	// Main/Start Menu: Leah
-	// search puppies : Will printPup method
-	// query user for breed of dog
-	// query by price range
-	// login menu: Gabriel method is logInMenu
-	// customer : Gabriel
-	// returning
-	// new
-	// admin : Gabriel
-	// default admin <-- set up first time
-	// check if first admin (boolean if first under the admin class)
-	// provide default userID and passWord first login
-	// recommend changing userID and passWord
-	// add new admin
-	// remove admin
-	// change userID and passWord
-	// load sample data - Will loadData// save data - Will saveData
-	// process the backlog data: batch process for after hours orders: to be
-	// determined
-	//
 
 }

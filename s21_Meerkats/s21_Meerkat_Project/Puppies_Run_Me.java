@@ -20,15 +20,6 @@ public class Puppies_Run_Me {
 		mm.createDefaultPuppy(pupList);
 		AuctionHouse ah = new AuctionHouse(true,bid, pupList, users); // set open to true
 		mm.defaultBid(ah);
-		// ArrayList<Puppies> pupList = loadData();
-		// printPups(pupList);
-		// ArrayList<User> users = new ArrayList<User>();
-		// User loggedIn;
-		// createDefaultAdmin(users);
-		// loggedIn = loginInMenu(users);
-		// System.out.println(loggedIn.getUserName());
-		// //outputData(pupList);
-		// System.exit(0);
 
 		int choice = 0;
 		while (choice >= 0) {
@@ -57,6 +48,6 @@ public class Puppies_Run_Me {
 			ah.checkTime(); // this checks if the bids are over
 		} // end while
 
-	}
+	}//end of main method
 
-}
+}//end of class Run_Me
