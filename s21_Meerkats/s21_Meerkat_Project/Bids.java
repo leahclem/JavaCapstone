@@ -25,7 +25,23 @@ public class Bids {
 
 	}
 
-	public Bids(Puppies pup, LocalDateTime end) {
+	public Bids(Puppies pup, String end, String start , double currentBid, double maxBid, double increment, User winner, boolean active)//will be to bring in bids already made before
+	{
+		//initialize
+		LocalDateTime endBy = this.strToDate(end);
+		LocalDateTime startBy = this.strToDate(start);
+		
+		this.pup = pup;
+		this.endBy = endBy;
+		this.startBy = startBy;
+		this.maxBid = maxBid;
+		this.currentBid = currentBid;
+		this.increment = increment;
+		this.winner = winner;
+		this.active = active;
+	}
+	
+	public Bids(Puppies pup, LocalDateTime end) {//initial creation of an auction/bid
 		this.pup = pup;
 		currentBid = pup.getPrice();
 		maxBid = 0;
@@ -41,6 +57,21 @@ public class Bids {
 		active = true;
 	}
 
+	public LocalDateTime strToDate(String date) {
+		//"202103121443" Year month day hour minutes and no second/millisecs
+		int year, month, day, hour, min;
+		
+		year = Integer.parseInt(date.substring(0, 3));
+		month = Integer.parseInt(date.substring(4, 5));
+		day = Integer.parseInt(date.substring(6, 7));
+		hour = Integer.parseInt(date.substring(8, 9));
+		min = Integer.parseInt(date.substring(10, 11));
+		
+		LocalDateTime rtDate = LocalDateTime.of(year, month, day, hour, min, 0, 0);
+		
+		return rtDate; 
+	}
+	
 	public String toString() { 
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		StringBuilder sb = new StringBuilder();
