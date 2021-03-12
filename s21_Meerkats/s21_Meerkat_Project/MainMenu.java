@@ -306,7 +306,7 @@ public class MainMenu {
 	// Default stuff, going to change, to read from a file
 	public void createDefaultAdmin(ArrayList<User> users) {
 		users.add(new Admin("dwolff", "CutePups", "Diane", "Wolff", true));
-		users.add(new Customer("jdoe", "apple", "31 Old Warren Rd.","schmoe@gmail.com"));
+		users.add(new Customer("jdoe", "apple", "31 Old Warren Rd","schmoe@gmail.com"));
 		users.add(new Admin("willzy", "apple", "Will", "McCoy", true));
 		users.add(new Admin("assteroids", "123", "Leah", "Clemens", true));
 	}
