@@ -1,0 +1,10 @@
+3|1|3|2
+dwolff|CutePups|Diane|Wolff|true
+assteroids|123|Leah|Clemens|true
+willzy|apple|Will|McCoy|true
+jdoe|apple|31 Old Warren Rd.|schmoe@gmail.com
+Bowser|boxer|Male|true|2500.0|false|true
+Tuffet|mutt|Male|false|100.0|false|false
+BooBoo|maltese|Male|false|800.0|true|false
+BooBoo|202103121443|202104011201|1000|1200|50|jdoe|true
+Tuffet|202101101201|202103121858|100.0|0|50|no one|true
