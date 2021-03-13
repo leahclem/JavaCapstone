@@ -17,6 +17,47 @@ public class MainMenu {
 
 	private Scanner scan = new Scanner(System.in);
 
+	public int menu() {
+		int value = 0;
+		Scanner scan = new Scanner(System.in);
+		System.out.println(" Welcome to Puppy Heaven!");
+		System.out.println("1. Search puppies: ");
+		System.out.println("2. Sign in: ");
+		System.out.println("3. Load sample data: "); //Program autoloads sample data for testing purposes, will be implemented later
+		System.out.println("4. Display active bids: ");
+		System.out.println("5. Exit: ");
+		System.out.print("Choice: ");
+		try {
+			value = scan.nextInt();
+		} catch (InputMismatchException e) {
+			System.out.print("Input Error. ");
+			scan.nextLine();
+		}
+		return value;
+	}
+
+	public User menuChoice(int choice, AuctionHouse ah) {
+		User loggedIn = null;
+
+		if (choice == 1) {
+			printPups(ah.getAllPups());
+		} else if (choice == 2) {
+			loggedIn = loginInMenu(ah.getAllUsers());
+		} else if (choice == 3) {
+			sampleData(ah);
+		} else if (choice == 4) {
+			ah.activeBids();
+		} else if (choice == 5) {
+			System.out.println("Bye!!!!!");
+			System.exit(0);
+			;
+		} else {
+			System.out.println("I don't understand, please enter a number from 1-5? ");
+		}
+
+		return loggedIn;
+	}
+	
 	public void printPups(ArrayList<Puppies> pupList) {
 		Scanner scan = new Scanner(System.in);
 		int selection = 0;
@@ -93,7 +134,7 @@ public class MainMenu {
 		}
 
 	}
-
+	
 	public User loginInMenu(ArrayList<User> users) {
 		// Variable Declaration
 		Scanner scan = new Scanner(System.in);
@@ -174,68 +215,37 @@ public class MainMenu {
 		// sign in now
 		return returningUser(users);
 	}
-	public void defaultBid(AuctionHouse ah) {
+	
+	public void sampleData(AuctionHouse ah) {//adds some extra puppies and auctions to the program
+		//Variable Declaration
+		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true);
+		Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false, true);
+		Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true);
+		Puppies pupD = new Puppies("Valley", "Alsation", "female", false, 200, true, false);
+		ah.getAllPups().add(pupA);
+		ah.getAllPups().add(pupB);
+		ah.getAllPups().add(pupC);
+		ah.getAllPups().add(pupD);
 		//plus different default times for testing purposes Jolly
-		ah.addBid(new Bids(ah.getAllPups().get(0), LocalDateTime.now().plusHours(2)));
-		ah.addBid(new Bids(ah.getAllPups().get(3), LocalDateTime.now().plusMinutes(1)));
-		ah.addBid(new Bids(ah.getAllPups().get(1), LocalDateTime.now().plusMinutes(5)));
+		//this could be a potential error since it is not referencing the 
+		ah.addBid(new Bids(findPup("Jolly", ah), LocalDateTime.now().plusHours(2)));
+		ah.addBid(new Bids(findPup("Valley", ah), LocalDateTime.now().plusMinutes(1)));
+		ah.addBid(new Bids(findPup("Sugar", ah), LocalDateTime.now().plusMinutes(5)));
 	}
-	// Default stuff, going to change, to read from a file
-	public void createDefaultAdmin(ArrayList<User> users) {
-		users.add(new Admin("dwolff", "CutePups", "Diane", "Wolff", true));
-		users.add(new Customer("jdoe", "apple", "31 Old Warren Rd","schmoe@gmail.com"));
-		users.add(new Admin("willzy", "apple", "Will", "McCoy", true));
-		users.add(new Admin("assteroids", "123", "Leah", "Clemens", true));
+	//this method is be used only by sample data
+	private Puppies findPup(String name, AuctionHouse ah) {
+		Puppies pup = null;
+		
+		for(Puppies p : ah.getAllPups()) {
+			if(p.getName().equalsIgnoreCase(name)) {
+				return p;
+			}
+		}//end of for loop
+		//should never run
+		System.out.println("Error in findPup.");
+		return null;
 	}
-
-	public void createDefaultPuppy(ArrayList<Puppies> pupList) {
-		pupList.add(new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true));
-		pupList.add(new Puppies("Happy", "beagle", "male", true, 1000.0, false, true));
-		pupList.add(new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true));
-		pupList.add(new Puppies("Valley", "Alsation", "female", false, 200, true, false));
-	}
-
-	public int menu() {
-		int value = 0;
-		Scanner scan = new Scanner(System.in);
-		System.out.println(" Welcome to Puppy Heaven!");
-		System.out.println("1. Search puppies: ");
-		System.out.println("2. Sign in: ");
-		System.out.println("3. Load sample data: "); //Program autoloads sample data for testing purposes, will be implemented later
-		System.out.println("4. Display active bids: ");
-		System.out.println("5. Exit: ");
-		System.out.print("Choice: ");
-		try {
-			value = scan.nextInt();
-		} catch (InputMismatchException e) {
-			System.out.print("Input Error. ");
-			scan.nextLine();
-		}
-		return value;
-	}
-
-	public User menuChoice(int choice, AuctionHouse ah) {
-		User loggedIn = null;
-
-		if (choice == 1) {
-			printPups(ah.getAllPups());
-		} else if (choice == 2) {
-			loggedIn = loginInMenu(ah.getAllUsers());
-		} else if (choice == 3) {
-			;
-		} else if (choice == 4) {
-			ah.activeBids();
-		} else if (choice == 5) {
-			System.out.println("Bye!!!!!");
-			System.exit(0);
-			;
-		} else {
-			System.out.println("I don't understand, please enter a number from 1-5? ");
-		}
-
-		return loggedIn;
-	}
-
+	
 	public Puppies addPup() {
 		String name = "";
 		String breed = "";

@@ -9,18 +9,16 @@ public class Puppies_Run_Me {
 	public static void main(String[] args) {
 		//Variable Declaration
 		User loggedIn = null;
-	
+		InputOutputMethods io = new InputOutputMethods();
 		MainMenu mm = new MainMenu();
 		ArrayList<Bids> bid = new ArrayList<Bids>();
 		ArrayList<Puppies> pupList = new ArrayList<Puppies>();
-		//ArrayList<Puppies> pupList = mm.loadData();
 		ArrayList<User> users = new ArrayList<User>();
-		mm.createDefaultAdmin(users);
-		// create default puppy objects similar to above
-		mm.createDefaultPuppy(pupList);
+		
+		io.loadData(pupList, users, bid);//load in saved data
+		
 		AuctionHouse ah = new AuctionHouse(true,bid, pupList, users); // set open to true
-		mm.defaultBid(ah);
-
+		
 		int choice = 0;
 		while (choice >= 0) {
 			if(loggedIn == null) {

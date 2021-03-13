@@ -25,15 +25,11 @@ public class Bids {
 
 	}
 
-	public Bids(Puppies pup, String end, String start , double currentBid, double maxBid, double increment, User winner, boolean active)//will be to bring in bids already made before
+	public Bids(Puppies pup, LocalDateTime end, LocalDateTime start , double currentBid, double maxBid, double increment, User winner, boolean active)//will be to bring in bids already made before
 	{
-		//initialize
-		LocalDateTime endBy = this.strToDate(end);
-		LocalDateTime startBy = this.strToDate(start);
-		
 		this.pup = pup;
-		this.endBy = endBy;
-		this.startBy = startBy;
+		this.endBy = end;
+		this.startBy = start;
 		this.maxBid = maxBid;
 		this.currentBid = currentBid;
 		this.increment = increment;
@@ -55,21 +51,6 @@ public class Bids {
 
 		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method 
 		active = true;
-	}
-
-	public LocalDateTime strToDate(String date) {
-		//"202103121443" Year month day hour minutes and no second/millisecs
-		int year, month, day, hour, min;
-		
-		year = Integer.parseInt(date.substring(0, 3));
-		month = Integer.parseInt(date.substring(4, 5));
-		day = Integer.parseInt(date.substring(6, 7));
-		hour = Integer.parseInt(date.substring(8, 9));
-		min = Integer.parseInt(date.substring(10, 11));
-		
-		LocalDateTime rtDate = LocalDateTime.of(year, month, day, hour, min, 0, 0);
-		
-		return rtDate; 
 	}
 	
 	public String toString() { 
