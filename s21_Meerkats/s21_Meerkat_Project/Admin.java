@@ -16,7 +16,12 @@ public class Admin extends User {
 		baseAdmin = base;
 	}
 	
-	
+	public String toStringF() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getUserName().toString()+"|"+this.getPassword().toString()+"|"+this.fname.toString()+"|"+this.lname.toString()+"|"+this.baseAdmin);
+		return sb.toString();
+		
+	}
 	// Create new Auction method
 	
 	// update auction details method

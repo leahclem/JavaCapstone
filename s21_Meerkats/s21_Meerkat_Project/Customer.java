@@ -25,6 +25,13 @@ public class Customer extends User {
 		this.payPal = payPal;
 		this.hiBids = new ArrayList<Bids>();
 	}
+	
+	public String toStringF() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getUserName().toString()+"|"+this.getPassword().toString()+"|"+this.address.toString()+"|"+this.payPal.toString());
+		return sb.toString();
+		
+	}
 
 	public String getPayPal() {
 		return payPal;

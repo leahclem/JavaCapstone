@@ -141,8 +141,9 @@ public class InputOutputMethods {
 		day = Integer.parseInt(date.substring(6, 8));
 		hour = Integer.parseInt(date.substring(8, 10));
 		min = Integer.parseInt(date.substring(10, 12));
-		//for testing
-		//System.out.println("year: " + year + " month: " + month + " day: " + day + " hour: " + hour + " minutes: " + min);	
+		// for testing
+		// System.out.println("year: " + year + " month: " + month + " day: " + day + "
+		// hour: " + hour + " minutes: " + min);
 		LocalDateTime rtDate = LocalDateTime.of(year, month, day, hour, min, 0, 0);
 
 		return rtDate;
@@ -319,7 +320,7 @@ public class InputOutputMethods {
 							pup = p;
 						}
 					} // end of for loop through all users
-					//if no pup found null will be entered which should never happen
+						// if no pup found null will be entered which should never happen
 					break;
 				case 1:
 					startDate = strToDate(st.nextToken());
@@ -370,18 +371,91 @@ public class InputOutputMethods {
 
 	}
 
-	public void outputData(ArrayList<Puppies> puppy) {
+	public void outputData(ArrayList<Puppies> pupList, ArrayList<User> users, ArrayList<Bids> auctions) {
+		ArrayList<String> custList = new ArrayList<>();
+		ArrayList<String> adminList = new ArrayList<>();
+		int pupSize = pupList.size();
+		int auctSize = auctions.size();
+		int adminSize = 0;
+		int custSize = 0;
+		for (int j = 0; j < users.size(); j++) {
+			if (users.get(j).getUserType() == 'A') {
+				adminSize++;
+				adminList.add(users.get(j).toString());
+			} else if (users.get(j).getUserType() == 'C') {
+				custSize++;
+				custList.add(users.get(j).toString());
+			}
+		}
+
 		PrintWriter out = null;
 		try {
 			out = openWrite();
-			for (int i = 0; i < puppy.size(); i++) {
-				out.println(puppy.get(i).toStringF());
+
+			out.println(adminSize + "|" + custSize + "|" + pupSize + "|" + auctSize);
+			for (int j = 0; j < users.size();j++) {
+				out.println(saveAdmin(users, j));
 			}
+			for (int l = 0; l < users.size();l++) {
+				out.println(saveCust(users, l));
+			}
+			
+			for (int k = 0; k < pupList.size(); k++) {
+				out.println(savePup(pupList, k));
+			}
+			
+			for(int m = 0; m < auctions.size();m++) {
+				out.println(saveAuct(auctions, m));
+			}
+			
+
 		} finally {
 			try {
 				out.close();
 			} catch (Exception e) {
 			}
 		}
-	}
+	} // end of outputData
+
+	public String saveAdmin(ArrayList<User> users, int i) {
+		StringBuilder sb = new StringBuilder();
+		if (users.get(i).getUserType() == 'A') {
+			sb.append(users.get(i).getUserName().toString() + "|" + users.get(i).getPassword().toString() + "|"
+					);
+
+		}
+
+		return sb.toString();
+	} // end saveAdmin
+	
+	public String saveCust(ArrayList<User> users, int i) {
+		StringBuilder sb = new StringBuilder();
+		if(users.get(i).getUserType()=='C') {
+			sb.append(users.get(i).getUserName().toString()+"|"+users.get(i).getPassword().toString()+"|"
+					+users.get(i).getClass().getName().toString());
+		}
+		return sb.toString();
+	} // end saveCust
+
+	public String savePup(ArrayList<Puppies> pupList, int i) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(pupList.get(i).getName().toString() + "|" + pupList.get(i).getBreed().toString() + "|"
+				+ pupList.get(i).getSex().toString() + "|" + pupList.get(i).isPedigree() + "|"
+				+ pupList.get(i).getPrice() + "|" + pupList.get(i).isHypo() + "|" + pupList.get(i).isAvailable());
+
+		return sb.toString();
+	} // end savePup
+	
+	public String saveAuct(ArrayList<Bids> auct, int i) {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(auct.get(i).getPup().toString()+"|"+auct.get(i).getStartBy().toString()+"|"
+				+auct.get(i).getEndBy().toString()+"|"+auct.get(i).getCurrentBid()+"|"
+				+auct.get(i).getMaxBid()+"|"+auct.get(i).getIncrement()+"|"
+				+auct.get(i).getWinner().getUserName().toString()+"|"
+				+auct.get(i).isActive());
+		
+		return sb.toString();
+	} // end saveAuct
+
 }
