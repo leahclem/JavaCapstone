@@ -71,7 +71,7 @@ public class Bids {
 
 	public String toStringF() {
 				
-		return startBy+"|"+endBy+"|"+currentBid+"|"+maxBid+"|"+this.winner.getUserName()+"|"+active;
+		return startBy+"|"+endBy+"|"+currentBid+"|"+maxBid+"|"+winner.getUserName()+"|"+active;
 	}
 	
 	public void checkBid(User cust, double newBid) {
