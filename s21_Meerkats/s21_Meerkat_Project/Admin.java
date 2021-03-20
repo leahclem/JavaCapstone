@@ -17,16 +17,10 @@ public class Admin extends User {
 	}
 	
 	public String toStringF() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.getUserName().toString()+"|"+this.getPassword().toString()+"|"+this.fname.toString()+"|"+this.lname.toString()+"|"+this.baseAdmin);
-		return sb.toString();
+		return getUserName().toString()+"|"+getPassword().toString()+"|A|"+fname+"|"+lname+"|"+baseAdmin;
 		
 	}
-	// Create new Auction method
 	
-	// update auction details method
-	
-	// 
 	public String getFname() {
 		return this.fname;
 	}

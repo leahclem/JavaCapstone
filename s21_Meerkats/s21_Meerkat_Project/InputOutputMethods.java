@@ -379,10 +379,10 @@ public class InputOutputMethods {
 		int adminSize = 0;
 		int custSize = 0;
 		for (int j = 0; j < users.size(); j++) {
-			if (users.get(j).getUserType() == 'A') {
+			if (users.get(j) instanceof Admin) {
 				adminSize++;
 				adminList.add(users.get(j).toString());
-			} else if (users.get(j).getUserType() == 'C') {
+			} else if (users.get(j) instanceof Customer) {
 				custSize++;
 				custList.add(users.get(j).toString());
 			}
@@ -393,10 +393,10 @@ public class InputOutputMethods {
 			out = openWrite();
 
 			out.println(adminSize + "|" + custSize + "|" + pupSize + "|" + auctSize);
-			for (int j = 0; j < users.size();j++) {
+			for (int j = 0; j < adminSize;j++) {
 				out.println(saveAdmin(users, j));
 			}
-			for (int l = 0; l < users.size();l++) {
+			for (int l = 0; l < custSize;l++) {
 				out.println(saveCust(users, l));
 			}
 			
@@ -418,44 +418,22 @@ public class InputOutputMethods {
 	} // end of outputData
 
 	public String saveAdmin(ArrayList<User> users, int i) {
-		StringBuilder sb = new StringBuilder();
-		if (users.get(i).getUserType() == 'A') {
-			sb.append(users.get(i).getUserName().toString() + "|" + users.get(i).getPassword().toString() + "|"
-					);
-
-		}
-
-		return sb.toString();
+	
+		return "";
 	} // end saveAdmin
 	
 	public String saveCust(ArrayList<User> users, int i) {
-		StringBuilder sb = new StringBuilder();
-		if(users.get(i).getUserType()=='C') {
-			sb.append(users.get(i).getUserName().toString()+"|"+users.get(i).getPassword().toString()+"|"
-					+users.get(i).getClass().getName().toString());
-		}
-		return sb.toString();
+		
+		return " ";
 	} // end saveCust
 
 	public String savePup(ArrayList<Puppies> pupList, int i) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(pupList.get(i).getName().toString() + "|" + pupList.get(i).getBreed().toString() + "|"
-				+ pupList.get(i).getSex().toString() + "|" + pupList.get(i).isPedigree() + "|"
-				+ pupList.get(i).getPrice() + "|" + pupList.get(i).isHypo() + "|" + pupList.get(i).isAvailable());
-
-		return sb.toString();
+		return pupList.get(i).toStringF();
 	} // end savePup
 	
 	public String saveAuct(ArrayList<Bids> auct, int i) {
-		StringBuilder sb = new StringBuilder();
+		return auct.get(i).toStringF();
 		
-		sb.append(auct.get(i).getPup().toString()+"|"+auct.get(i).getStartBy().toString()+"|"
-				+auct.get(i).getEndBy().toString()+"|"+auct.get(i).getCurrentBid()+"|"
-				+auct.get(i).getMaxBid()+"|"+auct.get(i).getIncrement()+"|"
-				+auct.get(i).getWinner().getUserName().toString()+"|"
-				+auct.get(i).isActive());
-		
-		return sb.toString();
 	} // end saveAuct
 
 }

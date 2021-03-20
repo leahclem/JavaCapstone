@@ -69,6 +69,11 @@ public class Bids {
 		return bidString;
 	}
 
+	public String toStringF() {
+				
+		return startBy+"|"+endBy+"|"+currentBid+"|"+maxBid+"|"+this.winner.getUserName()+"|"+active;
+	}
+	
 	public void checkBid(User cust, double newBid) {
 		if (winner == null) { // fix from constructor change
 			winner = cust;

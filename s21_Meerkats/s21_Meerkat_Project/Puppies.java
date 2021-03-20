@@ -39,7 +39,7 @@ public class Puppies extends Bids {
 	}
 	
 	public String toStringF() {
-		return name+","+breed+","+sex+","+pedigree+","+price+","+hypo+","+available;
+		return name+"|"+breed+"|"+sex+"|"+pedigree+"|"+price+"|"+hypo+"|"+available;
 	}
 
 	public String getName() {
