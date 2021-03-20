@@ -376,15 +376,12 @@ public class InputOutputMethods {
 		ArrayList<Admin> adminList = new ArrayList<>();
 		int pupSize = pupList.size();
 		int auctSize = auctions.size();
-		int adminSize = 0;
-		int custSize = 0;
-		for (int j = 0; j < users.size(); j++) {
-			if (users.get(j) instanceof Admin) {
-				adminSize++;
-				adminList.add(users.get(j)); // issues here since we don't have a pre-built arrayList of Admin
-			} else if (users.get(j) instanceof Customer) {
-				custSize++;
-				custList.add(users.get(j)); // issues here since we don't have a pre-built arrayList of Customer
+
+		for (User u : users) {
+			if (u instanceof Customer) {
+				custList.add((Customer) u); 
+			} else if (u instanceof Admin) {
+				adminList.add((Admin) u); 
 			}
 		}
 
@@ -392,14 +389,16 @@ public class InputOutputMethods {
 		try {
 			out = openWrite();
 
-			out.println(adminSize + "|" + custSize + "|" + pupSize + "|" + auctSize);
-			for (int j = 0; j < adminSize; j++) {
-				out.println(saveAdmin(adminList, j));
+			out.println(adminList.size() + "|" + custList.size() + "|" + pupSize + "|" + auctSize);
+
+			for (Admin a : adminList) {
+				out.println(a.toStringF());
 			}
-			for (int l = 0; l < custSize; l++) {
-				out.println(saveCust(custList, l));
+			for (Customer c : custList) {
+				out.println(c.toStringF());
 			}
 
+			// same could be done for puppies, i.e. iterating in the save method
 			for (int k = 0; k < pupList.size(); k++) {
 				out.println(savePup(pupList, k));
 			}
@@ -415,14 +414,6 @@ public class InputOutputMethods {
 			}
 		}
 	} // end of outputData
-
-	public String saveAdmin(ArrayList<Admin> users, int i) {
-		return users.get(i).toStringF();
-	} // end saveAdmin
-
-	public String saveCust(ArrayList<Customer> users, int i) {
-		return users.get(i).toStringF();
-	} // end saveCust
 
 	public String savePup(ArrayList<Puppies> pupList, int i) {
 		return pupList.get(i).toStringF();
