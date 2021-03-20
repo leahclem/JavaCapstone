@@ -398,15 +398,14 @@ public class InputOutputMethods {
 				out.println(c.toStringF());
 			}
 
-			// same could be done for puppies, i.e. iterating in the save method
-			for (int k = 0; k < pupList.size(); k++) {
-				out.println(savePup(pupList, k));
+			for(Puppies p : pupList) {
+				out.println(p.toStringF());
 			}
-
-			for (int m = 0; m < auctions.size(); m++) {
-				out.println(saveAuct(auctions, m));
+			
+			for(Bids b : auctions) {
+				out.println(b.toStringF());
 			}
-
+			
 		} finally {
 			try {
 				out.close();
