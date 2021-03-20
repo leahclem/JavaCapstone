@@ -55,7 +55,7 @@ public class AuctionHouse {
 		if (this.allBids.size() != 0) {// if there are any active bids
 			for (Bids b : this.allBids) {
 				if (b.isActive()) {
-					System.out.println(b.getPup().toString() + "\n It ends on " + b.getEndBy().toString());
+					System.out.println(b.toString());
 				} // end of if
 			} // end of for
 		} else {
@@ -68,7 +68,7 @@ public class AuctionHouse {
 		if(this.allBids.size() != 0) { // if there are any bids
 			for(Bids b : this.allBids) {
 				if (b.getEndBy().isBefore(LocalDateTime.now())) { // if bids that are past the endBy date
-					System.out.println(b.getPup().toString() +"\n Ended on "+ b.getEndBy().toString());
+					System.out.println(b.toString());
 				} // end if
 			} // end for
 			

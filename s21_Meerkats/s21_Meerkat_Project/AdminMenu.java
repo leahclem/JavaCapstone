@@ -111,6 +111,14 @@ public class AdminMenu extends MainMenu {
 		
 	}
 
+	public void checkAuctionHist(){
+		//stub checkpoint 3, it will display the history of a selected auction
+	}
+	
+	public void loadbacklog() {
+		//stub checkpoint 2, it will load backlog data, and add to bidhistory
+	}
+	
 	public LocalDateTime validDate() {
 		Scanner scan = new Scanner(System.in);
 

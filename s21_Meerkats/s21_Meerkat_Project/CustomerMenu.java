@@ -97,11 +97,11 @@ public class CustomerMenu extends MainMenu {
 
 					do {
 						maxBid = scan.nextDouble();
-						if (maxBid <= (pupBid.getCurrentBid() + pupBid.getIncrement()))
+						if (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()))
 							System.out.println("You will need to bid more than " + name + "'s current bid of "
 									+ (pupBid.getCurrentBid() + pupBid.getIncrement()));
 
-					} while (maxBid <= (pupBid.getCurrentBid() + pupBid.getIncrement()));
+					} while (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()));
 					// for now comparing to opening price but need to compare to current max??
 					pupBid.checkBid(customer, maxBid);
 				} // end if they place a bid
@@ -121,7 +121,7 @@ public class CustomerMenu extends MainMenu {
 		if (ah.getAllBids().size() != 0) {// if there are any active bids
 			for (Bids b : ah.getAllBids()) {//for all the bids
 				if (b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName()) ) {//if the winner has the same name
-					System.out.println(b.getPup().toString() + "\n It ends on " + b.getEndBy().toString());
+					System.out.println(b.toString());
 					winCheck = true;//the user is winning in an auction
 				} // end of if
 			} // end of for
@@ -133,4 +133,10 @@ public class CustomerMenu extends MainMenu {
 			System.out.println("There are no auctions, have an admin set one up.");
 		}
 	}//end of method checkWinning
+
+	public void payment() {
+		//stub for checkpoint 6, add option to menu
+	}
+
 }
+

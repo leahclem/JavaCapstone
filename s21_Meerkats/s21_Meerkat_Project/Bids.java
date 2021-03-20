@@ -2,9 +2,15 @@ package s21_Meerkat_Project;
 
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Bids {
 
+	
+	private class BidHist{//to be our LL/stack implementation
+		//stub to be filled checkpoint 3
+	}
+	
 	private double currentBid;
 
 	private double maxBid;
@@ -21,6 +27,10 @@ public class Bids {
 
 	private boolean active;
 
+	private boolean paidFor = false;//will be used for checkpoint 6
+	
+	private ArrayList<String> backlog = new ArrayList<>(); 
+	
 	public Bids() {
 
 	}
@@ -46,7 +56,7 @@ public class Bids {
 		} else {
 			increment = 50;
 		}
-		startBy = LocalDateTime.now();
+		startBy = LocalDateTime.now().withSecond(0).withNano(0);
 		endBy = end;
 
 		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method 
@@ -59,7 +69,7 @@ public class Bids {
 		sb.append(this.pup.getName() + " is ");
 		if (active == false) {
 			sb.append("not on auction. The winner was " + this.winner.getUserName() + ". The auction ended on " + endBy
-					+ " and the final price was " + nf.format(getCurrentBid()) + ".");
+					+ " and the final price was " + nf.format(getCurrentBid()) + "." + "Paid for: " + paidFor);
 		} else {
 			sb.append("on auction for " + nf.format(currentBid) + ". The current winner of the auction is "
 					+ this.winner.getUserName() + ". This auction started on " + startBy + " and ends on " + endBy
@@ -85,24 +95,31 @@ public class Bids {
 		return year+month+day+hour+min;
 	}
 	
+	private void recordBidHist(User cust, double bid) {
+		//stub update the bidding history
+	}
 		
 	public void checkBid(User cust, double newBid) {
-		if (winner == null) { // fix from constructor change
+		if (winner.getUserName().equalsIgnoreCase("no one")) { // fix from constructor change
 			winner = cust;
 			maxBid = newBid;
 		} else if (winner == cust) {
 			maxBid = newBid;
 		} else {
-			if (newBid > currentBid + increment && newBid < maxBid + increment) {
+			if (newBid > currentBid + increment && newBid <= maxBid) {
 				currentBid = currentBid + increment;
-			} else if (newBid > maxBid + increment) {
+			} else if (newBid > maxBid) {
 				winner = cust;
-				currentBid = maxBid + increment;
+				currentBid = maxBid;
 				maxBid = newBid;
 			}
 		}
 	}
 
+	public void storeBid(User cust, double newBid) {
+		//stub for checkpoint 2
+	}
+	
 	public double getCurrentBid() {
 		return currentBid;
 	}

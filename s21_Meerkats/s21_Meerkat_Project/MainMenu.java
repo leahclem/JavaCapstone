@@ -229,9 +229,9 @@ public class MainMenu {
 		ah.getAllPups().add(pupD);
 		//plus different default times for testing purposes Jolly
 		//this could be a potential error since it is not referencing the 
-		ah.addBid(new Bids(findPup("Jolly", ah), LocalDateTime.now().plusHours(2)));
-		ah.addBid(new Bids(findPup("Valley", ah), LocalDateTime.now().plusMinutes(1)));
-		ah.addBid(new Bids(findPup("Sugar", ah), LocalDateTime.now().plusMinutes(5)));
+		ah.addBid(new Bids(findPup("Jolly", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
+		ah.addBid(new Bids(findPup("Valley", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
+		ah.addBid(new Bids(findPup("Sugar", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
 	}
 	//this method is be used only by sample data
 	private Puppies findPup(String name, AuctionHouse ah) {
