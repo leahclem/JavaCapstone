@@ -17,7 +17,7 @@ public class Admin extends User {
 	}
 	
 	public String toStringF() {
-		return getUserName().toString()+"|"+getPassword().toString()+"|A|"+fname+"|"+lname+"|"+baseAdmin;
+		return getUserName().toString()+"|"+getPassword().toString()+"|"+fname+"|"+lname+"|"+baseAdmin;
 		
 	}
 	

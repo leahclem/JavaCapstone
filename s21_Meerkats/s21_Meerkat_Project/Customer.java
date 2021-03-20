@@ -27,7 +27,7 @@ public class Customer extends User {
 	}
 	
 	public String toStringF() {
-		return getUserName().toString()+"|"+getPassword().toString()+"|C|"+address+"|"+payPal;
+		return getUserName().toString()+"|"+getPassword().toString()+"|"+address+"|"+payPal;
 		
 	}
 
@@ -42,7 +42,13 @@ public class Customer extends User {
 	public ArrayList<Bids> getHiBids() {
 		return hiBids;
 	}
-
+	
+	//high bids needs more implementation
+	public void addHighBid(Bids added) {
+		this.hiBids.add(added);
+	}
+	
+	
 	public void setHiBids(ArrayList<Bids> hiBids) {
 		this.hiBids = hiBids;
 	}

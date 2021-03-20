@@ -298,6 +298,8 @@ public class InputOutputMethods {
 		String pupname, username;
 		Puppies pup = null;
 		User winner = null;
+		Customer win = null;
+		Bids added = null;
 
 		// for all the auctions loop through a line and collect all data
 		for (int i = 0; i < bids; i++) {
@@ -349,6 +351,8 @@ public class InputOutputMethods {
 							if (username.equalsIgnoreCase(u.getUserName())) {
 								count++;
 								winner = u;
+								if(winner instanceof Customer)
+									win = (Customer) winner;
 							}
 						} // end of for loop through all users
 							// check if there are any winners
@@ -364,7 +368,10 @@ public class InputOutputMethods {
 				}// end of switch case
 
 			} // end of for all data for a puppy
-			auctions.add(new Bids(pup, endDate, startDate, cbid, mbid, incr, winner, active));
+			added = new Bids(pup, endDate, startDate, cbid, mbid, incr, winner, active);
+			auctions.add(added);
+			win.addHighBid(added);//adds high bid to customer object
+			
 		} // end of for auction lines loop
 
 		return bf;

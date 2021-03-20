@@ -35,7 +35,7 @@ public class CustomerMenu extends MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, AuctionHouse ah) {
+	public User menuChoice(int choice, AuctionHouse ah, InputOutputMethods io) {
 		User loggedIn = this.curUser;
 		// apple
 		if (choice == 1) {
@@ -50,6 +50,7 @@ public class CustomerMenu extends MainMenu {
 			loggedIn = null;
 			System.out.println("Bye Customer " + curUser.getUserName());
 		} else if (choice == 6) {//exits the program
+			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 			;

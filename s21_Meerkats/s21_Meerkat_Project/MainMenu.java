@@ -36,7 +36,7 @@ public class MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, AuctionHouse ah) {
+	public User menuChoice(int choice, AuctionHouse ah, InputOutputMethods io) {
 		User loggedIn = null;
 
 		if (choice == 1) {
@@ -48,6 +48,7 @@ public class MainMenu {
 		} else if (choice == 4) {
 			ah.activeBids();
 		} else if (choice == 5) {
+			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 			;
