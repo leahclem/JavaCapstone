@@ -372,8 +372,8 @@ public class InputOutputMethods {
 	}
 
 	public void outputData(ArrayList<Puppies> pupList, ArrayList<User> users, ArrayList<Bids> auctions) {
-		ArrayList<String> custList = new ArrayList<>();
-		ArrayList<String> adminList = new ArrayList<>();
+		ArrayList<Customer> custList = new ArrayList<>();
+		ArrayList<Admin> adminList = new ArrayList<>();
 		int pupSize = pupList.size();
 		int auctSize = auctions.size();
 		int adminSize = 0;
@@ -381,10 +381,10 @@ public class InputOutputMethods {
 		for (int j = 0; j < users.size(); j++) {
 			if (users.get(j) instanceof Admin) {
 				adminSize++;
-				adminList.add(users.get(j).toString());
+				adminList.add(users.get(j)); // issues here since we don't have a pre-built arrayList of Admin
 			} else if (users.get(j) instanceof Customer) {
 				custSize++;
-				custList.add(users.get(j).toString());
+				custList.add(users.get(j)); // issues here since we don't have a pre-built arrayList of Customer
 			}
 		}
 
@@ -393,21 +393,20 @@ public class InputOutputMethods {
 			out = openWrite();
 
 			out.println(adminSize + "|" + custSize + "|" + pupSize + "|" + auctSize);
-			for (int j = 0; j < adminSize;j++) {
-				out.println(saveAdmin(users, j));
+			for (int j = 0; j < adminSize; j++) {
+				out.println(saveAdmin(adminList, j));
 			}
-			for (int l = 0; l < custSize;l++) {
-				out.println(saveCust(users, l));
+			for (int l = 0; l < custSize; l++) {
+				out.println(saveCust(custList, l));
 			}
-			
+
 			for (int k = 0; k < pupList.size(); k++) {
 				out.println(savePup(pupList, k));
 			}
-			
-			for(int m = 0; m < auctions.size();m++) {
+
+			for (int m = 0; m < auctions.size(); m++) {
 				out.println(saveAuct(auctions, m));
 			}
-			
 
 		} finally {
 			try {
@@ -417,23 +416,21 @@ public class InputOutputMethods {
 		}
 	} // end of outputData
 
-	public String saveAdmin(ArrayList<User> users, int i) {
-	
-		return "";
+	public String saveAdmin(ArrayList<Admin> users, int i) {
+		return users.get(i).toStringF();
 	} // end saveAdmin
-	
-	public String saveCust(ArrayList<User> users, int i) {
-		
-		return " ";
+
+	public String saveCust(ArrayList<Customer> users, int i) {
+		return users.get(i).toStringF();
 	} // end saveCust
 
 	public String savePup(ArrayList<Puppies> pupList, int i) {
 		return pupList.get(i).toStringF();
 	} // end savePup
-	
+
 	public String saveAuct(ArrayList<Bids> auct, int i) {
 		return auct.get(i).toStringF();
-		
+
 	} // end saveAuct
 
 }

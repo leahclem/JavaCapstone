@@ -27,9 +27,7 @@ public class Customer extends User {
 	}
 	
 	public String toStringF() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.getUserName().toString()+"|"+this.getPassword().toString()+"|"+this.address.toString()+"|"+this.payPal.toString());
-		return sb.toString();
+		return getUserName().toString()+"|"+getPassword().toString()+"|C|"+address+"|"+payPal;
 		
 	}
 
