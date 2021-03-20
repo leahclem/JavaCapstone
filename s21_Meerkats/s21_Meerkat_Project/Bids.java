@@ -77,11 +77,11 @@ public class Bids {
 	public String dateToString(LocalDateTime ldt) {
 		String year, month, day, hour, min;
 		String date = ldt.toString();
-		year = date.substring(0, 3);
-		month = date.substring(5, 6);
-		day = date.substring(8, 9);
-		hour = date.substring(11,12);
-		min = date.substring(14,15);
+		year = date.substring(0, 4);
+		month = date.substring(5, 7);
+		day = date.substring(8, 10);
+		hour = date.substring(11,13);
+		min = date.substring(14,16);
 		return year+month+day+hour+min;
 	}
 	
