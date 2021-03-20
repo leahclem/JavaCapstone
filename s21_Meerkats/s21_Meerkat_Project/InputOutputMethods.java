@@ -414,13 +414,4 @@ public class InputOutputMethods {
 		}
 	} // end of outputData
 
-	public String savePup(ArrayList<Puppies> pupList, int i) {
-		return pupList.get(i).toStringF();
-	} // end savePup
-
-	public String saveAuct(ArrayList<Bids> auct, int i) {
-		return auct.get(i).toStringF();
-
-	} // end saveAuct
-
-}
+} // end of IOMethods
