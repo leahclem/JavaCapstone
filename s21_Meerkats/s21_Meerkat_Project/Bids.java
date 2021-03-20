@@ -71,9 +71,21 @@ public class Bids {
 
 	public String toStringF() {
 				
-		return startBy+"|"+endBy+"|"+currentBid+"|"+maxBid+"|"+winner.getUserName()+"|"+active;
+		return this.getPup().getName()+"|"+dateToString(startBy)+"|"+dateToString(endBy)+"|"+currentBid+"|"+maxBid+"|"+winner.getUserName()+"|"+active;
 	}
 	
+	public String dateToString(LocalDateTime ldt) {
+		String year, month, day, hour, min;
+		String date = ldt.toString();
+		year = date.substring(0, 3);
+		month = date.substring(5, 6);
+		day = date.substring(8, 9);
+		hour = date.substring(11,12);
+		min = date.substring(14,15);
+		return year+month+day+hour+min;
+	}
+	
+		
 	public void checkBid(User cust, double newBid) {
 		if (winner == null) { // fix from constructor change
 			winner = cust;
