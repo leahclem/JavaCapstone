@@ -1,6 +1,12 @@
 To follow along you can CTRL-F to // for a guided tour. 
 
 // Our tour starts on the first menu as soon as you run the Puppies_Run_Me.java:
+
+						(Checkpoint C update!!)
+FIRST...You must save the SaveData.txt file to your computer before running the program. 
+		This is to simulate a database with users, puppies, and 3 running bids.
+SECOND...If you would like to see our stub methods just ctrl+f "stubs"
+
 Here is the initial menu:
 
  Welcome to Puppy Heaven!
@@ -29,7 +35,7 @@ Option 2: Sign in is working, we have several profiles created for Customers as 
 
 		The 2nd case is a customer: user name: jdoe, password: apple, address, email for PayPal
 		
-Option 3: Does not work, yet. Program auto loads sample data for testing purposes, will be implemented later
+Option 3: Works, program loads sample data from SavedData.txt file and displays auctions that have ended.
 
 Option 4: Works, shows any active auctions.
 
@@ -62,13 +68,13 @@ Option 1. Works. Is the same method as in the main menu to search by puppy name 
 
 Option 2. Works. Logs the Admin out, returns to Main Menu.
 
-Option 3. Works. 	Adds a new puppy to the ArrayList of Puppies objects. This prompts the Admin for all the fields for the new puppy object. 
+Option 3. Works. Adds a new puppy to the ArrayList of Puppies objects. This prompts the Admin for all the fields for the new puppy object. 
 			This can be tested by using option 1 to search and enter a large value like 100000 for price. It will list any puppies under 
-			that value.
+			that value. (Still an issue with being able to bid on puppy with a closed auction, will be fixed next meeting)
 
 Option 4. Works. Will show any active bids.
 
-Option 5. Works. 	Allows the Admin to create a new auction. This prompts the Admin for the details to search for a puppy and set up a 
+Option 5. Works. Allows the Admin to create a new auction. This prompts the Admin for the details to search for a puppy and set up a 
 			new auction for the puppy ending on a certain date and time (prompts Admin for date/time). This can be set up with the same date
 			and perhaps an hour in the future to allow this to be tested when logged in as a Customer later. 
 

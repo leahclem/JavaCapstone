@@ -39,17 +39,17 @@ public class CustomerMenu extends MainMenu {
 		User loggedIn = this.curUser;
 		// apple
 		if (choice == 1) {
-			printPups(ah.getAllPups());//print or search a puppy in the system
+			printPups(ah.getAllPups());// print or search a puppy in the system
 		} else if (choice == 2) {
-			newBid(ah.getAllBids(), curUser);//bid on a active auction
+			newBid(ah.getAllBids(), curUser);// bid on a active auction
 		} else if (choice == 3) {
-			ah.activeBids();//displays all bids currently active
-		} else if(choice == 4) {
-			checkWinning(ah);//display all winning auctions for the current user
-		} else if (choice == 5) {//logs out current user
+			ah.activeBids();// displays all bids currently active
+		} else if (choice == 4) {
+			checkWinning(ah);// display all winning auctions for the current user
+		} else if (choice == 5) {// logs out current user
 			loggedIn = null;
 			System.out.println("Bye Customer " + curUser.getUserName());
-		} else if (choice == 6) {//exits the program
+		} else if (choice == 6) {// exits the program
 			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
@@ -86,11 +86,11 @@ public class CustomerMenu extends MainMenu {
 			}
 			if (counter == 0) {
 				System.out.println("That puppy is not available. ");
-			} else {
+			} else {//FIX ME: should not be able to bid on sold puppy
 				System.out.println("Would you like to bid on " + name + "?(yes/no)");
 				String placeBid = scan.nextLine();
+				
 				if (placeBid.equalsIgnoreCase("yes")) {
-
 					// checkBid(name) and auction end date
 					System.out.println("Puppy name: " + name + "\nCurrent Bid ammount: "
 							+ (pupBid.getCurrentBid() + pupBid.getIncrement()) + "\nHow much do you wish to bid?");
@@ -112,31 +112,31 @@ public class CustomerMenu extends MainMenu {
 		else
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
-	
-	
+
 	public void checkWinning(AuctionHouse ah) {
-		//Variable Declaration
-		boolean winCheck = false;//stays false if the user is not winning in any auctions
-		
+		// Variable Declaration
+		boolean winCheck = false;// stays false if the user is not winning in any auctions
+
 		if (ah.getAllBids().size() != 0) {// if there are any active bids
-			for (Bids b : ah.getAllBids()) {//for all the bids
-				if (b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName()) ) {//if the winner has the same name
+			for (Bids b : ah.getAllBids()) {// for all the bids
+				if (b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName())) {// if the winner has the same
+																							// name
 					System.out.println(b.toString());
-					winCheck = true;//the user is winning in an auction
+					winCheck = true;// the user is winning in an auction
 				} // end of if
 			} // end of for
-			
-			if(winCheck = false) {
-				System.out.println("You are not currently winning in any auctions, display active auctions to see who is winning.");
+
+			if (winCheck = false) {
+				System.out.println(
+						"You are not currently winning in any auctions, display active auctions to see who is winning.");
 			}
-		} else {//if there are no auctions right now
+		} else {// if there are no auctions right now
 			System.out.println("There are no auctions, have an admin set one up.");
 		}
-	}//end of method checkWinning
+	}// end of method checkWinning
 
 	public void payment() {
-		//stub for checkpoint 6, add option to menu
+		// stub for checkpoint 6, add option to menu
 	}
 
 }
-
