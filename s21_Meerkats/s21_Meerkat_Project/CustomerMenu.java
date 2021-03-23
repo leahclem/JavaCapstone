@@ -75,7 +75,7 @@ public class CustomerMenu extends MainMenu {
 		int counter = 0;
 		if (curBid != null) {
 			for (int i = 0; i < curBid.size(); i++) {
-				if (curBid.get(i).getPup().getName().equalsIgnoreCase(name)) {
+				if (curBid.get(i).getPup().getName().equalsIgnoreCase(name) && curBid.get(i).isActive()) {
 					pupBid = curBid.get(i);
 
 					System.out.println(curBid.get(i).toString());
@@ -84,7 +84,7 @@ public class CustomerMenu extends MainMenu {
 				}
 
 			}
-			if (counter == 0) {
+			if (counter == 0 ) {
 				System.out.println("That puppy is not available. ");
 			} else {//FIX ME: should not be able to bid on sold puppy
 				System.out.println("Would you like to bid on " + name + "?(yes/no)");
