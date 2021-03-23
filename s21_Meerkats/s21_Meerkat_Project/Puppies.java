@@ -9,7 +9,7 @@ public class Puppies extends Bids {
 	private boolean pedigree; // who parents are if true, if false no need to capture parent's names
 	private double price; // opening price
 	private boolean hypo;
-	private boolean available; // true if available, false if already sold
+	private boolean available; //Fixme: unused variable true if available, false if already sold 
 	
 	public Puppies() {
 		
@@ -90,7 +90,7 @@ public class Puppies extends Bids {
 		this.hypo = hypo;
 	}
 
-	public boolean isAvailable() {
+	public boolean isAvailable() {//Fixme: unused variable
 		return available;
 	}
 

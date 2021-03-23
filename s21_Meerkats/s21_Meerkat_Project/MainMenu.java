@@ -253,7 +253,7 @@ public class MainMenu {
 		String sex = "";
 		boolean ped = true;
 		boolean hypo = true;
-		boolean available = true;
+		boolean available = true;//Fixme: unused variable
 		boolean valid = false;
 		double price = 0;
 		System.out.println("What is the name of the new pup for sale? ");
