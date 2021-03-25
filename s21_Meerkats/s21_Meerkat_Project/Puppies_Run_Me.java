@@ -1,8 +1,6 @@
 package s21_Meerkat_Project;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Puppies_Run_Me {
 
