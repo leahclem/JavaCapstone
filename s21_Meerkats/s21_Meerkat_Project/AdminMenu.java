@@ -255,25 +255,25 @@ public class AdminMenu extends MainMenu {
 
 		System.out.print("Enter the first name of the new Admin: ");
 		fname = scan.nextLine();
-		if (fname.equals("|") || fname.equalsIgnoreCase("null")) {
+		while (fname.contains("|") || fname.equals("null")) {
 			System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
 			fname = scan.nextLine();
 		}
 		System.out.print("Enter the last name of the new Admin: ");//FIX ME: Do we need two name values?
 		lname = scan.nextLine();
-		if (lname.equals("|") || lname.equalsIgnoreCase("null")) {
+		while (lname.contains("|") || lname.equals("null")) {
 			System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
 			lname = scan.nextLine();
 		}
 		System.out.println("Enter the user name of the new Admin: ");
 		userName = scan.nextLine();
-		if (userName.equals("|") || userName.equalsIgnoreCase("null")) {
+		while (userName.contains("|") || userName.equals("null")) {
 			System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
 			userName = scan.nextLine();
 		}
 		System.out.println("Finally enter the password of the new Admin: ");
 		password = scan.nextLine();
-		if (password.equals("|") || password.equalsIgnoreCase("null")) {
+		while (password.contains("|") || password.equals("null")) {
 			System.out.println("Password cannot include the word 'null' or the pipe symbol '|'");
 			password = scan.nextLine();
 		}

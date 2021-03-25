@@ -199,13 +199,13 @@ public class MainMenu {
 
 		System.out.println("Enter your username:");
 		username = scan.nextLine();
-		if (username.equals("|") || username.equalsIgnoreCase("null")) {
+		while (username.contains("|") || username.equals("null")) {
 			System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
 			username = scan.nextLine();
 		}
 		System.out.println("Enter your password:");
 		password = scan.nextLine();
-		if (password.equals("|") || password.equalsIgnoreCase("null")) {
+		while (password.contains("|") || password.contains("null")) {
 			System.out.println("Password cannot include the word 'null' or the pipe symbol '|'");
 			password = scan.nextLine();
 		}
@@ -262,7 +262,7 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				name = scan.nextLine();
-				if (name.equals("|") || name.equalsIgnoreCase("null")) {//FIX ME: is this good ObjO programming?
+				if (name.contains("|") || name.equals("null")) {//FIX ME: is this good ObjO programming?
 					System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
 					name = scan.nextLine();
 				}
@@ -277,8 +277,8 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				breed = scan.nextLine();
-				if (breed.equals("|") || breed.equalsIgnoreCase("null")) {
-					System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
+				while (breed.contains("|") || breed.equals("null")) {
+					System.out.println("Breed cannot include the word 'null' or the pipe symbol '|'");
 					breed = scan.nextLine();
 				}
 				valid = true;
@@ -292,8 +292,8 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				sex = scan.nextLine();
-				if (sex.equals("|") || sex.equalsIgnoreCase("null")) {
-					System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
+				while (sex.contains("|") || sex.equals("null")) {
+					System.out.println("Sex cannot include the word 'null' or the pipe symbol '|'");
 					sex = scan.nextLine();
 				}
 				if (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("Female")) {
