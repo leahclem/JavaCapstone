@@ -3,7 +3,9 @@ package s21_Meerkat_Project;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class AdminMenu extends MainMenu {
 
@@ -20,14 +22,15 @@ public class AdminMenu extends MainMenu {
 		int value = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
-		System.out.println("1. Search puppies: ");
-		System.out.println("2. Logout: ");
-		System.out.println("3. Add a new puppy for sale: ");
-		System.out.println("4. Display active auctions: ");
-		System.out.println("5. Create new auction: ");
-		System.out.println("6. Create new Admin: ");
-		System.out.println("7. View closed auctions: ");
-		System.out.println("8. Exit: ");
+		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");
+		System.out.println("2. Search puppies: ");
+		System.out.println("3. Logout: ");
+		System.out.println("4. Add a new puppy for sale: ");
+		System.out.println("5. Display active auctions: ");
+		System.out.println("6. Create new auction: ");
+		System.out.println("7. Create new Admin: ");
+		System.out.println("8. View closed auctions: ");
+		System.out.println("9. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -41,22 +44,24 @@ public class AdminMenu extends MainMenu {
 	public User menuChoice(int choice, AuctionHouse ah, InputOutputMethods io) {
 		User loggedIn = this.curUser;
 
-		if (choice == 1) {
-			printPups(ah.getAllPups());
+		if(choice == 1) {
+			loadbacklog(ah);//process backlogged data
 		} else if (choice == 2) {
+			printPups(ah.getAllPups());
+		} else if (choice == 3) {
 			loggedIn = null;
 			System.out.println("Bye Admin " + curUser.getUserName());
-		} else if (choice == 3) {
-			ah.getAllPups().add(addPup());
 		} else if (choice == 4) {
-			ah.activeBids();
+			ah.getAllPups().add(addPup());
 		} else if (choice == 5) {
-			createBid(ah);
+			ah.activeBids();
 		} else if (choice == 6) {
-			createAdmin(ah.getAllUsers());
+			createBid(ah);
 		} else if (choice == 7) {
-			ah.closedBids();
+			createAdmin(ah.getAllUsers());
 		} else if (choice == 8) {
+			ah.closedBids();
+		} else if (choice == 9) {
 			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
@@ -115,9 +120,60 @@ public class AdminMenu extends MainMenu {
 		//stub checkpoint 3, it will display the history of a selected auction
 	}
 	
-	public void loadbacklog() {
+	public void loadbacklog(AuctionHouse ah) {
 		//stub checkpoint 2, it will load backlog data, and add to bidhistory
-	}
+		//Variable Declaration
+		ArrayList<Bids> auctions = ah.getAllBids();
+		StringTokenizer stz;
+		String data;
+		String custName;
+		Bids curAuc;
+		User cust = null;
+		double maxbid;
+		
+		//make it so this only works from 9-5pm
+		if(LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
+			//loop through all bids
+			for(int i = 0 ; i < auctions.size() ; i++) {
+				//set the current Auction
+				curAuc = auctions.get(i);
+				//check for backlog data
+				if(!curAuc.getBacklogg().isEmpty() ) {//if the backlogg is not empty
+					//loop through all the backlogg data
+					try {//this will eventually break, im counting on it
+						do {//pop every piece of backlogged data and apply it
+							data = curAuc.getBacklogg().pop();
+							//divide the data between cust and bid
+							//instantiate the stringtokenizer
+							stz = new StringTokenizer(data, " ");
+							custName = stz.nextToken();
+							maxbid = Double.parseDouble(stz.nextToken());
+							//get the customer
+							for(int j = 0; j < ah.getAllUsers().size(); j++) {//loop through all users
+								if(ah.getAllUsers().get(j).getUserName().equalsIgnoreCase(custName) ) {//if the usernames are the same
+									cust = ah.getAllUsers().get(j);
+								}
+							}//end of customer loop
+							//apply the backlog to the Auction
+							curAuc.checkBid(cust, maxbid);
+						} while(!curAuc.getBacklogg().isEmpty());
+						System.out.println("Backlog for " + curAuc.getPup().getName() + " has been updated.");
+					} catch(NoSuchElementException nse) {
+						System.out.println("no more backlogged data for this auction");
+					}//end of try catch no such element
+					
+				}//end of if there is backlog data
+				else {
+					if(curAuc.isActive()) {
+						System.out.println("No backlog for auction: " + curAuc.getPup().getName());
+					}
+				}
+			}//end of for loop through all auctions	
+		}//end of if between 9am - 4:59pm
+		else {
+			System.out.println("Error, try loading the backlog between 9-5pm, when we are open.");
+		}
+	}//end of loadbacklog
 	
 	public LocalDateTime validDate() {
 		Scanner scan = new Scanner(System.in);

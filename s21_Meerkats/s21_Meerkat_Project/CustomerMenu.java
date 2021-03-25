@@ -1,5 +1,6 @@
 package s21_Meerkat_Project;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -102,7 +103,14 @@ public class CustomerMenu extends MainMenu {
 
 					} while (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()));
 					// for now comparing to opening price but need to compare to current max??
-					pupBid.checkBid(customer, maxBid);
+					//check if time is between nine to five pm
+					if(LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
+						pupBid.checkBid(customer, maxBid);
+					} else {//if not between 9-5pm
+						pupBid.storeBid(customer, maxBid);
+						System.out.println("Data backlogged");
+					}
+					
 				} // end if they place a bid
 
 			} // end else if puppy is found

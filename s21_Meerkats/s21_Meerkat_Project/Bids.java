@@ -29,10 +29,10 @@ public class Bids {
 
 	private boolean paidFor = false;//will be used for checkpoint 6
 	
-	private ArrayList<String> backlog = new ArrayList<>(); 
+	private Stack<String> backlogg;//this is where backlogg is stored for checkpoint 2
 	
 	public Bids() {
-
+	
 	}
 
 	public Bids(Puppies pup, LocalDateTime end, LocalDateTime start , double currentBid, double maxBid, double increment, User winner, boolean active)//will be to bring in bids already made before
@@ -45,6 +45,8 @@ public class Bids {
 		this.increment = increment;
 		this.winner = winner;
 		this.active = active;
+		//temp till save fix
+		this.backlogg = new Stack<>();
 	}
 	
 	public Bids(Puppies pup, LocalDateTime end) {//initial creation of an auction/bid
@@ -61,6 +63,8 @@ public class Bids {
 
 		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method 
 		active = true;
+		
+		this.backlogg = new Stack<>();
 	}
 	
 	public String toString() { 
@@ -95,8 +99,8 @@ public class Bids {
 		return year+month+day+hour+min;
 	}
 	
-	private void recordBidHist(User cust, double bid) {
-		//stub update the bidding history
+	private void recordBidHist(User cust, double bid) {//pushes data to the backlogg stack
+		//stubs used for checkpoint 3 
 	}
 		
 	public void checkBid(User cust, double newBid) {
@@ -115,9 +119,12 @@ public class Bids {
 			}
 		}
 	}
-
+	
 	public void storeBid(User cust, double newBid) {
 		//stub for checkpoint 2
+		//Variable Declaration
+		String savedBid = cust.getUserName() + " " + newBid;
+		backlogg.push(savedBid);
 	}
 	
 	public double getCurrentBid() {
@@ -182,6 +189,22 @@ public class Bids {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public boolean isPaidFor() {
+		return paidFor;
+	}
+
+	public void setPaidFor(boolean paidFor) {
+		this.paidFor = paidFor;
+	}
+
+	public Stack<String> getBacklogg() {
+		return backlogg;
+	}
+
+	public void setBacklogg(Stack<String> backlogg) {
+		this.backlogg = backlogg;
 	}
 
 }

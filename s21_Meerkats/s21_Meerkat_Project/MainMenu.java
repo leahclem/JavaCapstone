@@ -224,7 +224,7 @@ public class MainMenu {
 		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true);
 		Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false, true);
 		Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true);
-		Puppies pupD = new Puppies("Valley", "Alsation", "female", false, 200, true, false);
+		Puppies pupD = new Puppies("Valley", "Alsation", "female", false, 200, true, true);
 		ah.getAllPups().add(pupA);
 		ah.getAllPups().add(pupB);
 		ah.getAllPups().add(pupC);
