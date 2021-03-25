@@ -205,8 +205,16 @@ public class MainMenu {
 
 		System.out.println("Enter your username:");
 		username = scan.nextLine();
+		if (username.equals("|") || username.equalsIgnoreCase("null")) {
+			System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
+			username = scan.nextLine();
+		}
 		System.out.println("Enter your password:");
 		password = scan.nextLine();
+		if (password.equals("|") || password.equalsIgnoreCase("null")) {
+			System.out.println("Password cannot include the word 'null' or the pipe symbol '|'");
+			password = scan.nextLine();
+		}
 		System.out.println("Enter you address so we can ship your purchased products:");
 		address = scan.nextLine();
 		System.out.println("What is your Paypal email address? ");
@@ -260,6 +268,10 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				name = scan.nextLine();
+				if (name.equals("|") || name.equalsIgnoreCase("null")) {//FIX ME: is this good ObjO programming?
+					System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
+					name = scan.nextLine();
+				}
 				valid = true;
 			} catch (InputMismatchException e) {
 				System.out.println("That isn't a puppy name, try again. ");
@@ -271,6 +283,10 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				breed = scan.nextLine();
+				if (breed.equals("|") || breed.equalsIgnoreCase("null")) {
+					System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
+					breed = scan.nextLine();
+				}
 				valid = true;
 			} catch (InputMismatchException e) {
 				System.out.println("That isn't a puppy breed, try again. ");
@@ -282,6 +298,10 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				sex = scan.nextLine();
+				if (sex.equals("|") || sex.equalsIgnoreCase("null")) {
+					System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
+					sex = scan.nextLine();
+				}
 				if (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("Female")) {
 					valid = true;
 				} else {
