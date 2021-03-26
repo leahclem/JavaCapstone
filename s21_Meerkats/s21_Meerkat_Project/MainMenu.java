@@ -262,7 +262,7 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				name = scan.nextLine();
-				if (name.contains("|") || name.equals("null")) {//FIX ME: is this good ObjO programming?
+				while (name.contains("|") || name.equals("null")) {
 					System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
 					name = scan.nextLine();
 				}

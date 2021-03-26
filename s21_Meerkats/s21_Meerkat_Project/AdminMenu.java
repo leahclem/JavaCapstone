@@ -315,7 +315,7 @@ public class AdminMenu extends MainMenu {
 			System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
 			fname = scan.nextLine();
 		}
-		System.out.print("Enter the last name of the new Admin: ");//FIX ME: Do we need two name values?
+		System.out.print("Enter the last name of the new Admin: ");
 		lname = scan.nextLine();
 		while (lname.contains("|") || lname.equals("null")) {
 			System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
