@@ -1,4 +1,4 @@
-// Reimplements Wolf's stack code for reuse
+// Reimplements Wolff's stack code for reuse
 package s21_Meerkat_Project;
 
 import java.util.NoSuchElementException;
