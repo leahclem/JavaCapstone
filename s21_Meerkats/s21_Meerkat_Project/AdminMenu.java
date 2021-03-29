@@ -23,7 +23,7 @@ public class AdminMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
 		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");
-		System.out.println("2. Search puppies: ");
+		System.out.println("2. List all puppies: ");
 		System.out.println("3. Logout: ");
 		System.out.println("4. Add a new puppy for sale: ");
 		System.out.println("5. Display active auctions: ");
@@ -47,12 +47,12 @@ public class AdminMenu extends MainMenu {
 		if(choice == 1) {
 			loadbacklog(ah);//process backlogged data
 		} else if (choice == 2) {
-			printPups(ah.getAllPups());
+			listPups(ah);
 		} else if (choice == 3) {
 			loggedIn = null;
 			System.out.println("Bye Admin " + curUser.getUserName());
 		} else if (choice == 4) {
-			ah.getAllPups().add(addPup());
+			ah.getAllPups().add(addPup(ah));
 		} else if (choice == 5) {
 			ah.activeBids();
 		} else if (choice == 6) {
@@ -118,6 +118,14 @@ public class AdminMenu extends MainMenu {
 
 	public void checkAuctionHist(){
 		//stub checkpoint 3, it will display the history of a selected auction
+	}
+	
+	public void listPups(AuctionHouse ah) {
+		for(int i = 0; i<ah.getAllPups().size(); i++) {
+			System.out.println(ah.getAllPups().get(i).toString());
+		}
+			
+		
 	}
 	
 	public void loadbacklog(AuctionHouse ah) {

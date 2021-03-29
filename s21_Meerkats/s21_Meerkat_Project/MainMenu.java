@@ -1,11 +1,9 @@
 package s21_Meerkat_Project;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 
 public class MainMenu {
 
@@ -17,7 +15,8 @@ public class MainMenu {
 		System.out.println(" Welcome to Puppy Heaven!");
 		System.out.println("1. Search puppies: ");
 		System.out.println("2. Sign in: ");
-		System.out.println("3. Load sample data: "); //Program autoloads sample data for testing purposes, will be implemented later
+		System.out.println("3. Load sample data: "); // Program autoloads sample data for testing purposes, will be
+														// implemented later
 		System.out.println("4. Display active bids: ");
 		System.out.println("5. Exit: ");
 		System.out.print("Choice: ");
@@ -52,7 +51,7 @@ public class MainMenu {
 
 		return loggedIn;
 	}
-	
+
 	public void printPups(ArrayList<Puppies> pupList) {
 		Scanner scan = new Scanner(System.in);
 		int selection = 0;
@@ -129,7 +128,7 @@ public class MainMenu {
 		}
 
 	}
-	
+
 	public User loginInMenu(ArrayList<User> users) {
 		// Variable Declaration
 		Scanner scan = new Scanner(System.in);
@@ -218,9 +217,9 @@ public class MainMenu {
 		// sign in now
 		return returningUser(users);
 	}
-	
-	public void sampleData(AuctionHouse ah) {//adds some extra puppies and auctions to the program
-		//Variable Declaration
+
+	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
+		// Variable Declaration
 		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true);
 		Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false, true);
 		Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true);
@@ -229,44 +228,56 @@ public class MainMenu {
 		ah.getAllPups().add(pupB);
 		ah.getAllPups().add(pupC);
 		ah.getAllPups().add(pupD);
-		//plus different default times for testing purposes Jolly
-		//this could be a potential error since it is not referencing the 
+		// plus different default times for testing purposes Jolly
+		// this could be a potential error since it is not referencing the
 		ah.addBid(new Bids(findPup("Jolly", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
 		ah.addBid(new Bids(findPup("Valley", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
 		ah.addBid(new Bids(findPup("Sugar", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
 	}
-	//this method is be used only by sample data
+
+	// this method is be used only by sample data
 	private Puppies findPup(String name, AuctionHouse ah) {
 		Puppies pup = null;
-		
-		for(Puppies p : ah.getAllPups()) {
-			if(p.getName().equalsIgnoreCase(name)) {
+
+		for (Puppies p : ah.getAllPups()) {
+			if (p.getName().equalsIgnoreCase(name)) {
 				return p;
 			}
-		}//end of for loop
-		//should never run
+		} // end of for loop
+			// should never run
 		System.out.println("Error in findPup.");
 		return null;
 	}
-	
-	public Puppies addPup() {
+
+	public Puppies addPup(AuctionHouse ah) {
 		String name = "";
 		String breed = "";
 		String sex = "";
 		boolean ped = true;
 		boolean hypo = true;
-		boolean available = true;//Fixme: unused variable
+		boolean available = true;// Fixme: unused variable
 		boolean valid = false;
 		double price = 0;
 		System.out.println("What is the name of the new pup for sale? ");
 		while (!valid) {
 			try {
 				name = scan.nextLine();
-				while (name.contains("|") || name.equals("null")) {
-					System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
-					name = scan.nextLine();
+				boolean sameName = false;
+				for (int i = 0; i < ah.getAllPups().size(); i++) {
+					if (name.equalsIgnoreCase(ah.getAllPups().get(i).getName())) {
+						System.out.println("There is already a puppy with that name. Please enter a valid name: ");
+						sameName = true;
+					}
 				}
-				valid = true;
+				if (name.contains("|") || name.equals("null")) {
+					System.out.println("Name cannot include the word 'null' or the pipe symbol '|'. Please enter a valid name: ");
+					valid = false;
+				} else if (sameName == true) {
+					valid = false;
+				} else {
+					valid = true;
+				}
+
 			} catch (InputMismatchException e) {
 				System.out.println("That isn't a puppy name, try again. ");
 				scan.nextLine();
