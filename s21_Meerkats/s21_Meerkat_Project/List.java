@@ -118,12 +118,12 @@ public class List<E> {
          return;
       } 
 
-      System.out.printf("The %s is: ", name);
+      System.out.printf("The %s is: \n ", name);
       ListNode<E> current = firstNode;
 
       // while not at end of list, output current node's data
       while (current != null) {
-         System.out.printf("%s ", current.data);
+         System.out.printf("%s \n", current.data);
          current = current.nextNode;
       } 
 

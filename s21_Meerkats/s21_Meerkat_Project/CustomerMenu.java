@@ -1,5 +1,6 @@
 package s21_Meerkat_Project;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -69,6 +70,7 @@ public class CustomerMenu extends MainMenu {
 		double pupPrice = 0;
 		boolean payEnt = false;
 		Bids pupBid = null;
+		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		System.out.println("What is the name of the puppy you wish to find? ");
 
 		name = scan.nextLine();
@@ -87,19 +89,19 @@ public class CustomerMenu extends MainMenu {
 			if (counter == 0 ) {
 				System.out.println("That puppy is not available. ");
 			} else {
-				System.out.println("Would you like to bid on " + name + "?(yes/no)");
+				System.out.println("Would you like to bid on " + name + "? (yes/no)");
 				String placeBid = scan.nextLine();
 				
 				if (placeBid.equalsIgnoreCase("yes")) {
 					// checkBid(name) and auction end date
-					System.out.println("Puppy name: " + name + "\nCurrent Bid ammount: "
-							+ (pupBid.getCurrentBid() + pupBid.getIncrement()) + "\nHow much do you wish to bid?");
+					System.out.println("Puppy name: " + name + "\nThe current Bid is: "
+							+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement())) + "\nHow much do you wish to bid?");
 
 					do {
 						maxBid = scan.nextDouble();
 						if (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()))
 							System.out.println("You will need to bid more than " + name + "'s current bid of "
-									+ (pupBid.getCurrentBid() + pupBid.getIncrement()));
+									+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement())));
 
 					} while (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()));
 					// for now comparing to opening price but need to compare to current max??

@@ -64,7 +64,7 @@ public class Bids {
 		startBy = LocalDateTime.now().withSecond(0).withNano(0);
 		endBy = end;
 
-		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method 
+		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method *)$
 		active = true;
 		
 		this.backlogg = new Stack<>();
@@ -111,23 +111,23 @@ public class Bids {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		String bh = (pup.getName()+"'s Bid History");
 		bidHistory.enqueue(bh);
-		bh = (" Bidder \t Result \t Winner \t Current Price \t Max willing to pay");
+		bh = (" Bidder \t Result \t\t Winner \t Current Price \t Max willing to pay");
 		bidHistory.enqueue(bh); 
-		bh =(u.getUserName()+"\t First bid\t"+u.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
+		bh =(u.getUserName()+"\t First bid\t\t"+u.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
 	
 	// use if the same customer increases their bid, if they are already winning
 	private void updateBHQueue(User u) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName()+"\t Updated bid \t"+winner.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
+		String bh = (u.getUserName()+"\tUpdated bid \t\t"+winner.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
 	
 	// use if a new user wins
 	private void newWinBHQueue(User u) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName()+"\tNew winner \t"+winner.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
+		String bh = (u.getUserName()+"\tNew winner \t\t"+winner.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
 	
@@ -139,7 +139,7 @@ public class Bids {
 	}
 		
 	public void checkBid(User cust, double newBid) {
-		if (winner.getUserName().equalsIgnoreCase("no one")) { // fix from constructor change
+		if (winner.getUserName().equalsIgnoreCase("no one")) { // fix from constructor change *)$
 			winner = cust;
 			maxBid = newBid;
 			newBHQueue(cust);
