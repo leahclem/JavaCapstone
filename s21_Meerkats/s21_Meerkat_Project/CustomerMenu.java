@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class CustomerMenu extends MainMenu {
 
 	private User curUser;
-
+	private Customer curCust;
 	CustomerMenu() {
 	}
 
@@ -25,8 +25,9 @@ public class CustomerMenu extends MainMenu {
 		System.out.println("2. Place bid on Puppy: ");
 		System.out.println("3. Display active auctions: ");
 		System.out.println("4. Display all my winning auctions:");
-		System.out.println("5. Logout: ");
-		System.out.println("6. Exit: ");
+		System.out.println("5. Pay for puppy:");
+		System.out.println("6. Logout: ");
+		System.out.println("7. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -48,16 +49,18 @@ public class CustomerMenu extends MainMenu {
 			ah.activeBids();// displays all bids currently active
 		} else if (choice == 4) {
 			checkWinning(ah);// display all winning auctions for the current user
-		} else if (choice == 5) {// logs out current user
+		} else if (choice == 5) {
+			payment(ah, curUser);
+		} else if (choice == 6) {// logs out current user
 			loggedIn = null;
 			System.out.println("Bye Customer " + curUser.getUserName());
-		} else if (choice == 6) {// exits the program
+		} else if (choice == 7) {// exits the program
 			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 			;
 		} else {
-			System.out.println("I don't understand, please enter a number from 1-5? ");
+			System.out.println("I don't understand, please enter a number from 1-7? ");
 		}
 
 		return loggedIn;
@@ -144,8 +147,34 @@ public class CustomerMenu extends MainMenu {
 		}
 	}// end of method checkWinning
 
-	public void payment() {
-		// stub for checkpoint 6, add option to menu
+	public void payment(AuctionHouse ah, User curUser) {//FIXME
+		Scanner scan = new Scanner(System.in);
+		Bids buyPup = null;
+		
+		System.out.println("The puppies you need to pay for are: ");
+		for (Bids b : ah.getAllBids()) {
+			if (b.isActive() == false && b.isPaidFor() == false
+					&& b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName())) {
+				System.out.println(b.getPup());
+
+			}
+		}
+		System.out.println("Which puppy would you like to pay for? ");
+		String pup = scan.nextLine();
+		for (Bids b : ah.getAllBids()) {
+			if (b.getPup().getName().equalsIgnoreCase(pup)) {
+				buyPup = b.getPup();
+			}
+		}
+		
+		System.out.println("Please confirm your payment method using " + this.curCust.getPayPal());
+		System.out.println("Do we have your permission to bill this account? (yes/no)");
+		String confirm = scan.nextLine();
+		if (confirm.equalsIgnoreCase("yes")) {
+			buyPup.setPaidFor(true);
+		} else {
+			System.out.println("If the puppy is not paid for within 48 hours it will be put back on the market.");
+		}
 	}
 
 }
