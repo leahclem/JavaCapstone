@@ -10,11 +10,13 @@ public class CustomerMenu extends MainMenu {
 
 	private User curUser;
 	private Customer curCust;
+
 	CustomerMenu() {
 	}
 
 	CustomerMenu(User u) {
 		this.curUser = u;
+		this.curCust = (Customer) u;
 	}
 
 	public int menu() {
@@ -89,16 +91,17 @@ public class CustomerMenu extends MainMenu {
 					counter++;
 				}
 			}
-			if (counter == 0 ) {
+			if (counter == 0) {
 				System.out.println("That puppy is not available. ");
 			} else {
 				System.out.println("Would you like to bid on " + name + "? (yes/no)");
 				String placeBid = scan.nextLine();
-				
+
 				if (placeBid.equalsIgnoreCase("yes")) {
 					// checkBid(name) and auction end date
 					System.out.println("Puppy name: " + name + "\nThe current Bid is: "
-							+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement())) + "\nHow much do you wish to bid?");
+							+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement()))
+							+ "\nHow much do you wish to bid?");
 
 					do {
 						maxBid = scan.nextDouble();
@@ -108,14 +111,14 @@ public class CustomerMenu extends MainMenu {
 
 					} while (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()));
 					// for now comparing to opening price but need to compare to current max??
-					//check if time is between nine to five pm
-					if(LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
+					// check if time is between nine to five pm
+					if (LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
 						pupBid.checkBid(customer, maxBid);
-					} else {//if not between 9-5pm
+					} else {// if not between 9-5pm
 						pupBid.storeBid(customer, maxBid);
 						System.out.println("Data backlogged");
 					}
-					
+
 				} // end if they place a bid
 
 			} // end else if puppy is found
@@ -147,34 +150,41 @@ public class CustomerMenu extends MainMenu {
 		}
 	}// end of method checkWinning
 
-	public void payment(AuctionHouse ah, User curUser) {//FIXME
+	public void payment(AuctionHouse ah, User curUser) {// FIXME
 		Scanner scan = new Scanner(System.in);
 		Bids buyPup = null;
-		
+		String pup;
+		String confirm;
+		int counter = 0;
 		System.out.println("The puppies you need to pay for are: ");
 		for (Bids b : ah.getAllBids()) {
+
 			if (b.isActive() == false && b.isPaidFor() == false
 					&& b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName())) {
 				System.out.println(b.getPup());
+				counter++;
+			}
+		}
+		if (counter != 0) {
+			System.out.println("Which puppy would you like to pay for? ");
+			pup = scan.nextLine();
+			for (Bids b : ah.getAllBids()) {
+				if (b.getPup().getName().equalsIgnoreCase(pup) && b.isPaidFor() == false) {
+					buyPup = b;
+				}
+			}
 
+			System.out.println("Please confirm your payment method using " + this.curCust.getPayPal());
+			System.out.println("Do we have your permission to bill this account? (yes/no)");
+			confirm = scan.nextLine();
+			if (confirm.equalsIgnoreCase("yes")) {
+				buyPup.setPaidFor(true);
+				System.out.println("Payment confirmed. Thank you for your business!");
+			} else {
+				System.out.println("If the puppy is not paid for soon it will be put back on the market.");
 			}
-		}
-		System.out.println("Which puppy would you like to pay for? ");
-		String pup = scan.nextLine();
-		for (Bids b : ah.getAllBids()) {
-			if (b.getPup().getName().equalsIgnoreCase(pup)) {
-				buyPup = b.getPup();
-			}
-		}
-		
-		System.out.println("Please confirm your payment method using " + this.curCust.getPayPal());
-		System.out.println("Do we have your permission to bill this account? (yes/no)");
-		String confirm = scan.nextLine();
-		if (confirm.equalsIgnoreCase("yes")) {
-			buyPup.setPaidFor(true);
-		} else {
-			System.out.println("If the puppy is not paid for within 48 hours it will be put back on the market.");
-		}
+		} else 
+			System.out.println("You have no puppies to pay for.");
 	}
 
 }
