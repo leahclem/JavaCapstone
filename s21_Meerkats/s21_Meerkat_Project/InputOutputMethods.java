@@ -345,7 +345,7 @@ public class InputOutputMethods {
 					count = 0;// reset count variable
 
 					if (username.equalsIgnoreCase("null")) {
-						winner = new User("no one", "apple", 'C');
+						winner = new User("null", "apple", 'C');
 					} else {// find the matching user
 						for (User u : users) {
 							if (username.equalsIgnoreCase(u.getUserName())) {
@@ -357,7 +357,7 @@ public class InputOutputMethods {
 						} // end of for loop through all users
 							// check if there are any winners
 						if (count == 0) {
-							winner = new User("no one", "apple", 'C');// note can't login with this information
+							winner = new User("null", "apple", 'C');// note can't login with this information
 						}
 					} // end of else to find current winner
 

@@ -150,7 +150,7 @@ public class AdminMenu extends MainMenu {
 					//loop through all the backlogg data
 					try {//this will eventually break, im counting on it
 						do {//pop every piece of backlogged data and apply it
-							data = curAuc.getBacklogg().pop();
+							data = curAuc.getBacklogg().dequeue();
 							//divide the data between cust and bid
 							//instantiate the stringtokenizer
 							stz = new StringTokenizer(data, " ");

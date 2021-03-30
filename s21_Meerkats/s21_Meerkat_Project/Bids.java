@@ -5,28 +5,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Bids {
-
-	
+	//fields
 	private double currentBid;
-
 	private double maxBid;
-
 	private double increment;
-
 	private LocalDateTime endBy;
-
 	private LocalDateTime startBy;
-
 	private User winner;
-
 	private Puppies pup;
-
 	private boolean active;
-
 	private boolean paidFor = false;//will be used for checkpoint 6
-	
-	private Stack<String> backlogg;//this is where backlogg is stored for checkpoint 2
-	
+	private Queue<String> backlogg;//this is where backlogg is stored for checkpoint 2
 	private Queue<String> bidHistory;
 	
 	public Bids() {
@@ -44,7 +33,7 @@ public class Bids {
 		this.winner = winner;
 		this.active = active;
 		//temp till save fix
-		this.backlogg = new Stack<>();
+		this.backlogg = new Queue<>();
 		this.bidHistory = new Queue<>();
 	}
 	
@@ -60,10 +49,10 @@ public class Bids {
 		startBy = LocalDateTime.now().withSecond(0).withNano(0);
 		endBy = end;
 
-		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method *)$
+		winner = new User("null", "apple", 'C'); // make sure this is fixed see checkBid method *)$
 		active = true;
 		
-		this.backlogg = new Stack<>();
+		this.backlogg = new Queue<>();
 		this.bidHistory = new Queue<>();
 	}
 	
@@ -98,11 +87,6 @@ public class Bids {
 		min = date.substring(14,16);
 		return year+month+day+hour+min;
 	}
-	
-	private void recordBidHist(User cust, double bid) {//pushes data to the backlogg stack
-		//stubs used for checkpoint 3 
-	}
-	
 	// use for the first bidder
 	private void newBHQueue(User u) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
@@ -136,7 +120,7 @@ public class Bids {
 	}
 		
 	public void checkBid(User cust, double newBid) {
-		if (winner.getUserName().equalsIgnoreCase("no one")) { // fix from constructor change *)$
+		if (winner.getUserName().equalsIgnoreCase("null")) { // fix from constructor change *)$
 			winner = cust;
 			maxBid = newBid;
 			newBHQueue(cust);
@@ -162,7 +146,7 @@ public class Bids {
 		//stub for checkpoint 2
 		//Variable Declaration
 		String savedBid = cust.getUserName() + " " + newBid;
-		backlogg.push(savedBid);
+		backlogg.enqueue(savedBid);
 	}
 	
 	public double getCurrentBid() {
@@ -237,11 +221,11 @@ public class Bids {
 		this.paidFor = paidFor;
 	}
 
-	public Stack<String> getBacklogg() {
+	public Queue<String> getBacklogg() {
 		return backlogg;
 	}
 
-	public void setBacklogg(Stack<String> backlogg) {
+	public void setBacklogg(Queue<String> backlogg) {
 		this.backlogg = backlogg;
 	}
 

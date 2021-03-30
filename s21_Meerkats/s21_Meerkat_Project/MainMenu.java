@@ -219,26 +219,28 @@ public class MainMenu {
 	}
 
 	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
-		// Variable Declaration
-		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true);
-		Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false, true);
-		Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true);
-		Puppies pupD = new Puppies("Valley", "Alsation", "female", false, 200, true, true);
-		ah.getAllPups().add(pupA);
-		ah.getAllPups().add(pupB);
-		ah.getAllPups().add(pupC);
-		ah.getAllPups().add(pupD);
-		// plus different default times for testing purposes Jolly
-		// this could be a potential error since it is not referencing the
-		ah.addBid(new Bids(findPup("Jolly", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
-		ah.addBid(new Bids(findPup("Valley", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
-		ah.addBid(new Bids(findPup("Sugar", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
+		//Check to see if these dogs are already in the database
+		if(pupExists("Jolly", ah) || pupExists("Happy", ah) || pupExists("Sugar", ah) || pupExists("Valley", ah)) {
+			System.out.println("Cannot load sample data one or more dogs already in database.");
+		} else {
+			Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true);
+			Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false, true);
+			Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true);
+			Puppies pupD = new Puppies("Valley", "Alsation", "female", false, 200, true, true);
+			ah.getAllPups().add(pupA);
+			ah.getAllPups().add(pupB);
+			ah.getAllPups().add(pupC);
+			ah.getAllPups().add(pupD);
+			// plus different default times for testing purposes Jolly
+			// this could be a potential error since it is not referencing the
+			ah.addBid(new Bids(findPup("Jolly", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Valley", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Sugar", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
+		}//end of else
 	}
 
 	// this method is be used only by sample data
 	private Puppies findPup(String name, AuctionHouse ah) {
-		Puppies pup = null;
-
 		for (Puppies p : ah.getAllPups()) {
 			if (p.getName().equalsIgnoreCase(name)) {
 				return p;
@@ -247,6 +249,15 @@ public class MainMenu {
 			// should never run
 		System.out.println("Error in findPup.");
 		return null;
+	}
+	
+	private boolean pupExists(String name, AuctionHouse ah) {
+		for (Puppies p : ah.getAllPups()) {
+			if (p.getName().equalsIgnoreCase(name)) {
+				return true;
+			}
+		} // end of for loop
+		return false;
 	}
 
 	public Puppies addPup(AuctionHouse ah) {
