@@ -20,7 +20,7 @@ public class Puppies extends Bids {
 		this.name=name;
 	}
 	
-	public Puppies(String name, String breed, String sex, boolean pedigree, double price, boolean hypo, boolean sold) {
+	public Puppies(String name, String breed, String sex, boolean pedigree, double price, boolean hypo, boolean available) {
 		super();
 		this.name = name;
 		this.breed = breed;
@@ -28,7 +28,7 @@ public class Puppies extends Bids {
 		this.pedigree = pedigree;
 		this.price = price;
 		this.hypo = hypo;
-		this.available = sold;
+		this.available = available;
 	}
 	
 	public String toString() {

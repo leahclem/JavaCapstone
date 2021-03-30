@@ -1,19 +1,11 @@
-3|3|7|5
+3|2|3|2
 dwolff|CutePups|Diane|Wolff|true
 assteroids|123|Leah|Clemens|true
 willzy|apple|Will|McCoy|true
 jdoe|apple|31 Old Warren Rd.|schmoe@gmail.com
-dave|apple|adfasd|adfadf
-dave|apple|adfadfs|asdfasd
+dave|apple|7457 Grapetree Lane|dave@superdave.com
 Bowser|boxer|Male|true|2500.0|false|true
 Tuffet|mutt|Male|false|100.0|false|false
 BooBoo|maltese|Male|false|800.0|true|false
-Jolly|poodle|male|true|2000.0|false|true
-Happy|beagle|male|true|1000.0|false|true
-Sugar|German Shepherd|female|true|1500.0|false|true
-Valley|Alsation|female|false|200.0|true|true
 BooBoo|202103121443|202104011201|2000.0|50000.0||50.0|dave|true
 Tuffet|202101101201|202103121858|100.0|0.0||50.0|no one|false
-Jolly|202103301521|202103301721|2000.0|0.0||50.0|no one|true
-Valley|202103301521|202103301522|200.0|0.0||10.0|no one|false
-Sugar|202103301521|202103301526|5000.0|100000.0||50.0|dave|true
