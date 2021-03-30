@@ -7,10 +7,6 @@ import java.util.ArrayList;
 public class Bids {
 
 	
-	private class BidHist{//to be our LL/stack implementation
-		//stub to be filled checkpoint 3
-	}
-	
 	private double currentBid;
 
 	private double maxBid;
@@ -68,6 +64,7 @@ public class Bids {
 		active = true;
 		
 		this.backlogg = new Stack<>();
+		this.bidHistory = new Queue<>();
 	}
 	
 	public String toString() { 
