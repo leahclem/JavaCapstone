@@ -30,7 +30,8 @@ public class AdminMenu extends MainMenu {
 		System.out.println("6. Create new auction: ");
 		System.out.println("7. Create new Admin: ");
 		System.out.println("8. View closed auctions: ");
-		System.out.println("9. Exit: ");
+		System.out.println("9. View bid history queue");
+		System.out.println("10. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -61,7 +62,9 @@ public class AdminMenu extends MainMenu {
 			createAdmin(ah.getAllUsers());
 		} else if (choice == 8) {
 			ah.closedBids();
-		} else if (choice == 9) {
+		} else if (choice == 9){
+			ah.getAllBids().get(0).getBidHistory().print(); //*(*( add during business hours for testing.
+		} else if (choice == 10) {
 			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
