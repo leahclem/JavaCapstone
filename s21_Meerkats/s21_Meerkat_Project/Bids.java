@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Bids {
-	//fields
+	// fields
 	private double currentBid;
 	private double maxBid;
 	private double increment;
@@ -14,15 +14,16 @@ public class Bids {
 	private User winner;
 	private Puppies pup;
 	private boolean active;
-	private boolean paidFor = false;//will be used for checkpoint 6
-	private Queue<String> backlogg;//this is where backlogg is stored for checkpoint 2
+	private boolean paidFor = false;// will be used for checkpoint 6
+	private Queue<String> backlogg;// this is where backlogg is stored for checkpoint 2
 	private Queue<String> bidHistory;
-	
+
 	public Bids() {
-	
+
 	}
 
-	public Bids(Puppies pup, LocalDateTime end, LocalDateTime start , double currentBid, double maxBid, double increment, User winner, boolean active)//will be to bring in bids already made before
+	public Bids(Puppies pup, LocalDateTime end, LocalDateTime start, double currentBid, double maxBid, double increment,
+			User winner, boolean active)// will be to bring in bids already made before
 	{
 		this.pup = pup;
 		this.endBy = end;
@@ -32,12 +33,12 @@ public class Bids {
 		this.increment = increment;
 		this.winner = winner;
 		this.active = active;
-		//temp till save fix
+		// temp till save fix
 		this.backlogg = new Queue<>();
 		this.bidHistory = new Queue<>();
 	}
-	
-	public Bids(Puppies pup, LocalDateTime end) {//initial creation of an auction/bid
+
+	public Bids(Puppies pup, LocalDateTime end) {// initial creation of an auction/bid
 		this.pup = pup;
 		currentBid = pup.getPrice();
 		maxBid = 0;
@@ -51,12 +52,12 @@ public class Bids {
 
 		winner = new User("null", "apple", 'C'); // make sure this is fixed see checkBid method *)$
 		active = true;
-		
+
 		this.backlogg = new Queue<>();
 		this.bidHistory = new Queue<>();
 	}
-	
-	public String toString() { 
+
+	public String toString() {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.pup.getName() + " is ");
@@ -73,58 +74,64 @@ public class Bids {
 	}
 
 	public String toStringF() {
-				
-		return this.getPup().getName()+"|"+dateToString(startBy)+"|"+dateToString(endBy)+"|"+currentBid+"|"+maxBid+"|"+increment+"|"+winner.getUserName()+"|"+active;
+
+		return this.getPup().getName() + "|" + dateToString(startBy) + "|" + dateToString(endBy) + "|" + currentBid
+				+ "|" + maxBid + "|" + increment + "|" + winner.getUserName() + "|" + active;
 	}
-	
+
 	public String dateToString(LocalDateTime ldt) {
 		String year, month, day, hour, min;
 		String date = ldt.toString();
 		year = date.substring(0, 4);
 		month = date.substring(5, 7);
 		day = date.substring(8, 10);
-		hour = date.substring(11,13);
-		min = date.substring(14,16);
-		return year+month+day+hour+min;
+		hour = date.substring(11, 13);
+		min = date.substring(14, 16);
+		return year + month + day + hour + min;
 	}
+
 	// use for the first bidder
 	private void newBHQueue(User u) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (pup.getName()+"'s Bid History");
+		String bh = (pup.getName() + "'s Bid History");
 		bidHistory.enqueue(bh);
-		bh = (" Bidder \t Result \t\t Winner \t Current Price \t Max willing to pay");
-		bidHistory.enqueue(bh); 
-		bh =(u.getUserName()+"\t First bid\t\t"+u.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
+		bh = ("Bidder \t\tResult \t\t\tWinner \t\tCurrent Price \t\tMax willing to pay");
+		bidHistory.enqueue(bh);
+		bh = (u.getUserName() + "\t\tFirst bid\t\t" + u.getUserName() + "\t\t" + nf.format(currentBid) + "\t\t\t"
+				+ nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
-	
+
 	// use if the same customer increases their bid, if they are already winning
 	private void updateBHQueue(User u) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName()+"\tUpdated bid \t\t"+winner.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
+		String bh = (u.getUserName() + "\t\tUpdated bid \t\t" + winner.getUserName() + "\t\t" + nf.format(currentBid)
+				+ "\t\t\t" + nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
-	
+
 	// use if a new user wins
 	private void newWinBHQueue(User u) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName()+"\tNew winner \t\t"+winner.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
+		String bh = (u.getUserName() + "\t\tNew winner \t\t" + winner.getUserName() + "\t\t" + nf.format(currentBid)
+				+ "\t\t\t" + nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
-	
+
 	// use if there is a new bid, but it isn't enough to win
 	private void notEnoughBHQueue(User u) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName()+"\tRejected (too low) \t"+winner.getUserName()+"\t"+nf.format(currentBid)+"\t"+nf.format(maxBid));
+		String bh = (u.getUserName() + "\t\tRejected (too low) \t" + winner.getUserName() + "\t\t"
+				+ nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
-		
+
 	public void checkBid(User cust, double newBid) {
-		if (winner.getUserName().equalsIgnoreCase("null")) { // fix from constructor change *)$
+		if (winner.getUserName().equalsIgnoreCase("null")) {
 			winner = cust;
 			maxBid = newBid;
 			newBHQueue(cust);
-			
+
 		} else if (winner == cust) {
 			maxBid = newBid;
 			updateBHQueue(cust);
@@ -139,16 +146,15 @@ public class Bids {
 				newWinBHQueue(cust);
 			}
 		}
-		bidHistory.print(); // remove this, just used for testing
 	}
-	
+
 	public void storeBid(User cust, double newBid) {
-		//stub for checkpoint 2
-		//Variable Declaration
+		// stub for checkpoint 2
+		// Variable Declaration
 		String savedBid = cust.getUserName() + " " + newBid;
 		backlogg.enqueue(savedBid);
 	}
-	
+
 	public double getCurrentBid() {
 		return currentBid;
 	}
@@ -237,5 +243,4 @@ public class Bids {
 		this.bidHistory = bidHistory;
 	}
 
-	
 }

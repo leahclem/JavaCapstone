@@ -63,7 +63,14 @@ public class AdminMenu extends MainMenu {
 		} else if (choice == 8) {
 			ah.closedBids();
 		} else if (choice == 9){
-			ah.getAllBids().get(0).getBidHistory().print(); //*(*( add during business hours for testing.
+			for(int i = 0; i<ah.getAllBids().size();i++) {
+				if(ah.getAllBids().get(i).getBidHistory().isEmpty()) {
+					System.out.println(ah.getAllBids().get(i).getPup().getName()+" has no bidding history yet. ");
+				} else {
+					ah.getAllBids().get(i).getBidHistory().print(); //*(*( add during business hours for testing.
+				}
+				
+			}
 		} else if (choice == 10) {
 			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
