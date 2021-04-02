@@ -291,15 +291,16 @@ public class InputOutputMethods {
 		// Variable Declaration
 		String line = "", delim = "|";
 		StringTokenizer st;
-		int count = 0;
+		int count = 0, backlog = 0, bidHist = 0;
 		double price = 0, cbid = 0, mbid = 0, incr = 0;
 		LocalDateTime startDate = null, endDate = null;
-		boolean active = false;
+		boolean active = false, isPaidFor = false;
 		String pupname, username;
 		Puppies pup = null;
 		User winner = null;
 		Customer win = null;
 		Bids added = null;
+		
 
 		// for all the auctions loop through a line and collect all data
 		for (int i = 0; i < bids; i++) {
@@ -311,7 +312,7 @@ public class InputOutputMethods {
 			}
 			st = new StringTokenizer(line, delim);
 			// gather all data from the auction line
-			for (int j = 0; j < 8; j++) {
+			for (int j = 0; j < 11; j++) {
 				// assign variables accordingly
 				switch (j) {
 				case 0:
@@ -365,10 +366,39 @@ public class InputOutputMethods {
 				case 7:
 					active = Boolean.parseBoolean(st.nextToken());
 					break;
+				case 8:
+					isPaidFor = Boolean.parseBoolean(st.nextToken());
+					break;
+				case 9:
+					backlog = Integer.parseInt(st.nextToken());
+					break;
+				case 10:
+					bidHist = Integer.parseInt(st.nextToken());
+					break;
 				}// end of switch case
 
 			} // end of for all data for a puppy
-			added = new Bids(pup, endDate, startDate, cbid, mbid, incr, winner, active);
+			added = new Bids(pup, endDate, startDate, cbid, mbid, incr, winner, active, isPaidFor);
+			//add the backlogg data
+			for(int j = 0 ; j < backlog ; j++) {
+				try {//grab the next line of backlog
+					line = bf.readLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				//add backlog to queue
+				added.getBacklogg().enqueue(line);
+			}
+			//add the bidHistory data
+			for(int j = 0 ; j < bidHist ; j++) {
+				try {//grab the next line of backlog
+					line = bf.readLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				//add bidHist to queue
+				added.getBidHistory().enqueue(line);
+			}
 			auctions.add(added);
 			win.addHighBid(added);//adds high bid to customer object
 			

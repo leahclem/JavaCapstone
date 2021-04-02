@@ -23,7 +23,7 @@ public class Bids {
 	}
 
 	public Bids(Puppies pup, LocalDateTime end, LocalDateTime start, double currentBid, double maxBid, double increment,
-			User winner, boolean active)// will be to bring in bids already made before
+			User winner, boolean active, boolean paidFor)// will be to bring in bids already made before
 	{
 		this.pup = pup;
 		this.endBy = end;
@@ -33,6 +33,7 @@ public class Bids {
 		this.increment = increment;
 		this.winner = winner;
 		this.active = active;
+		this.paidFor = paidFor;
 		// temp till save fix
 		this.backlogg = new Queue<>();
 		this.bidHistory = new Queue<>();
