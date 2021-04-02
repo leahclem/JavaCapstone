@@ -35,7 +35,9 @@ Option 2: Sign in is working, we have several profiles created for Customers as 
 
 		The 2nd case is a customer: user name: jdoe, password: apple, address, email for PayPal
 		
-Option 3: Works, program loads sample data from SavedData.txt file and displays auctions that have ended.
+Option 3: Works, program loads sample data from SavedData.txt file and displays auctions that have ended. However, this option
+			would not be in the end user program and is used for data (times) that are dynamic (e.g. end 5 minutes from program 
+			start).
 
 Option 4: Works, shows any active auctions.
 
