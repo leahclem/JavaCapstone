@@ -45,8 +45,8 @@ public class AdminMenu extends MainMenu {
 	public User menuChoice(int choice, AuctionHouse ah, InputOutputMethods io) {
 		User loggedIn = this.curUser;
 
-		if(choice == 1) {
-			loadbacklog(ah);//process backlogged data
+		if (choice == 1) {
+			loadbacklog(ah);// process backlogged data
 		} else if (choice == 2) {
 			listPups(ah);
 		} else if (choice == 3) {
@@ -62,15 +62,8 @@ public class AdminMenu extends MainMenu {
 			createAdmin(ah.getAllUsers());
 		} else if (choice == 8) {
 			ah.closedBids();
-		} else if (choice == 9){
-			for(int i = 0; i<ah.getAllBids().size();i++) {
-				if(ah.getAllBids().get(i).getBidHistory().isEmpty()) {
-					System.out.println(ah.getAllBids().get(i).getPup().getName()+" has no bidding history yet. ");
-				} else {
-					ah.getAllBids().get(i).getBidHistory().print(); //*(*( add during business hours for testing.
-				}
-				
-			}
+		} else if (choice == 9) {
+			checkAuctionHist(ah);
 		} else if (choice == 10) {
 			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
@@ -81,7 +74,7 @@ public class AdminMenu extends MainMenu {
 
 		return loggedIn;
 	}
-	
+
 	public void createBid(AuctionHouse ah) {
 		Scanner scan = new Scanner(System.in);
 		// query admin for which puppy to create a bid for, using name as the primary
@@ -108,39 +101,85 @@ public class AdminMenu extends MainMenu {
 				}
 
 			} catch (IndexOutOfBoundsException iob) {
-				counter=0;
+				counter = 0;
 			}
 		} // end loop to determine if there is an existing Bid for the puppy
 
 		if (pup == null) {
 			System.out.println("We did not find a puppy with that name. ");
 			// this should pull us out of the method if no puppy is found
-		} else if (counter==1) {
+		} else if (counter == 1) {
 			System.out.println("There is already an auction for this puppy. ");
-		} else if (counter==0) {
+		} else if (counter == 0) {
 			LocalDateTime endDate = validDate();
 			ah.addBid(new Bids(pup, endDate));
 		} else {
 			System.out.println("Something isn't right. ");
 		}
-		
+
 	}
 
-	public void checkAuctionHist(){
-		//stub checkpoint 3, it will display the history of a selected auction
+	public void checkAuctionHist(AuctionHouse ah) {
+		Scanner scan = new Scanner(System.in);
+		// option 9 view bidHistory
+		int choice = 0;
+		System.out.println("Do you want to: \n1. View all auctions \n2. Search by puppy name \nChoice: ");
+
+		boolean valid = false;
+		while (!valid) {
+			try {
+				choice = scan.nextInt();
+				if (choice == 1) {
+					for (int i = 0; i < ah.getAllBids().size(); i++) {
+						if (ah.getAllBids().get(i).getBidHistory().isEmpty()) {
+							System.out.println(
+									ah.getAllBids().get(i).getPup().getName() + " has no bidding history yet. ");
+						} else {
+							ah.getAllBids().get(i).getBidHistory().print();
+
+						}
+
+					}
+					valid = true;
+				} else if (choice == 2) {
+					System.out.println("What is the puppy's name?");
+					String name = scan.nextLine();
+					for (int j = 0; j < ah.getAllBids().size(); j++) {
+						if (name.equalsIgnoreCase(ah.getAllBids().get(j).getPup().getName())) {
+							ah.getAllBids().get(j).getBidHistory().print();
+						} else if (ah.getAllBids().get(j).getBidHistory().isEmpty()) {
+							System.out.println(
+									ah.getAllBids().get(j).getPup().getName() + " has no bidding history yet. ");
+
+						} else {
+							System.out.println("I don't see a puppy with that name. ");
+						}
+
+					}
+					valid = true;
+				} else {
+					System.out.println("Please enter either 1 or 2.");
+					scan.nextLine();
+					valid = false;
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Please enter either 1 or 2. ");
+				scan.nextLine();
+			}
+
+		}
 	}
-	
+
 	public void listPups(AuctionHouse ah) {
-		for(int i = 0; i<ah.getAllPups().size(); i++) {
+		for (int i = 0; i < ah.getAllPups().size(); i++) {
 			System.out.println(ah.getAllPups().get(i).toString());
 		}
-			
-		
+
 	}
-	
+
 	public void loadbacklog(AuctionHouse ah) {
-		//stub checkpoint 2, it will load backlog data, and add to bidhistory
-		//Variable Declaration
+		// stub checkpoint 2, it will load backlog data, and add to bidhistory
+		// Variable Declaration
 		ArrayList<Bids> auctions = ah.getAllBids();
 		StringTokenizer stz;
 		String data;
@@ -148,51 +187,53 @@ public class AdminMenu extends MainMenu {
 		Bids curAuc;
 		User cust = null;
 		double maxbid;
-		
-		//make it so this only works from 9-5pm
-		if(LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
-			//loop through all bids
-			for(int i = 0 ; i < auctions.size() ; i++) {
-				//set the current Auction
+
+		// make it so this only works from 9-5pm
+		if (LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
+			// loop through all bids
+			for (int i = 0; i < auctions.size(); i++) {
+				// set the current Auction
 				curAuc = auctions.get(i);
-				//check for backlog data
-				if(!curAuc.getBacklogg().isEmpty() ) {//if the backlogg is not empty
-					//loop through all the backlogg data
-					try {//this will eventually break, im counting on it
-						do {//pop every piece of backlogged data and apply it
+				// check for backlog data
+				if (!curAuc.getBacklogg().isEmpty()) {// if the backlogg is not empty
+					// loop through all the backlogg data
+					try {// this will eventually break, im counting on it
+						do {// pop every piece of backlogged data and apply it
 							data = curAuc.getBacklogg().dequeue();
-							//divide the data between cust and bid
-							//instantiate the stringtokenizer
+							// divide the data between cust and bid
+							// instantiate the stringtokenizer
 							stz = new StringTokenizer(data, " ");
 							custName = stz.nextToken();
 							maxbid = Double.parseDouble(stz.nextToken());
-							//get the customer
-							for(int j = 0; j < ah.getAllUsers().size(); j++) {//loop through all users
-								if(ah.getAllUsers().get(j).getUserName().equalsIgnoreCase(custName) ) {//if the usernames are the same
+							// get the customer
+							for (int j = 0; j < ah.getAllUsers().size(); j++) {// loop through all users
+								if (ah.getAllUsers().get(j).getUserName().equalsIgnoreCase(custName)) {// if the
+																										// usernames are
+																										// the same
 									cust = ah.getAllUsers().get(j);
 								}
-							}//end of customer loop
-							//apply the backlog to the Auction
+							} // end of customer loop
+								// apply the backlog to the Auction
 							curAuc.checkBid(cust, maxbid);
-						} while(!curAuc.getBacklogg().isEmpty());
+						} while (!curAuc.getBacklogg().isEmpty());
 						System.out.println("Backlog for " + curAuc.getPup().getName() + " has been updated.");
-					} catch(NoSuchElementException nse) {
+					} catch (NoSuchElementException nse) {
 						System.out.println("no more backlogged data for this auction");
-					}//end of try catch no such element
-					
-				}//end of if there is backlog data
+					} // end of try catch no such element
+
+				} // end of if there is backlog data
 				else {
-					if(curAuc.isActive()) {
+					if (curAuc.isActive()) {
 						System.out.println("No backlog for auction: " + curAuc.getPup().getName());
 					}
 				}
-			}//end of for loop through all auctions	
-		}//end of if between 9am - 4:59pm
+			} // end of for loop through all auctions
+		} // end of if between 9am - 4:59pm
 		else {
 			System.out.println("Error, try loading the backlog between 9-5pm, when we are open.");
 		}
-	}//end of loadbacklog
-	
+	}// end of loadbacklog
+
 	public LocalDateTime validDate() {
 		Scanner scan = new Scanner(System.in);
 
@@ -356,6 +397,5 @@ public class AdminMenu extends MainMenu {
 
 		System.out.println("Created user: " + userName);
 	}// end of create admin
-		
 
 }
