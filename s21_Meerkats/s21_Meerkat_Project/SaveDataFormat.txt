@@ -16,6 +16,12 @@ name|breed|gender|pedigree|price|hypoalergenic|sold
 string|string|string|boolean|double|boolean|boolean
 
 Jolly|202103121443|202103121503|2200|2400|100|no one|true
-puppyName|startDateInString|EndDateInString|CurrentBid|maxBid|increment|winner|active
-string|string|string|double|double|double|string|boolean
+puppyName|startDateInString|EndDateInString|CurrentBid|maxBid|increment|winner|active|isPaidFor|backloglines|bidHistlines
+string|string|string|double|double|double|string|boolean|boolean|int|int
 for pup and username search for corresponding objects before calling constructor
+
+string
+//backlogg data
+
+string
+//bidHist data
