@@ -2,7 +2,7 @@ package s21_Meerkat_Project;
 
 import java.text.NumberFormat;
 
-public class Puppies extends Bids {
+public class Puppies {
 	private String name; // primary key for DB implementation
 	private String breed;
 	private String sex;
