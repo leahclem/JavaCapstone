@@ -413,10 +413,7 @@ public class InputOutputMethods {
 		ArrayList<Admin> adminList = new ArrayList<>();
 		int pupSize = pupList.size();
 		int auctSize = auctions.size();
-		int backLogSize = 0;
-		int bidHistSize = 0;
 		
-
 		for (User u : users) {
 			if (u instanceof Customer) {
 				custList.add((Customer) u); 
@@ -425,19 +422,6 @@ public class InputOutputMethods {
 			}
 		}
 
-		for (Bids b : auctions) {
-			if(b.getBidHistory().isEmpty()) {
-				;
-			} else {
-				bidHistSize=bidHistSize + b.getBidHistory().size();
-			}
-			if(b.getBacklogg().isEmpty()) {
-				;
-			} else {
-				backLogSize = backLogSize + b.getBacklogg().size();
-			}
-		}
-		
 		PrintWriter out = null;
 		try {
 			out = openWrite();
@@ -456,26 +440,15 @@ public class InputOutputMethods {
 			}
 			
 			for(Bids b : auctions) {
-				out.println(b.toStringF(bidHistSize, backLogSize));
-			}
-			
-			for (Bids b : auctions) {
-				
-				if(b.getBacklogg().isEmpty()) {
-					;
-				} else {
+				out.println(b.toStringF());
+				while(!b.getBacklogg().isEmpty()) {
 					out.println(b.getBacklogg().dequeue().toString());
 				}
-			}
-			
-			for (Bids b : auctions) {
-				if (b.getBidHistory().isEmpty()) {
-					;
-				}else {
+				while(!b.getBidHistory().isEmpty()) {
 					out.println(b.getBidHistory().dequeue().toString());
 				}
 			}
-			
+					
 		} finally {
 			try {
 				out.close();

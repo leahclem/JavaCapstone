@@ -74,9 +74,9 @@ public class Bids {
 		return bidString;
 	}
 
-	public String toStringF(int backLogg, int bidHist) {
+	public String toStringF() {
 		return this.getPup().getName() + "|" + dateToString(startBy) + "|" + dateToString(endBy) + "|" + currentBid
-				+ "|" + maxBid + "|" + increment + "|" + winner.getUserName() + "|" + active +"|"+backLogg+"|"+bidHist;
+				+ "|" + maxBid + "|" + increment + "|" + winner.getUserName() + "|" + active +"|"+backlogg.size()+"|"+bidHistory.size();
 	}
 
 	public String dateToString(LocalDateTime ldt) {
