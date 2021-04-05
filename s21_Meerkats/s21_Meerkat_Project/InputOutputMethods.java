@@ -315,7 +315,7 @@ public class InputOutputMethods {
 			for (int j = 0; j < 11; j++) {
 				// assign variables accordingly
 				switch (j) {
-				case 0:
+				case 0://pupname
 					pupname = st.nextToken();
 					// find the puppy
 					for (Puppies p : pupList) {
@@ -325,22 +325,22 @@ public class InputOutputMethods {
 					} // end of for loop through all users
 						// if no pup found null will be entered which should never happen
 					break;
-				case 1:
+				case 1://startdate
 					startDate = strToDate(st.nextToken());
 					break;
-				case 2:
+				case 2://endDate
 					endDate = strToDate(st.nextToken());
 					break;
-				case 3:
+				case 3://current bid
 					cbid = Double.parseDouble(st.nextToken());
 					break;
-				case 4:
+				case 4://max bid
 					mbid = Double.parseDouble(st.nextToken());
 					break;
-				case 5:
+				case 5://increment
 					incr = Double.parseDouble(st.nextToken());
 					break;
-				case 6:
+				case 6://winner
 					username = st.nextToken();
 					// check if no winner
 					count = 0;// reset count variable
@@ -363,16 +363,16 @@ public class InputOutputMethods {
 					} // end of else to find current winner
 
 					break;
-				case 7:
+				case 7://is active
 					active = Boolean.parseBoolean(st.nextToken());
 					break;
-				case 8:
+				case 8://is paidfor
 					isPaidFor = Boolean.parseBoolean(st.nextToken());
 					break;
-				case 9:
+				case 9://bidhist
 					backlog = Integer.parseInt(st.nextToken());
 					break;
-				case 10:
+				case 10://backlog
 					bidHist = Integer.parseInt(st.nextToken());
 					break;
 				}// end of switch case
