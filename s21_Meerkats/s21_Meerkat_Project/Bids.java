@@ -76,7 +76,7 @@ public class Bids {
 
 	public String toStringF() {
 		return this.getPup().getName() + "|" + dateToString(startBy) + "|" + dateToString(endBy) + "|" + currentBid
-				+ "|" + maxBid + "|" + increment + "|" + winner.getUserName() + "|" + active +"|"+backlogg.size()+"|"+bidHistory.size();
+				+ "|" + maxBid + "|" + increment + "|" + winner.getUserName() + "|" + active +"|"+paidFor+"|"+backlogg.size()+"|"+bidHistory.size();
 	}
 
 	public String dateToString(LocalDateTime ldt) {
