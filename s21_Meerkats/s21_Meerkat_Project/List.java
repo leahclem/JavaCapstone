@@ -129,6 +129,21 @@ public class List<E> {
 
       System.out.println();
    } 
+   
+   public int numInQueue() {
+	   int num = 0;
+	   if(isEmpty()) {
+		   return 0;
+	   }
+	   ListNode<E> current = firstNode;
+	   
+	   while(current != null) {
+		   num = num +1;
+		   current = current.nextNode;
+	   }
+	   return num;	   
+   }
+   
 } 
 
 

@@ -22,6 +22,10 @@ public class Queue<E> {
 
    // output queue contents
    public void print() {queueList.print();}
+   
+   public int size() {
+	   return queueList.numInQueue();
+   }
 } 
 
 
