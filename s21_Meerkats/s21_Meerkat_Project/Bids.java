@@ -59,6 +59,12 @@ public class Bids {
 	}
 
 	public String toString() {
+		String win = " ";
+		if(this.winner.getUserName().equalsIgnoreCase(null)) {
+			win = "no one";
+		} else {
+			win = this.winner.getUserName().toString();
+		}
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.pup.getName() + " is ");
@@ -67,7 +73,7 @@ public class Bids {
 					+ " and the final price was " + nf.format(getCurrentBid()) + "." + "Paid for: " + paidFor);
 		} else {
 			sb.append("on auction for " + nf.format(currentBid) + ". The current winner of the auction is "
-					+ this.winner.getUserName() + ". This auction started on " + startBy + " and ends on " + endBy
+					+ win + ". This auction started on " + startBy + " and ends on " + endBy
 					+ ".");
 		}
 		String bidString = sb.toString();
