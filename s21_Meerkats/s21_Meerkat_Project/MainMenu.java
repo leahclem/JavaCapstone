@@ -230,19 +230,19 @@ public class MainMenu {
 		if(pupExists("Jolly", ah) || pupExists("Happy", ah) || pupExists("Sugar", ah) || pupExists("Valley", ah)) {
 			System.out.println("Cannot load sample data one or more dogs already in database.");
 		} else {
-			Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true);
-			Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false, true);
-			Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true);
-			Puppies pupD = new Puppies("Valley", "Alsation", "female", false, 200, true, true);
+			Puppies pupA = new Puppies("Ginger", "poodle", "male", true, 2000.0, false, true);
+			Puppies pupB = new Puppies("Pepper", "beagle", "male", true, 1000.0, false, true);
+			Puppies pupC = new Puppies("Red", "German Shepherd", "female", true, 1500.0, false, true);
+			Puppies pupD = new Puppies("Weston", "Alsation", "female", false, 200, true, true);
 			ah.getAllPups().add(pupA);
 			ah.getAllPups().add(pupB);
 			ah.getAllPups().add(pupC);
 			ah.getAllPups().add(pupD);
 			// plus different default times for testing purposes Jolly
 			// this could be a potential error since it is not referencing the
-			ah.addBid(new Bids(findPup("Jolly", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
-			ah.addBid(new Bids(findPup("Valley", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
-			ah.addBid(new Bids(findPup("Sugar", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Ginger", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Pepper", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
 		}//end of else
 	}
 
