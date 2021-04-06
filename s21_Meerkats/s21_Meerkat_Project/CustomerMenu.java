@@ -156,6 +156,7 @@ public class CustomerMenu extends MainMenu {
 		String pup;
 		String confirm;
 		int counter = 0;
+		int counter2=0;
 		System.out.println("The puppies you need to pay for are: ");
 		for (Bids b : ah.getAllBids()) {
 
@@ -171,9 +172,12 @@ public class CustomerMenu extends MainMenu {
 			for (Bids b : ah.getAllBids()) {
 				if (b.getPup().getName().equalsIgnoreCase(pup) && b.isPaidFor() == false) {
 					buyPup = b;
-				} else {
-					System.out.println("Could not find a puppy with that name.");
+					counter2++;
 				}
+			}
+			if(counter2==0) {
+				System.out.println("Could not find a puppy with that name.");
+				return;
 			}
 
 			System.out.println("Please confirm your payment method using " + this.curCust.getPayPal());
