@@ -360,6 +360,7 @@ public class AdminMenu extends MainMenu {
 	}
 
 	public void createAdmin(ArrayList<User> users) {
+		MainMenu mm = new MainMenu();
 		// Ask for name and sign in information
 		Scanner scan = new Scanner(System.in);
 		String userName;
@@ -370,32 +371,31 @@ public class AdminMenu extends MainMenu {
 
 		System.out.print("Enter the first name of the new Admin: ");
 		fname = scan.nextLine();
-		while (fname.contains("|") || fname.equals("null")) {
-			System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
-			fname = scan.nextLine();
-		}
+		mm.checkValid(fname); 
+		
 		System.out.print("Enter the last name of the new Admin: ");
 		lname = scan.nextLine();
-		while (lname.contains("|") || lname.equals("null")) {
-			System.out.println("Name cannot include the word 'null' or the pipe symbol '|'");
-			lname = scan.nextLine();
-		}
+		mm.checkValid(lname);
+		
 		System.out.println("Enter the user name of the new Admin: ");
 		userName = scan.nextLine();
-		while (userName.contains("|") || userName.equals("null")) {
-			System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
-			userName = scan.nextLine();
+		mm.checkValid(userName);
+		//loop to check for duplicate username and also validate new entry for the word "null" or pipes
+		for (int i =0; i< users.size(); i++) {
+			if (users.get(i).getUserName().equals(userName)) {
+				System.out.println("That username is already taken, try a different one. ");
+				userName = scan.nextLine();
+				mm.checkValid(userName);
+			}
 		}
+		
 		System.out.println("Finally enter the password of the new Admin: ");
 		password = scan.nextLine();
-		while (password.contains("|") || password.equals("null")) {
-			System.out.println("Password cannot include the word 'null' or the pipe symbol '|'");
-			password = scan.nextLine();
-		}
+		mm.checkValid(password);
 
 		users.add(new Admin(userName, password, fname, lname, base));
-
+		
 		System.out.println("Created user: " + userName);
 	}// end of create admin
-
+	
 }

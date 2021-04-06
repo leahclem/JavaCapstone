@@ -171,6 +171,8 @@ public class CustomerMenu extends MainMenu {
 			for (Bids b : ah.getAllBids()) {
 				if (b.getPup().getName().equalsIgnoreCase(pup) && b.isPaidFor() == false) {
 					buyPup = b;
+				} else {
+					System.out.println("Could not find a puppy with that name.");
 				}
 			}
 
