@@ -305,13 +305,13 @@ public class AdminMenu extends MainMenu {
 		while (!validNum) {
 			try {
 				hour = scan.nextInt();
-				if (hour <= 23 && hour >= 0) {
+				if (hour <= 16 && hour >= 9) {
 					validNum = true;
 				} else {
-					System.out.println("Please enter an hour between 0 and 23: ");
+					System.out.println("Please enter an hour between 9 and 16: ");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("Please enter an hour between 0 and 23: ");
+				System.out.println("Please enter an hour between 9 and 16: ");
 				scan.nextLine();
 			}
 		}
