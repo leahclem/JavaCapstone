@@ -198,20 +198,27 @@ public class MainMenu {
 
 		System.out.println("Enter your username:");
 		username = scan.nextLine();
-		while (username.contains("|") || username.equals("null")) {
-			System.out.println("Username cannot include the word 'null' or the pipe symbol '|'");
-			username = scan.nextLine();
+		checkValid(username);
+		//loop to check for duplicate username and also validate new entry for the word "null" or pipes
+		for (int i =0; i< users.size(); i++) {
+			if (users.get(i).getUserName().equals(username)) {
+				System.out.println("That username is already taken, try a different one. ");
+				username = scan.nextLine();
+				checkValid(username);
+			}
 		}
+		
 		System.out.println("Enter your password:");
 		password = scan.nextLine();
-		while (password.contains("|") || password.contains("null")) {
-			System.out.println("Password cannot include the word 'null' or the pipe symbol '|'");
-			password = scan.nextLine();
-		}
-		System.out.println("Enter you address so we can ship your purchased products:");
+		checkValid(password); 
+		
+		System.out.println("Enter your address so we can ship your purchased products:");
 		address = scan.nextLine();
+		checkValid(address);
+		
 		System.out.println("What is your Paypal email address? ");
 		String payPal = scan.nextLine();
+		checkValid(payPal);
 
 		users.add(new Customer(username, password, address, payPal));
 		// sign in now
@@ -273,17 +280,15 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				name = scan.nextLine();
+				checkValid(name);
 				boolean sameName = false;
 				for (int i = 0; i < ah.getAllPups().size(); i++) {
 					if (name.equalsIgnoreCase(ah.getAllPups().get(i).getName())) {
-						System.out.println("There is already a puppy with that name. Please enter a valid name: ");
+						System.out.println("There is already a puppy with that name. Please enter a different name: ");
 						sameName = true;
 					}
 				}
-				if (name.contains("|") || name.equals("null")) {
-					System.out.println("Name cannot include the word 'null' or the pipe symbol '|'. Please enter a valid name: ");
-					valid = false;
-				} else if (sameName == true) {
+				if (sameName == true) {
 					valid = false;
 				} else {
 					valid = true;
@@ -299,10 +304,7 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				breed = scan.nextLine();
-				while (breed.contains("|") || breed.equals("null")) {
-					System.out.println("Breed cannot include the word 'null' or the pipe symbol '|'");
-					breed = scan.nextLine();
-				}
+				checkValid(sex);
 				valid = true;
 			} catch (InputMismatchException e) {
 				System.out.println("That isn't a puppy breed, try again. ");
@@ -314,10 +316,7 @@ public class MainMenu {
 		while (!valid) {
 			try {
 				sex = scan.nextLine();
-				while (sex.contains("|") || sex.equals("null")) {
-					System.out.println("Sex cannot include the word 'null' or the pipe symbol '|'");
-					sex = scan.nextLine();
-				}
+				checkValid(sex);
 				if (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("Female")) {
 					valid = true;
 				} else {
@@ -376,6 +375,15 @@ public class MainMenu {
 		available = true;
 		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo, available);
 		return pup;
+	}
+	
+	public void checkValid(String input) {
+		Scanner scan = new Scanner(System.in);
+		
+		while (input.contains("|") || input.equals("null")) {
+			System.out.println("Your input cannot include the word 'null' or the pipe symbol '|'");
+			input = scan.nextLine();
+		}
 	}
 
 }
