@@ -60,7 +60,7 @@ public class Bids {
 
 	public String toString() {
 		String win = " ";
-		if(this.winner.getUserName().equalsIgnoreCase(null)) {
+		if(this.winner.getUserName().equalsIgnoreCase("null")) {
 			win = "no one";
 		} else {
 			win = this.winner.getUserName().toString();
@@ -69,8 +69,8 @@ public class Bids {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.pup.getName() + " is ");
 		if (active == false) {
-			sb.append("not on auction. The winner was " + this.winner.getUserName() + ". The auction ended on " + endBy
-					+ " and the final price was " + nf.format(getCurrentBid()) + "." + "Paid for: " + paidFor);
+			sb.append("not on auction. The winner was " + win + ". The auction ended on " + endBy
+					+ " and the final price was " + nf.format(getCurrentBid()) + "." + " Paid for: " + paidFor);
 		} else {
 			sb.append("on auction for " + nf.format(currentBid) + ". The current winner of the auction is "
 					+ win + ". This auction started on " + startBy + " and ends on " + endBy

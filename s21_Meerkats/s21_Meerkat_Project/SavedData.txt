@@ -17,7 +17,7 @@ BooBoo's Bid History
 Bidder		Result			Winner		 Current Price 		Max willing to pay
 dave		First bid		dave		 2000.0				50000.0
 Tuffet|202101101201|202103121858|100.0|0.0|50.0|null|false|false|0|0
-Jolly|202104051941|202104052141|2000.0|0.0|50.0|null|true|false|2|0
+Jolly|202104051941|202104052141|2000.0|0.0|50.0|null|false|false|2|0
 dave 2100.0
 jdoe 3100.0
 Valley|202104051941|202104051942|200.0|0.0|10.0|null|false|false|0|0

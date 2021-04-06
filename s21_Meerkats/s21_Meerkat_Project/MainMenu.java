@@ -227,7 +227,7 @@ public class MainMenu {
 
 	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
 		//Check to see if these dogs are already in the database
-		if(pupExists("Jolly", ah) || pupExists("Happy", ah) || pupExists("Sugar", ah) || pupExists("Valley", ah)) {
+		if(pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah)) {
 			System.out.println("Cannot load sample data one or more dogs already in database.");
 		} else {
 			Puppies pupA = new Puppies("Ginger", "poodle", "male", true, 2000.0, false, true);
