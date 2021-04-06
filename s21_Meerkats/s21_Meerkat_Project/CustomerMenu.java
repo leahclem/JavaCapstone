@@ -102,16 +102,17 @@ public class CustomerMenu extends MainMenu {
 					System.out.println("Puppy name: " + name + "\nThe current Bid is: "
 							+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement()))
 							+ "\nHow much do you wish to bid?");
-
-					do {
-						maxBid = scan.nextDouble();
-						if (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()))
-							System.out.println("You will need to bid more than " + name + "'s current bid of "
-									+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement())));
-
-					} while (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()));
-					// for now comparing to opening price but need to compare to current max??
-					// check if time is between nine to five pm
+					maxBid = scan.nextDouble(); // remove after issue is resolved and add try catch
+//					do {
+//						maxBid = scan.nextDouble();
+//						if (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement())) {
+//							System.out.println("You will need to bid more than " + name + "'s current bid of "
+//									+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement())));
+//							
+//						}
+//					} while (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()));
+//					// for now comparing to opening price but need to compare to current max??
+//					// check if time is between nine to five pm
 					if (LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
 						pupBid.checkBid(customer, maxBid);
 					} else {// if not between 9-5pm
@@ -156,7 +157,7 @@ public class CustomerMenu extends MainMenu {
 		String pup;
 		String confirm;
 		int counter = 0;
-		int counter2=0;
+		int counter2 = 0;
 		System.out.println("The puppies you need to pay for are: ");
 		for (Bids b : ah.getAllBids()) {
 
@@ -175,7 +176,7 @@ public class CustomerMenu extends MainMenu {
 					counter2++;
 				}
 			}
-			if(counter2==0) {
+			if (counter2 == 0) {
 				System.out.println("Could not find a puppy with that name.");
 				return;
 			}
@@ -189,7 +190,7 @@ public class CustomerMenu extends MainMenu {
 			} else {
 				System.out.println("If the puppy is not paid for soon it will be put back on the market.");
 			}
-		} else 
+		} else
 			System.out.println("You have no puppies to pay for.");
 	}
 

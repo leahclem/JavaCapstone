@@ -60,7 +60,7 @@ public class Bids {
 
 	public String toString() {
 		String win = " ";
-		if(this.winner.getUserName().equalsIgnoreCase("null")) {
+		if (this.winner.getUserName().equalsIgnoreCase("null")) {
 			win = "no one";
 		} else {
 			win = this.winner.getUserName().toString();
@@ -72,9 +72,8 @@ public class Bids {
 			sb.append("not on auction. The winner was " + win + ". The auction ended on " + endBy
 					+ " and the final price was " + nf.format(getCurrentBid()) + "." + " Paid for: " + paidFor);
 		} else {
-			sb.append("on auction for " + nf.format(currentBid) + ". The current winner of the auction is "
-					+ win + ". This auction started on " + startBy + " and ends on " + endBy
-					+ ".");
+			sb.append("on auction for " + nf.format(currentBid) + ". The current winner of the auction is " + win
+					+ ". This auction started on " + startBy + " and ends on " + endBy + ".");
 		}
 		String bidString = sb.toString();
 		return bidString;
@@ -82,7 +81,8 @@ public class Bids {
 
 	public String toStringF() {
 		return this.getPup().getName() + "|" + dateToString(startBy) + "|" + dateToString(endBy) + "|" + currentBid
-				+ "|" + maxBid + "|" + increment + "|" + winner.getUserName() + "|" + active +"|"+paidFor+"|"+backlogg.size()+"|"+bidHistory.size();
+				+ "|" + maxBid + "|" + increment + "|" + winner.getUserName() + "|" + active + "|" + paidFor + "|"
+				+ backlogg.size() + "|" + bidHistory.size();
 	}
 
 	public String dateToString(LocalDateTime ldt) {
@@ -139,11 +139,17 @@ public class Bids {
 			newBHQueue(cust);
 
 		} else if (winner == cust) {
-			maxBid = newBid;
-			updateBHQueue(cust);
+			if (maxBid < newBid) {
+				maxBid = newBid;
+				updateBHQueue(cust);
+			} else {
+				notEnoughBHQueue(cust);
+			}
+
 		} else {
-			if (newBid > currentBid + increment && newBid <= maxBid) {
+			if (newBid <= maxBid) {
 				currentBid = currentBid + increment;
+				System.out.println("You did not bid enough to win. ");
 				notEnoughBHQueue(cust);
 			} else if (newBid > maxBid) {
 				winner = cust;
