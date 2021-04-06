@@ -35,14 +35,20 @@ public class AuctionHouse {
 
 	public void checkTime() {// will check if any bids are over
 		LocalDateTime curTime = LocalDateTime.now();// The current time and date
+		String win = " ";
 		if (this.allBids != null) {// if there are any bids active
 			for (Bids b : this.allBids) {
 				if (b.getEndBy().isBefore(curTime) && b.isActive() == true) {// Checks if the current time is
 																						// before the end date and the
 																						// bid is active
 					// print and call something in bids to end this bid
+					if(b.getWinner().getUserName().equalsIgnoreCase(null)) {
+						win = "no one";
+					} else {
+						win = b.getWinner().getUserName().toString();
+					}
 					System.out.println("The bid for " + b.getPup().getName() + " is over the winner is "
-							+ b.getWinner().getUserName());
+							+ win);
 					b.setActive(false);
 
 				}
