@@ -1,37 +1,37 @@
-To follow along you can CTRL-F to // for a guided tour. 
-
+To follow along you can CTRL-F to "//" for a guided tour
 // Our tour starts on the first menu as soon as you run the Puppies_Run_Me.java:
 
-						(Checkpoint C update!!)
+						(Checkpoint D update!!)
 FIRST...You must save the SaveData.txt file to your computer before running the program. 
-		This is to simulate a database with users, puppies, 1 running auction, and 1 closed auction.
-SECOND...If you would like to see our stub methods just ctrl+f "stubs"
+		choose option 3 from main menu for the dynamic bids that are preset to open and some that are set to close immediately for sample 
+SECOND...We implemented backlog data and history, to test backlog after closing hours you need to manually change the date and time on your computer
 
 Here is the initial menu:
 
  Welcome to Puppy Heaven!
 1. Search puppies: 
 2. Sign in: 
-3. Load sample data: 
+3. Load sample data: (for testing/grading purposes: dynamic dates) 
 4. Display active bids: 
 5. Exit: 
 Choice: 
 
 Option 1: Working to search by name or price. Pre-loaded with several Puppies objects:
-		pupList.add(new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true));
-		pupList.add(new Puppies("Happy", "beagle", "male", true, 1000.0, false, true));
-		pupList.add(new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true));
-		pupList.add(new Puppies("Valley", "Alsation", "female", false, 200, true, false));
+		Puppies pupA = new Puppies("Ginger", "poodle", "male", true, 2000.0, false, true);
+		Puppies pupB = new Puppies("Pepper", "beagle", "male", true, 1000.0, false, true);
+		Puppies pupC = new Puppies("Red", "German Shepherd", "female", true, 1500.0, false, true);
+		Puppies pupD = new Puppies("Weston", "Alsation", "female", false, 200, true, true);
 		
 		The primary key for the puppies is the name (e.g. Jolly, Happy, etc.).
 		
 Option 2: Sign in is working, we have several profiles created for Customers as well as Admins:
-		users.add(new Admin("dwolff", "CutePups", "Diane", "Wolff", true));
-		users.add(new Customer("jdoe", "apple", "31 Old Warren Rd.","schmoe@gmail.com"));
-		users.add(new Admin("willzy", "apple", "Will", "McCoy", true));
-		users.add(new Admin("assteroids", "123", "Leah", "Clemens", true));
+		dwolff|CutePups|Diane|Wolff|true
+		assteroids|123|Leah|Clemens|true
+		willzy|apple|Will|McCoy|true
+		jdoe|apple|31 Old Warren Rd.|schmoe@gmail.com
+		dave|apple|7457 Grapetree Lane|dave@superdave.com
 		
-		In the first case the is the UserName, password, First Name, Last name, boolean for use later. 
+		In the 1st case is an admin: user name: dwolff, password: CutePups, First Name: Diane, Last name: Wolff, boolean for use later. 
 
 		The 2nd case is a customer: user name: jdoe, password: apple, address, email for PayPal
 		
@@ -57,32 +57,40 @@ the Admin menu, later in the tutorial you can log in as a Customer and we will d
 
 Welcome dwolff
  Welcome to Puppy Heaven! Admin user dwolff
-1. Search puppies: 
-2. Logout: 
-3. Add a new puppy for sale: 
-4. Display active bids: 
-5. Create new bid: 
-6. Create new Admin: 
-7. Exit: 
+1. Process backlogged data for Auctions (9-5pm): 
+2. Search puppies: 
+3. Logout:
+4. Add a new puppy for sale:
+5. Display active auctions:
+6. Create new auction:
+7. Create new Admin: 
+8. View closed auctions:
+9. View bid history queue:
+10. Exit:
 Choice: 
+Option 1. Works. Processes backlogged data for after hours auctions (5pm-9am) 
+			this funtion only works if you change date/time on computer to simulate next day
+			
+Option 2. Works. Is the same method as in the main menu to search by puppy name or price.
 
-Option 1. Works. Is the same method as in the main menu to search by puppy name or price.
+Option 3. Works. Logs the Admin out, returns to Main Menu.
 
-Option 2. Works. Logs the Admin out, returns to Main Menu.
+Option 4. Works. Adds a new puppy to the ArrayList of Puppies objects. This prompts the Admin for all the fields for the new puppy object. 
+			This can be tested by using option 2 to search and enter a large value like 100000 for price. It will list any puppies under 
+			that value.
 
-Option 3. Works. Adds a new puppy to the ArrayList of Puppies objects. This prompts the Admin for all the fields for the new puppy object. 
-			This can be tested by using option 1 to search and enter a large value like 100000 for price. It will list any puppies under 
-			that value. **(Still an issue with being able to bid on puppy with a closed auction, will be fixed next meeting)
+Option 5. Works. Will show any active bids.
 
-Option 4. Works. Will show any active bids.
+Option 6. Works. Allows the Admin to create a new auction. This prompts the Admin for the details to search for a puppy and set up a 
+			new auction for the puppy ending on a certain date and time (prompts Admin for date/time). 
+			
+Option 7. Works. Allows the Admin to create a new Admin.
 
-Option 5. Works. Allows the Admin to create a new auction. This prompts the Admin for the details to search for a puppy and set up a 
-			new auction for the puppy ending on a certain date and time (prompts Admin for date/time). This can be set up with the same date
-			and perhaps an hour in the future to allow this to be tested when logged in as a Customer later. 
+Option 8. Works. Displays all auctions that have ended.
 
-Option 6. Works. Allows the Admin to create a new Admin.
+Option 9. Works. Search by puppy name or view all bid history
 
-Option 7. Works. Exits program.
+Option 10. Works. Exits program.
 
 
 // To view the Customer Menu, select option 2 to log out. This brings us back to the main menu. Select 2 sign in: 
@@ -95,8 +103,10 @@ Welcome jdoe
 1. View puppies: 
 2. Place bid on Puppy: 
 3. Display active bids: 
-4. Logout: 
-5. Exit: 
+4. Display all my winning auctions:
+5. Pay for puppy:
+6. Logout: 
+7. Exit: 
 Choice: 
 
 Option 1: Works. Same method as in Main Menu.
@@ -104,14 +114,14 @@ Option 1: Works. Same method as in Main Menu.
 Option 2: Works. Checks for an existing auction, must be created by Admin. If the auction was created by the Admin in the above menu then
 			this option allows the Customer to place a bid. Updates the winner or sets the Customer as the winner if they are the first bidder.
 				
-Option 3: Works. Same method as in the Admin, displays all bids. Work in progress to have this display bids just for the customer themselves,
-			instead of all the bids in general.
+Option 3: Works. Same method as in the Admin, displays all bids. 
 
-Option 4: Works. Logs the customer out and returns to main menu.
+Option 4. Works. Displays all auctions the user is currently winning
 
-Option 5: Works. Exits program.
+Option 5. Works. Displays all auctions user has won and needs to pay for. They can confirm payment per puppy 
+
+Option 6: Works. Logs the customer out and returns to main menu.
+
+Option 7: Works. Exits program.
 
 // Here ends the tutorial. 
-
-Notes: Much of the data is not persistent yet. We have pre-loaded some puppies and Users for testing, but the Auctions/Bids are not 
-saved when the program is closed. 

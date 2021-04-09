@@ -23,7 +23,7 @@ public class AdminMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
 		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");
-		System.out.println("2. List all puppies: ");
+		System.out.println("2. Search puppies: ");
 		System.out.println("3. Logout: ");
 		System.out.println("4. Add a new puppy for sale: ");
 		System.out.println("5. Display active auctions: ");
@@ -178,7 +178,7 @@ public class AdminMenu extends MainMenu {
 	}
 
 	public void loadbacklog(AuctionHouse ah) {
-		// stub checkpoint 2, it will load backlog data, and add to bidhistory
+		// load backlog data, and add to bidhistory
 		// Variable Declaration
 		ArrayList<Bids> auctions = ah.getAllBids();
 		StringTokenizer stz;

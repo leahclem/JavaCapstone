@@ -160,7 +160,6 @@ public class Bids {
 	}
 
 	public void storeBid(User cust, double newBid) {
-		// stub for checkpoint 2
 		// Variable Declaration
 		String savedBid = cust.getUserName() + " " + newBid;
 		backlogg.enqueue(savedBid);
