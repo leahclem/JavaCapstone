@@ -69,6 +69,7 @@ public class CustomerMenu extends MainMenu {
 	}
 
 	public static void newBid(ArrayList<Bids> curBid, User customer) {
+		boolean validNum = false;
 		double maxBid = 0;
 		Scanner scan = new Scanner(System.in);
 		String name = "";
@@ -102,7 +103,16 @@ public class CustomerMenu extends MainMenu {
 					System.out.println("Puppy name: " + name + "\nThe current Bid is: "
 							+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement()))
 							+ "\nHow much do you wish to bid?");
-					maxBid = scan.nextDouble(); // remove after issue is resolved and add try catch
+					while (!validNum) {
+						try {
+							maxBid = scan.nextDouble(); // remove after issue is resolved and add try catch
+							validNum = true;
+						} catch (InputMismatchException e) {
+							System.out.println("Please enter a valid number. ");
+							scan.nextLine();
+						}
+					}
+					
 //					do {
 //						maxBid = scan.nextDouble();
 //						if (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement())) {
@@ -160,13 +170,13 @@ public class CustomerMenu extends MainMenu {
 		int counter2 = 0;
 		System.out.println("The puppies you need to pay for are: ");
 		for (Bids b : ah.getAllBids()) {
-
-			if (b.isActive() == false && b.isPaidFor() == false
+		//prints out puppies that are won and not yet paid for by this user
+			if (b.isActive() == false && b.isPaidFor() == false 
 					&& b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName())) {
 				System.out.println(b.getPup());
 				counter++;
 			}
-		}
+		}//end for
 		if (counter != 0) {
 			System.out.println("Which puppy would you like to pay for? ");
 			pup = scan.nextLine();
@@ -175,7 +185,7 @@ public class CustomerMenu extends MainMenu {
 					buyPup = b;
 					counter2++;
 				}
-			}
+			}//end for
 			if (counter2 == 0) {
 				System.out.println("Could not find a puppy with that name.");
 				return;
@@ -190,7 +200,7 @@ public class CustomerMenu extends MainMenu {
 			} else {
 				System.out.println("If the puppy is not paid for soon it will be put back on the market.");
 			}
-		} else
+		} else 
 			System.out.println("You have no puppies to pay for.");
 	}
 
