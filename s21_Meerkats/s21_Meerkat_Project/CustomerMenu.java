@@ -73,8 +73,6 @@ public class CustomerMenu extends MainMenu {
 		double maxBid = 0;
 		Scanner scan = new Scanner(System.in);
 		String name = "";
-		double pupPrice = 0;
-		boolean payEnt = false;
 		Bids pupBid = null;
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		System.out.println("What is the name of the puppy you wish to find? ");
