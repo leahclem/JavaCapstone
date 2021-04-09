@@ -113,16 +113,7 @@ public class CustomerMenu extends MainMenu {
 						}
 					}
 					
-//					do {
-//						maxBid = scan.nextDouble();
-//						if (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement())) {
-//							System.out.println("You will need to bid more than " + name + "'s current bid of "
-//									+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement())));
-//							
-//						}
-//					} while (maxBid < (pupBid.getCurrentBid() + pupBid.getIncrement()));
-//					// for now comparing to opening price but need to compare to current max??
-//					// check if time is between nine to five pm
+					// check if time is between nine to five pm
 					if (LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
 						pupBid.checkBid(customer, maxBid);
 					} else {// if not between 9-5pm
