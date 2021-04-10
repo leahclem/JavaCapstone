@@ -2,9 +2,11 @@ To follow along you can CTRL-F to "//" for a guided tour
 // Our tour starts on the first menu as soon as you run the Puppies_Run_Me.java:
 
 						(Checkpoint D update!!)
-FIRST:		You must save the SaveData.txt file to your computer before running the program. 
+FIRST:		You must save the SaveData.txt file to your computer before running the program. Then select that file when you run the program.
+			If you choose to log out using one of the official menu EXITS, then it will prompt you to save an updated file, which you would
+			load the next time you open the program for data persistence.
 SECOND:		Choose option 3 from main menu for the dynamic bids that are preset to open and some that are set to close immediately for 
-			your testing. 
+			your testing. Please note that option 3 is for testing purposes and would not be in the customer facing product.
 THIRD:		We implemented a queue for backlog data and bid history. To test backlog after closing hours you need to manually change the time
 			on your computer to simulate business hours and closed hours. These options work behind the scenes if you are a customer.
 			To process the backlogged data you must sign in as an Admin during 9:00 to 17:00 and select option 1. To view the bid history 

@@ -101,7 +101,7 @@ public class Bids {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		String bh = (pup.getName() + "'s Bid History");
 		bidHistory.enqueue(bh);
-		bh = ("Bidder \t\tResult \t\t\tWinner\t\tBid\t\tCurrent Price \t\tMax willing to pay");
+		bh = ("Bidder \t\tResult \t\t\tWinner\t\tBid\t\t\tCurrent Price \t\tMax willing to pay");
 		bidHistory.enqueue(bh);
 		bh = (u.getUserName() + "\t\tFirst bid\t\t" + u.getUserName() + "\t\t"+nf.format(newBid)+"\t\t" + nf.format(currentBid) + "\t\t\t"
 				+ nf.format(maxBid));

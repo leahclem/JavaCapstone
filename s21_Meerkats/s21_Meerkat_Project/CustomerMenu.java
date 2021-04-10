@@ -98,7 +98,7 @@ public class CustomerMenu extends MainMenu {
 
 				if (placeBid.equalsIgnoreCase("yes")) {
 					// checkBid(name) and auction end date
-					System.out.println("Puppy name: " + name + "\nThe current Bid is: "
+					System.out.println("Puppy name: " + name + "\nTo win you must bid at least: "
 							+ nf.format((pupBid.getCurrentBid() + pupBid.getIncrement()))
 							+ "\nHow much do you wish to bid?");
 					while (!validNum) {
