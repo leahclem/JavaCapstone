@@ -97,64 +97,65 @@ public class Bids {
 	}
 
 	// use for the first bidder
-	private void newBHQueue(User u) {
+	private void newBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		String bh = (pup.getName() + "'s Bid History");
 		bidHistory.enqueue(bh);
-		bh = ("Bidder \t\tResult \t\t\tWinner\t\tCurrent Price \t\tMax willing to pay");
+		bh = ("Bidder \t\tResult \t\t\tWinner\t\tBid\t\tCurrent Price \t\tMax willing to pay");
 		bidHistory.enqueue(bh);
-		bh = (u.getUserName() + "\t\tFirst bid\t\t" + u.getUserName() + "\t\t" + nf.format(currentBid) + "\t\t\t"
+		bh = (u.getUserName() + "\t\tFirst bid\t\t" + u.getUserName() + "\t\t"+nf.format(newBid)+"\t\t" + nf.format(currentBid) + "\t\t\t"
 				+ nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
 
 	// use if the same customer increases their bid, if they are already winning
-	private void updateBHQueue(User u) {
+	private void updateBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName() + "\t\tUpdated bid \t\t" + winner.getUserName() + "\t\t" + nf.format(currentBid)
+		String bh = (u.getUserName() + "\t\tUpdated bid \t\t" + winner.getUserName() + "\t\t" +nf.format(newBid)+ "\t\t" + nf.format(currentBid)
 				+ "\t\t\t" + nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
 
 	// use if a new user wins
-	private void newWinBHQueue(User u) {
+	private void newWinBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName() + "\t\tNew winner \t\t" + winner.getUserName() + "\t\t" + nf.format(currentBid)
+		String bh = (u.getUserName() + "\t\tNew winner \t\t" + winner.getUserName() + "\t\t" +nf.format(newBid)+ "\t\t" + nf.format(currentBid)
 				+ "\t\t\t" + nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
 
 	// use if there is a new bid, but it isn't enough to win
-	private void notEnoughBHQueue(User u) {
+	private void notEnoughBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName() + "\t\tRejected (too low) \t" + winner.getUserName() + "\t\t"
+		String bh = (u.getUserName() + "\t\tRejected (too low) \t" + winner.getUserName() + "\t\t" +nf.format(newBid)+ "\t\t"
 				+ nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
 		bidHistory.enqueue(bh);
 	}
 
 	public void checkBid(User cust, double newBid) {
-		if (winner.getUserName().equalsIgnoreCase("null")) {
+		
+		if (winner.getUserName().equalsIgnoreCase("null")) { // do this if the bid is the first bid
 			winner = cust;
 			maxBid = newBid;
-			newBHQueue(cust);
+			newBHQueue(cust, newBid);
 
-		} else if (winner == cust) {
-			if (maxBid < newBid) {
+		} else if (winner == cust) { // do this if the customer is upping their bid on the same dog
+			if (newBid>maxBid) { // if the bid is more than the current max bid
 				maxBid = newBid;
-				updateBHQueue(cust);
-			} else {
-				notEnoughBHQueue(cust);
+				updateBHQueue(cust, newBid);
+			} else if (newBid<=maxBid){				// if the bid is less than or equals to the max bid
+				notEnoughBHQueue(cust, newBid);
 			}
 
-		} else {
-			if (newBid <= maxBid) {
-				currentBid = currentBid + increment;
-				notEnoughBHQueue(cust);
-			} else if (newBid > maxBid) {
+		} else {									// if neither of the above situations apply then do this:
+			if (newBid <= maxBid) {					// if the newBid is less than or equals to maxBid
+				currentBid = newBid;
+				notEnoughBHQueue(cust, newBid);
+			} else if (newBid > maxBid) {			// if the newBid is greater than maxBid
 				winner = cust;
-				currentBid = maxBid;
+				currentBid = maxBid+increment;
 				maxBid = newBid;
-				newWinBHQueue(cust);
+				newWinBHQueue(cust, newBid);
 			}
 		}
 	}

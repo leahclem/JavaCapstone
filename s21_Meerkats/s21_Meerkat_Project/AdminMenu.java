@@ -123,6 +123,7 @@ public class AdminMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		// option 9 view bidHistory
 		int choice = 0;
+		
 		System.out.println("Do you want to: \n1. View all auctions \n2. Search by puppy name \nChoice: ");
 
 		boolean valid = false;
@@ -142,19 +143,26 @@ public class AdminMenu extends MainMenu {
 					}
 					valid = true;
 				} else if (choice == 2) {
+					scan.nextLine();
+					boolean found = false;
 					System.out.println("What is the puppy's name?");
 					String name = scan.nextLine();
-					for (int j = 0; j < ah.getAllBids().size(); j++) {
-						if (name.equalsIgnoreCase(ah.getAllBids().get(j).getPup().getName())) {
-							ah.getAllBids().get(j).getBidHistory().print();
-						} else if (ah.getAllBids().get(j).getBidHistory().isEmpty()) {
-							System.out.println(
-									ah.getAllBids().get(j).getPup().getName() + " has no bidding history yet. ");
-
-						} else {
-							System.out.println("I don't see a puppy with that name. ");
+					while(!found) {
+						for (int j = 0; j<ah.getAllBids().size();j++) {
+							if(name.equalsIgnoreCase(ah.getAllBids().get(j).getPup().getName())) {
+								found = true;
+								if(ah.getAllBids().get(j).getPup().getName().isEmpty()) {
+									System.out.println(
+											ah.getAllBids().get(j).getPup().getName() + " has no bidding history yet. ");
+								} else {
+									ah.getAllBids().get(j).getBidHistory().print();
+								}
+								
+							} else if ((j==ah.getAllBids().size()-1) && found == false) {
+								System.out.println("I don't see a puppy with that name. ");
+								found = true;
+							}
 						}
-
 					}
 					valid = true;
 				} else {
