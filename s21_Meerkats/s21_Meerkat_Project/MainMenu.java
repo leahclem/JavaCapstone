@@ -229,10 +229,10 @@ public class MainMenu {
 		if(pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah)) {
 			System.out.println("Cannot load sample data one or more dogs already in database.");
 		} else {
-			Puppies pupA = new Puppies("Ginger", "poodle", "male", true, 2000.0, false, true);
-			Puppies pupB = new Puppies("Pepper", "beagle", "male", true, 1000.0, false, true);
-			Puppies pupC = new Puppies("Red", "German Shepherd", "female", true, 1500.0, false, true);
-			Puppies pupD = new Puppies("Weston", "Alsation", "female", false, 200, true, true);
+			Puppies pupA = new Puppies("Ginger", "poodle", "male", true, 2000.0, false);
+			Puppies pupB = new Puppies("Pepper", "beagle", "male", true, 1000.0, false);
+			Puppies pupC = new Puppies("Red", "German Shepherd", "female", true, 1500.0, false);
+			Puppies pupD = new Puppies("Weston", "Alsation", "female", false, 200, true);
 			ah.getAllPups().add(pupA);
 			ah.getAllPups().add(pupB);
 			ah.getAllPups().add(pupC);
@@ -272,7 +272,6 @@ public class MainMenu {
 		String sex = "";
 		boolean ped = true;
 		boolean hypo = true;
-		boolean available = true;// Fixme: unused variable
 		boolean valid = false;
 		double price = 0;
 		System.out.println("What is the name of the new pup for sale? ");
@@ -371,8 +370,7 @@ public class MainMenu {
 				scan.nextLine();
 			}
 		}
-		available = true;
-		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo, available);
+		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo);//note removed available
 		return pup;
 	}
 	

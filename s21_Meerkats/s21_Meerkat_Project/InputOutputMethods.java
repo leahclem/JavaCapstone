@@ -166,7 +166,7 @@ public class InputOutputMethods {
 			}
 			st = new StringTokenizer(line, delim);
 			// gather all data from the admin line
-			for (int j = 0; j < 5; j++) {
+			for (int j = 0; j < 4; j++) {
 				// assign variables accordingly
 				switch (j) {
 				case 0:
@@ -181,13 +181,10 @@ public class InputOutputMethods {
 				case 3:
 					lname = st.nextToken();
 					break;
-				case 4:
-					fAdmin = Boolean.parseBoolean(st.nextToken());
-					break;
 				}// end of switch case
 
 			} // end of for all data for an admin
-			users.add(new Admin(userName, password, fname, lname, fAdmin));
+			users.add(new Admin(userName, password, fname, lname));
 		} // end of for admin lines loop
 
 		return bf;
@@ -240,7 +237,7 @@ public class InputOutputMethods {
 		StringTokenizer st;
 		String pupname = null, breed = null, gender = null;
 		double price = 0;
-		boolean pedigree = false, hypo = false, sold = false;
+		boolean pedigree = false, hypo = false;
 
 		// for all the pups loop through a line and collect all data
 		for (int i = 0; i < pups; i++) {
@@ -252,7 +249,7 @@ public class InputOutputMethods {
 			}
 			st = new StringTokenizer(line, delim);
 			// gather all data from the puppy line
-			for (int j = 0; j < 7; j++) {
+			for (int j = 0; j < 6; j++) {
 				// assign variables accordingly
 				switch (j) {
 				case 0:
@@ -273,13 +270,10 @@ public class InputOutputMethods {
 				case 5:
 					hypo = Boolean.parseBoolean(st.nextToken());
 					break;
-				case 6:
-					sold = Boolean.parseBoolean(st.nextToken());
-					break;
 				}// end of switch case
 
 			} // end of for all data for a puppy
-			pupList.add(new Puppies(pupname, breed, gender, pedigree, price, hypo, sold));
+			pupList.add(new Puppies(pupname, breed, gender, pedigree, price, hypo));
 		} // end of for puppies lines loop
 
 		return bf;

@@ -3,22 +3,19 @@ package s21_Meerkat_Project;
 public class Admin extends User {
 	private String fname;
 	private String lname;
-	private boolean baseAdmin = false;
 	
 	Admin(){
 		
 	}
 	
-	Admin(String userName, String password, String fname, String lname, boolean base){
+	Admin(String userName, String password, String fname, String lname){
 		super(userName, password, 'A');
 		this.fname = fname;
 		this.lname = lname;
-		baseAdmin = base;
 	}
 	
 	public String toStringF() {
-		return getUserName().toString()+"|"+getPassword().toString()+"|"+fname+"|"+lname+"|"+baseAdmin;
-		
+		return getUserName().toString()+"|"+getPassword().toString()+"|"+fname+"|"+lname;//+"|"+baseAdmin; note removed base admin
 	}
 	
 	public String getFname() {
@@ -35,15 +32,5 @@ public class Admin extends User {
 	
 	public void setLname(String lname) {
 		this.lname = lname;
-	}
-	
-	public boolean isBaseAdmin() {
-		return this.baseAdmin;
-	}
-	
-	public void setBaseAdmin(boolean base) {
-		this.baseAdmin = base;
-	}
-	
-	
+	}	
 }

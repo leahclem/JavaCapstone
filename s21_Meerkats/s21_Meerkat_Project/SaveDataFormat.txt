@@ -3,17 +3,17 @@
 
 //put empty line for readability not in actual flat file
 
-dwolff|CutePups|Diane|Wolff|true //Admin Data
-username|password|firstName|LastName|firstAdmin
-string|string|string|string|boolean
+dwolff|CutePups|Diane|Wolff //Admin Data
+username|password|firstName|LastName
+string|string|string|string
 
 jdoe|apple|31 Old Warren Rd|schmoe@gmail.com //customer data
 username|password|address|email
 string|string|string|string
 
-Jolly|poodle|male|true|2000.0|false|true //Puppy Data
-name|breed|gender|pedigree|price|hypoalergenic|sold
-string|string|string|boolean|double|boolean|boolean
+Jolly|poodle|male|true|2000.0|false //Puppy Data
+name|breed|gender|pedigree|price|hypoalergenic
+string|string|string|boolean|double|boolean
 
 Jolly|202103121443|202103121503|2200|2400|100|no one|true
 puppyName|startDateInString|EndDateInString|CurrentBid|maxBid|increment|winner|active|isPaidFor|backloglines|bidHistlines

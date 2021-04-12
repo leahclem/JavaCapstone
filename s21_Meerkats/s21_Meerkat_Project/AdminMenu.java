@@ -375,7 +375,6 @@ public class AdminMenu extends MainMenu {
 		String password;
 		String fname;
 		String lname;
-		boolean base = false;
 
 		System.out.print("Enter the first name of the new Admin: ");
 		fname = scan.nextLine();
@@ -401,7 +400,7 @@ public class AdminMenu extends MainMenu {
 		password = scan.nextLine();
 		mm.checkValid(password);
 
-		users.add(new Admin(userName, password, fname, lname, base));
+		users.add(new Admin(userName, password, fname, lname));
 		
 		System.out.println("Created user: " + userName);
 	}// end of create admin

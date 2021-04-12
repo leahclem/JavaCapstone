@@ -15,9 +15,9 @@ class CustMenuTest {
 
  	@BeforeEach
 	void setUp() throws Exception {
- 		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false, true);
-		Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false, true);
-		Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false, true);
+ 		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false);
+		Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false);
+		Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false);
 		
 		curBid.add(new Bids(pupA, LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
 		curBid.add(new Bids(pupB, LocalDateTime.now().plusMinutes(0).withSecond(0).withNano(0)));

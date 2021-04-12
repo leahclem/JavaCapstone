@@ -1,17 +1,17 @@
 3|2|8|7
-dwolff|CutePups|Diane|Wolff|true
-assteroids|123|Leah|Clemens|true
-willzy|apple|Will|McCoy|true
+dwolff|CutePups|Diane|Wolff
+assteroids|123|Leah|Clemens
+willzy|apple|Will|McCoy
 jdoe|apple|31 Old Warren Rd.|schmoe@gmail.com
 dave|apple|7457 Grapetree Lane|dave@superdave.com
-Tuffet|mutt|Male|false|100.0|false|false
-BooBoo|maltese|Male|false|800.0|true|false
-Jolly|poodle|male|true|2000.0|false|true
-Happy|beagle|male|true|1000.0|false|true
-Sugar|German Shepherd|female|true|1500.0|false|true
-Valley|Alsation|female|false|200.0|true|true
-Olly|husky|male|true|1500.0|false|true
-Sophie|Maltese|female|true|1500.0|true|true
+Tuffet|mutt|Male|false|100.0|false
+BooBoo|maltese|Male|false|800.0|true
+Jolly|poodle|male|true|2000.0|false
+Happy|beagle|male|true|1000.0|false
+Sugar|German Shepherd|female|true|1500.0|false
+Valley|Alsation|female|false|200.0|true
+Olly|husky|male|true|1500.0|false
+Sophie|Maltese|female|true|1500.0|true
 BooBoo|202103121443|202104011201|2000.0|5000.0|50.0|dave|false|true|0|3
 BooBoo's Bid History
 Bidder		Result			Winner		 Bid 			Current Price 			Max willing to pay

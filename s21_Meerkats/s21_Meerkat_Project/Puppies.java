@@ -9,7 +9,6 @@ public class Puppies {
 	private boolean pedigree; // who parents are if true, if false no need to capture parent's names
 	private double price; // opening price
 	private boolean hypo;
-	private boolean available; //Fixme: unused variable true if available, false if already sold 
 	
 	public Puppies() {
 		
@@ -20,7 +19,7 @@ public class Puppies {
 		this.name=name;
 	}
 	
-	public Puppies(String name, String breed, String sex, boolean pedigree, double price, boolean hypo, boolean available) {
+	public Puppies(String name, String breed, String sex, boolean pedigree, double price, boolean hypo) {
 		super();
 		this.name = name;
 		this.breed = breed;
@@ -28,18 +27,17 @@ public class Puppies {
 		this.pedigree = pedigree;
 		this.price = price;
 		this.hypo = hypo;
-		this.available = available;
 	}
 	
 	public String toString() {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		return "Named: " +name+" is a "+breed+". Is "+sex+". Is pedigreed: "+pedigree+". Opening priced at: "+nf.format(price)+
-				". Is hypo-allergenic: "+hypo+". Is available: "+available+".";
+				". Is hypo-allergenic: "+hypo+".";// Is available: "+available+"."; //note removed
 				
 	}
 	
 	public String toStringF() {
-		return name+"|"+breed+"|"+sex+"|"+pedigree+"|"+price+"|"+hypo+"|"+available;
+		return name+"|"+breed+"|"+sex+"|"+pedigree+"|"+price+"|"+hypo;//+"|"+available;//note remove available
 	}
 
 	public String getName() {
@@ -89,14 +87,5 @@ public class Puppies {
 	public void setHypo(boolean hypo) {
 		this.hypo = hypo;
 	}
-
-	public boolean isAvailable() {//Fixme: unused variable
-		return available;
-	}
-
-	public void setAvailable(boolean sold) {
-		this.available = sold;
-	}
-
 	
 }
