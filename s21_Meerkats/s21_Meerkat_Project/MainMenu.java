@@ -226,22 +226,32 @@ public class MainMenu {
 
 	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
 		//Check to see if these dogs are already in the database
-		if(pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah)) {
+		if(pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah) 
+				|| pupExists("Goldy", ah) || pupExists("Hank", ah) || pupExists("Camilla", ah)) {
 			System.out.println("Cannot load sample data one or more dogs already in database.");
 		} else {
 			Puppies pupA = new Puppies("Ginger", "poodle", "male", true, 2000.0, false);
 			Puppies pupB = new Puppies("Pepper", "beagle", "male", true, 1000.0, false);
 			Puppies pupC = new Puppies("Red", "German Shepherd", "female", true, 1500.0, false);
 			Puppies pupD = new Puppies("Weston", "Alsation", "female", false, 200, true);
+			Puppies pupE = new Puppies("Hank", "Pomeranian", "male", false, 600, true);
+			Puppies pupF = new Puppies("Goldy", "Golden Retriever", "female", true, 1200, true);
+			Puppies pupG = new Puppies("Camilla", "Samoyed", "female", true, 2500, true);
 			ah.getAllPups().add(pupA);
 			ah.getAllPups().add(pupB);
 			ah.getAllPups().add(pupC);
 			ah.getAllPups().add(pupD);
+			ah.getAllPups().add(pupE);
+			ah.getAllPups().add(pupF);
+			ah.getAllPups().add(pupG);
 			// plus different default times for testing purposes Jolly
 			// this could be a potential error since it is not referencing the
 			ah.addBid(new Bids(findPup("Ginger", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
 			ah.addBid(new Bids(findPup("Pepper", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
 			ah.addBid(new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0)));
+			ah.addBid(new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0)));
 		}//end of else
 	}
 
