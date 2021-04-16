@@ -2,7 +2,7 @@ package s21_Meerkat_Project;
 
 public class User {
 	private char userType;	
-	private String userName;
+	private String userName; // primary key
 	private String password;
 	private static int tempid = 1000;
 	private String id;

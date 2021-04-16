@@ -6,6 +6,7 @@ public class Puppies_Run_Me {
 
 	public static void main(String[] args) {
 		//Variable Declaration
+		// $db opens database connection and loads and 
 		User loggedIn = null;
 		InputOutputMethods io = new InputOutputMethods();
 		MainMenu mm = new MainMenu();

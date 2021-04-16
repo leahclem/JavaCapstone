@@ -11,8 +11,8 @@ public class Bids {
 	private double increment;
 	private LocalDateTime endBy;
 	private LocalDateTime startBy;
-	private User winner;
-	private Puppies pup;
+	private User winner; // user object user name
+	private Puppies pup; // puppy name is primary key
 	private boolean active;
 	private boolean paidFor = false;// will be used for checkpoint 6
 	private Queue<String> backlogg;// this is where backlogg is stored for checkpoint 2

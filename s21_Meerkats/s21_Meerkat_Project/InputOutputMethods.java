@@ -394,7 +394,7 @@ public class InputOutputMethods {
 				added.getBidHistory().enqueue(line);
 			}
 			auctions.add(added);
-			win.addHighBid(added);//adds high bid to customer object
+//			win.addHighBid(added);//adds high bid to customer object
 			
 		} // end of for auction lines loop
 
