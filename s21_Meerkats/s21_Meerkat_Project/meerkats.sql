@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2021 at 12:22 PM
+-- Generation Time: Apr 20, 2021 at 01:46 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -37,6 +37,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (userID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table admin
+--
+
+INSERT INTO admin (fname, lname, userID) VALUES
+('Sally', 'Jones', 'admin1'),
+('Tony', 'Loco', 'admin2');
+
 -- --------------------------------------------------------
 
 --
@@ -53,8 +61,17 @@ CREATE TABLE IF NOT EXISTS bids (
   name varchar(15) NOT NULL,
   active tinyint(1) NOT NULL,
   paidFor tinyint(1) NOT NULL,
-  PRIMARY KEY (name)
+  PRIMARY KEY (name),
+  KEY bids_ibfk_2 (winner)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table bids
+--
+
+INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paidFor) VALUES
+(1500, 2000, '2021-04-30 16:37:09', '2021-04-19 16:37:09', 'customer1', 'Jolly', 1, 0),
+(1000, 1500, '2021-04-30 16:41:57', '2021-04-20 01:37:09', 'customer2', 'Mack', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -69,6 +86,15 @@ CREATE TABLE IF NOT EXISTS customer (
   userID varchar(15) NOT NULL,
   PRIMARY KEY (userID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table customer
+--
+
+INSERT INTO customer (payPal, address, userID) VALUES
+('customer1@smail.com', '123 Happy Lanes, Bowling Green KY', 'customer1'),
+('customer2@smail.com', '149 Elm Street, Roanoke VA', 'customer2'),
+('customer3@smail.com', '901 Surfside Lane, Malibu CA', 'customer3');
 
 -- --------------------------------------------------------
 
@@ -110,6 +136,17 @@ CREATE TABLE IF NOT EXISTS theuser (
   userType char(1) NOT NULL,
   PRIMARY KEY (userID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table theuser
+--
+
+INSERT INTO theuser (userID, password, userType) VALUES
+('admin1', 'apple', 'A'),
+('admin2', 'apple', 'A'),
+('customer1', 'apple', 'C'),
+('customer2', 'apple', 'C'),
+('customer3', 'apple', 'C');
 
 --
 -- Constraints for dumped tables
