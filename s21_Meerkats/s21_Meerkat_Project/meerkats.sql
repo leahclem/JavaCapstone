@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2021 at 01:46 AM
+-- Generation Time: Apr 23, 2021 at 04:50 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -23,6 +23,18 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS meerkats DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE meerkats;
 
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `AllBids`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AllBids` ()  BEGIN
+SELECT bids.name AS 'Name', bids.currentBid AS 'Current Bid', bids.winner AS 'Winner'
+FROM bids;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -30,11 +42,10 @@ USE meerkats;
 --
 
 DROP TABLE IF EXISTS admin;
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE `admin` (
   fname varchar(15) NOT NULL,
   lname varchar(15) NOT NULL,
-  userID varchar(15) NOT NULL,
-  PRIMARY KEY (userID)
+  userID varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -52,17 +63,15 @@ INSERT INTO admin (fname, lname, userID) VALUES
 --
 
 DROP TABLE IF EXISTS bids;
-CREATE TABLE IF NOT EXISTS bids (
+CREATE TABLE bids (
   currentBid double NOT NULL,
   maxBid double NOT NULL,
-  endBy datetime NOT NULL,
-  startBy datetime NOT NULL,
+  endBy varchar(12) NOT NULL,
+  startBy varchar(12) NOT NULL,
   winner varchar(15) NOT NULL,
   name varchar(15) NOT NULL,
   active tinyint(1) NOT NULL,
-  paidFor tinyint(1) NOT NULL,
-  PRIMARY KEY (name),
-  KEY bids_ibfk_2 (winner)
+  paidFor tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -70,8 +79,8 @@ CREATE TABLE IF NOT EXISTS bids (
 --
 
 INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paidFor) VALUES
-(1500, 2000, '2021-04-30 16:37:09', '2021-04-19 16:37:09', 'customer1', 'Jolly', 1, 0),
-(1000, 1500, '2021-04-30 16:41:57', '2021-04-20 01:37:09', 'customer2', 'Mack', 1, 0);
+(2200, 2500, '202104301637', '202104191637', 'customer1', 'Jolly', 1, 0),
+(2000, 3100, '202104301641', '202104200137', 'customer2', 'Mack', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -80,11 +89,10 @@ INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paid
 --
 
 DROP TABLE IF EXISTS customer;
-CREATE TABLE IF NOT EXISTS customer (
+CREATE TABLE customer (
   payPal varchar(32) NOT NULL,
   address varchar(64) NOT NULL,
-  userID varchar(15) NOT NULL,
-  PRIMARY KEY (userID)
+  userID varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -103,14 +111,13 @@ INSERT INTO customer (payPal, address, userID) VALUES
 --
 
 DROP TABLE IF EXISTS puppies;
-CREATE TABLE IF NOT EXISTS puppies (
+CREATE TABLE puppies (
   name varchar(15) NOT NULL,
   breed varchar(15) NOT NULL,
   sex varchar(15) NOT NULL,
   pedigree tinyint(1) NOT NULL,
   price double(7,2) NOT NULL,
-  hypo tinyint(1) NOT NULL,
-  PRIMARY KEY (name)
+  hypo tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -130,11 +137,10 @@ INSERT INTO puppies (name, breed, sex, pedigree, price, hypo) VALUES
 --
 
 DROP TABLE IF EXISTS theuser;
-CREATE TABLE IF NOT EXISTS theuser (
+CREATE TABLE theuser (
   userID varchar(15) NOT NULL,
   password varchar(15) NOT NULL,
-  userType char(1) NOT NULL,
-  PRIMARY KEY (userID)
+  userType char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -147,6 +153,41 @@ INSERT INTO theuser (userID, password, userType) VALUES
 ('customer1', 'apple', 'C'),
 ('customer2', 'apple', 'C'),
 ('customer3', 'apple', 'C');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table admin
+--
+ALTER TABLE admin
+  ADD PRIMARY KEY (userID);
+
+--
+-- Indexes for table bids
+--
+ALTER TABLE bids
+  ADD PRIMARY KEY (name),
+  ADD KEY bids_ibfk_2 (winner);
+
+--
+-- Indexes for table customer
+--
+ALTER TABLE customer
+  ADD PRIMARY KEY (userID);
+
+--
+-- Indexes for table puppies
+--
+ALTER TABLE puppies
+  ADD PRIMARY KEY (name);
+
+--
+-- Indexes for table theuser
+--
+ALTER TABLE theuser
+  ADD PRIMARY KEY (userID);
 
 --
 -- Constraints for dumped tables
