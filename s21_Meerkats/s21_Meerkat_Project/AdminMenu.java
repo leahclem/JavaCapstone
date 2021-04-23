@@ -22,13 +22,13 @@ public class AdminMenu extends MainMenu {
 		int value = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
-		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");
+		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");//up_g add dequeue backlogg db update
 		System.out.println("2. Search puppies: ");
 		System.out.println("3. Logout: ");
-		System.out.println("4. Add a new puppy for sale: ");
+		System.out.println("4. Add a new puppy for sale: ");//up_l addpup db update
 		System.out.println("5. Display active auctions: ");
-		System.out.println("6. Create new auction: ");
-		System.out.println("7. Create new Admin: ");
+		System.out.println("6. Create new auction: ");//up_g add auction update db
+		System.out.println("7. Create new Admin: ");//up_l update db to add admin user
 		System.out.println("8. View closed auctions: ");
 		System.out.println("9. View bid history queue");
 		System.out.println("10. Exit: ");
@@ -185,7 +185,7 @@ public class AdminMenu extends MainMenu {
 
 	}
 
-	public void loadbacklog(AuctionHouse ah) {
+	public void loadbacklog(AuctionHouse ah) {//up_g add dequeue backlogg db update
 		// load backlog data, and add to bidhistory
 		// Variable Declaration
 		ArrayList<Bids> auctions = ah.getAllBids();
