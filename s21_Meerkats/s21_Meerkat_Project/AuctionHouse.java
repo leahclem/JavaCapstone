@@ -1,5 +1,6 @@
 package s21_Meerkat_Project;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -49,7 +50,16 @@ public class AuctionHouse {
 					}
 					System.out.println("The bid for " + b.getPup().getName() + " is over the winner is "
 							+ win);
-					b.setActive(false);
+					
+					try {//Update the db and arraylist, to set the bid inactive
+						SQLMethods.checkConnect();
+						SQLMethods.stmt.executeUpdate("CALL updateActive(\'"+ b.getPup().getName() +"\')");
+						b.setActive(false);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						System.out.println("Update failed");
+					}
 
 				}
 

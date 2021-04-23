@@ -14,7 +14,7 @@ public class MainMenu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven!");
 		System.out.println("1. Search puppies: ");
-		System.out.println("2. Sign in: ");
+		System.out.println("2. Sign in: ");//up_g update db for creating a customer
 		System.out.println("3. Load sample data: (for testing/grading purposes: dynamic dates)"); // Program autoloads sample data for testing purposes
 		System.out.println("4. Display active bids: ");
 		System.out.println("5. Exit: ");

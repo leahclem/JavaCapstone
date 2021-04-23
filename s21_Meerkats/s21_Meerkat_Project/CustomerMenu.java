@@ -24,10 +24,10 @@ public class CustomerMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Customer user " + curUser.getUserName());
 		System.out.println("1. View puppies: ");
-		System.out.println("2. Place bid on Puppy: ");
+		System.out.println("2. Place bid on Puppy: ");//up_g update db puppy data with winner curbid
 		System.out.println("3. Display active auctions: ");
 		System.out.println("4. Display all my winning auctions:");
-		System.out.println("5. Pay for puppy:");
+		System.out.println("5. Pay for puppy:");//up_l update db for pup paid bool
 		System.out.println("6. Logout: ");
 		System.out.println("7. Exit: ");
 		System.out.print("Choice: ");
