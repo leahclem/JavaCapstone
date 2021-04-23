@@ -11,17 +11,9 @@ public class SQLMethods {
 	static Statement stmt = null;
 
 	public static Connection makeAConnection() {
-		Scanner scan = new Scanner(System.in);
 		Connection connection = null;
 
-		System.out.println("What is the name of the database?");
-		String name = scan.nextLine();
-		String url = "jdbc:mysql://localhost:3306/" + name;
-
-		System.out.println("Username:");
-		String uid = scan.nextLine();
-		System.out.println("Password:");
-		String pass = scan.nextLine();
+		String url = "jdbc:mysql://localhost:3306/" + "meerkats";
 
 		String driver = "com.mysql.jdbc.Driver";
 
@@ -32,7 +24,7 @@ public class SQLMethods {
 
 		}
 		try {
-			connection = DriverManager.getConnection(url, uid, pass);
+			connection = DriverManager.getConnection(url, "CSC202", "CSC202"); // url, uid, password
 			System.out.println("Connection successful!");
 
 		} catch (SQLException e) {
@@ -68,11 +60,11 @@ public class SQLMethods {
 
 	public static void checkConnect() {
 		if (con == null) {
-			System.out.println("A connection does not exist");
+			con = makeAConnection();
 		} else
 			System.out.println("A connection already existed so we will use it");
 
-		if (stmt == null) {
+		if (stmt == null) { // ?
 			try {
 				stmt = con.createStatement();
 			} catch (SQLException e) {
