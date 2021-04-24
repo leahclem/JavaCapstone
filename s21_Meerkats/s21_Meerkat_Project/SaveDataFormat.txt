@@ -15,7 +15,7 @@ Jolly|poodle|male|true|2000.0|false //Puppy Data
 name|breed|gender|pedigree|price|hypoalergenic
 string|string|string|boolean|double|boolean
 
-Jolly|202103121443|202103121503|2200|2400|100|no one|true
+Jolly|202103121443|202103121503|2200|2400|100|null|true
 puppyName|startDateInString|EndDateInString|CurrentBid|maxBid|increment|winner|active|isPaidFor|backloglines|bidHistlines
 string|string|string|double|double|double|string|boolean|boolean|int|int
 for pup and username search for corresponding objects before calling constructor

@@ -1,5 +1,6 @@
 package s21_Meerkat_Project;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -219,7 +220,15 @@ public class MainMenu {
 		String payPal = scan.nextLine();
 		checkValid(payPal);
 
-		users.add(new Customer(username, password, address, payPal));
+		try {//Update the db, to add a new bid
+			SQLMethods.checkConnect();
+			SQLMethods.stmt.executeUpdate("CALL addCust(\'"+username+"\',\'"+ password + "\', \'"+payPal+"\', \'"+address+"\')");
+			users.add(new Customer(username, password, address, payPal));		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Update failed.");
+		}
 		// sign in now
 		return returningUser(users);
 	}

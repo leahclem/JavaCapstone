@@ -1,6 +1,7 @@
 package s21_Meerkat_Project;
 
 import java.util.ArrayList;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -215,9 +216,7 @@ public class AdminMenu extends MainMenu {
 							maxbid = Double.parseDouble(stz.nextToken());
 							// get the customer
 							for (int j = 0; j < ah.getAllUsers().size(); j++) {// loop through all users
-								if (ah.getAllUsers().get(j).getUserName().equalsIgnoreCase(custName)) {// if the
-																										// usernames are
-																										// the same
+								if (ah.getAllUsers().get(j).getUserName().equalsIgnoreCase(custName)) {// if the usernames are the same
 									cust = ah.getAllUsers().get(j);
 								}
 							} // end of customer loop
@@ -236,6 +235,14 @@ public class AdminMenu extends MainMenu {
 					}
 				}
 			} // end of for loop through all auctions
+			try {//Update the db, to set dequeue backlogg
+				SQLMethods.checkConnect();
+				SQLMethods.stmt.executeUpdate("CALL dequePups()");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Update failed. Dequeue did not occur for backlogg.");
+			}
 		} // end of if between 9am - 4:59pm
 		else {
 			System.out.println("Error, try loading the backlog between 9-5pm, when we are open.");
