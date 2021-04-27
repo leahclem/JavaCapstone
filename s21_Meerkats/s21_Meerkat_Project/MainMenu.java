@@ -389,6 +389,14 @@ public class MainMenu {
 				scan.nextLine();
 			}
 		}
+		try {//Update the db, to add a new puppy
+			SQLMethods.checkConnect();
+			SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ name + "\', \'"+breed+"\', \'"+sex+"\', "+ped+", " + price+", " +hypo+ ")");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Update failed.");
+		}
 		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo);//note removed available
 		return pup;
 	}

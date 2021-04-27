@@ -1,5 +1,6 @@
 package s21_Meerkat_Project;
 
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class CustomerMenu extends MainMenu {
 		System.out.println("2. Place bid on Puppy: ");//up_g update db puppy data with winner curbid
 		System.out.println("3. Display active auctions: ");
 		System.out.println("4. Display all my winning auctions:");
-		System.out.println("5. Pay for puppy:");//up_l update db for pup paid bool
+		System.out.println("5. Pay for puppy:");
 		System.out.println("6. Logout: ");
 		System.out.println("7. Exit: ");
 		System.out.print("Choice: ");
@@ -184,6 +185,14 @@ public class CustomerMenu extends MainMenu {
 			System.out.println("Do we have your permission to bill this account? (yes/no)");
 			confirm = scan.nextLine();
 			if (confirm.equalsIgnoreCase("yes")) {
+				try {//Update the db, to puppy paid for
+					SQLMethods.checkConnect();
+					SQLMethods.stmt.executeUpdate("CALL updatePaid(\'" + pup + "\')");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Update failed.");
+				}
 				buyPup.setPaidFor(true);
 				System.out.println("Payment confirmed. Thank you for your business!");
 			} else {
