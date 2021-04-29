@@ -413,15 +413,13 @@ public class AdminMenu extends MainMenu {
 			SQLMethods.checkConnect();
 			SQLMethods.stmt.executeUpdate(
 					"CALL addAdmin(\'" + userName + "\', \'" + password + "\', \'" + fname + "\', \'" + lname + "\')");
-
+			users.add(new Admin(userName, password, fname, lname));//Add to the arraylist
+			System.out.println("Created user: " + userName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Update failed.");
 		}
-		users.add(new Admin(userName, password, fname, lname));
-
-		System.out.println("Created user: " + userName);
 	}// end of create admin
 
 }

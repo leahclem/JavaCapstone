@@ -188,13 +188,13 @@ public class CustomerMenu extends MainMenu {
 				try {// Update the db, to puppy paid for
 					SQLMethods.checkConnect();
 					SQLMethods.stmt.executeUpdate("CALL updatePaid(\'" + pup + "\')");
+					buyPup.setPaidFor(true);
+					System.out.println("Payment confirmed. Thank you for your business!");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					System.out.println("Update failed.");
 				}
-				buyPup.setPaidFor(true);
-				System.out.println("Payment confirmed. Thank you for your business!");
 			} else {
 				System.out.println("If the puppy is not paid for soon it will be put back on the market.");
 			}

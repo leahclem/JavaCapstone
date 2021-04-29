@@ -375,6 +375,7 @@ public class MainMenu {
 	 */
 
 	public Puppies addPup(AuctionHouse ah) {
+		Puppies pup = null;//Declared for the final pup added in the try statement
 		String name = "";
 		String breed = "";
 		String sex = "";
@@ -482,12 +483,13 @@ public class MainMenu {
 			SQLMethods.checkConnect();
 			SQLMethods.stmt.executeUpdate("CALL addPup(\'" + name + "\', \'" + breed + "\', \'" + sex + "\', " + ped
 					+ ", " + price + ", " + hypo + ")");
+			pup = new Puppies(name, breed, sex, ped, price, hypo);// note removed available
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Update failed.");
 		}
-		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo);// note removed available
+		
 		return pup;
 	}
 
