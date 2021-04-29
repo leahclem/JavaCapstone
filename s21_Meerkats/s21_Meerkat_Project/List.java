@@ -1,163 +1,237 @@
-// Fig. 21.3: List.java
-// ListNode and List class declarations.
 package s21_Meerkat_Project;
 
 import java.util.NoSuchElementException;
 
-// class to represent one node in a list
+
+/**
+ * List class used to create list objects for use in Queue
+ *
+ * @param <E>
+ *            generic element
+ */
 class ListNode<E> {
-   // package access members; List can access these directly
-   E data; // data for this node
-   ListNode<E> nextNode; // reference to the next node in the list
+	// package access members; List can access these directly
+	/**
+	 * E data field
+	 */
+	E data; // data for this node
 
-   // constructor creates a ListNode that refers to object
-   ListNode(E object) {this(object, null);}
+	/**
+	 * ListNode<E> references next node in list
+	 */
+	ListNode<E> nextNode; // reference to the next node in the list
 
-   // constructor creates ListNode that refers to the specified
-   // object and to the next ListNode
-   ListNode(E object, ListNode<E> node) {
-      data = object;    
-      nextNode = node;  
-   } 
+	// constructor creates a ListNode that refers to object
 
-   // return reference to data in node
-   E getData() {return data;}
+	/**
+	 * Constructor for List class
+	 * 
+	 * @param object
+	 */
+	ListNode(E object) {
+		this(object, null);
+	}
 
-   // return reference to next node in list
-   ListNode<E> getNext() {return nextNode;}
-} 
+	// constructor creates ListNode that refers to the specified
+	// object and to the next ListNode
+
+	/**
+	 * Constructor for List class
+	 * 
+	 * @param object
+	 * @param node
+	 */
+	ListNode(E object, ListNode<E> node) {
+		data = object;
+		nextNode = node;
+	}
+
+	/**
+	 * getData method
+	 * 
+	 * @return data (generic)
+	 */
+	E getData() {
+		return data;
+	}
+
+	/**
+	 * getNext method, returns reference to next node in list
+	 * 
+	 * @return
+	 */
+	ListNode<E> getNext() {
+		return nextNode;
+	}
+}
 
 // class List definition
+/**
+ * Class List contains: firstNode lastNode
+ *
+ * @param <E>
+ *            generic element
+ */
 public class List<E> {
-   private ListNode<E> firstNode;
-   private ListNode<E> lastNode; 
-   private String name; // string like "list" used in printing
+	/**
+	 * field firstNode containing generic element <E>
+	 */
+	private ListNode<E> firstNode;
+	/**
+	 * field lastNode containing generic element <E>
+	 */
+	private ListNode<E> lastNode;
+	/**
+	 * field name, contains String used for printing
+	 */
+	private String name;
 
-   // constructor creates empty List with "list" as the name
-   public List() {this("list");}
+	/**
+	 * Constructor for List, using 'list' as name
+	 */
+	public List() {
+		this("list");
+	}
 
-   // constructor creates an empty List with a name
-   public List(String listName) {
-      name = listName;
-      firstNode = lastNode = null;
-   } 
+	/**
+	 * Constructor for List, using listName (String) as name
+	 * 
+	 * @param listName
+	 */
+	public List(String listName) {
+		name = listName;
+		firstNode = lastNode = null;
+	}
 
-   // insert item at front of List
-   public void insertAtFront(E insertItem) {
-      if (isEmpty()) { // firstNode and lastNode refer to same object
-         firstNode = lastNode = new ListNode<E>(insertItem);
-      } 
-      else { // firstNode refers to new node
-         firstNode = new ListNode<E>(insertItem, firstNode);
-      } 
-   } 
+	/**
+	 * insertAtFront method used to add an item to the front of the List
+	 * 
+	 * @param insertItem
+	 *            <E>
+	 */
+	public void insertAtFront(E insertItem) {
+		if (isEmpty()) { // firstNode and lastNode refer to same object
+			firstNode = lastNode = new ListNode<E>(insertItem);
+		} else { // firstNode refers to new node
+			firstNode = new ListNode<E>(insertItem, firstNode);
+		}
+	}
 
-   // insert item at end of List
-   public void insertAtBack(E insertItem) {
-      if (isEmpty()) { // firstNode and lastNode refer to same object
-         firstNode = lastNode = new ListNode<E>(insertItem);
-      } 
-      else { // lastNode's nextNode refers to new node
-         lastNode = lastNode.nextNode = new ListNode<E>(insertItem);
-      } 
-   } 
+	// insert item at end of List
+	/**
+	 * insertAtBack method used to add an item to the back of the List
+	 * 
+	 * @param insertItem
+	 */
+	public void insertAtBack(E insertItem) {
+		if (isEmpty()) { // firstNode and lastNode refer to same object
+			firstNode = lastNode = new ListNode<E>(insertItem);
+		} else { // lastNode's nextNode refers to new node
+			lastNode = lastNode.nextNode = new ListNode<E>(insertItem);
+		}
+	}
 
-   // remove first node from List
-   public E removeFromFront() throws NoSuchElementException {
-      if (isEmpty()) { // throw exception if List is empty
-         throw new NoSuchElementException(name + " is empty");
-      }
+	/**
+	 * removeFromFront method used to remove an item from the front of the List
+	 * 
+	 * @return removedItem <E>
+	 * @throws NoSuchElementException
+	 */
+	public E removeFromFront() throws NoSuchElementException {
+		if (isEmpty()) { // throw exception if List is empty
+			throw new NoSuchElementException(name + " is empty");
+		}
 
-      E removedItem = firstNode.data; // retrieve data being removed
+		E removedItem = firstNode.data; // retrieve data being removed
 
-      // update references firstNode and lastNode 
-      if (firstNode == lastNode) {
-         firstNode = lastNode = null;
-      }
-      else {
-         firstNode = firstNode.nextNode;
-      }
+		// update references firstNode and lastNode
+		if (firstNode == lastNode) {
+			firstNode = lastNode = null;
+		} else {
+			firstNode = firstNode.nextNode;
+		}
 
-      return removedItem; // return removed node data
-   } 
+		return removedItem; // return removed node data
+	}
 
-   // remove last node from List
-   public E removeFromBack() throws NoSuchElementException {
-      if (isEmpty()) { // throw exception if List is empty
-         throw new NoSuchElementException(name + " is empty");
-      }
+	/**
+	 * removeFromBack method used to remove an item from the back of the List
+	 * 
+	 * @return removedItem <E>
+	 * @throws NoSuchElementException
+	 */
+	public E removeFromBack() throws NoSuchElementException {
+		if (isEmpty()) { // throw exception if List is empty
+			throw new NoSuchElementException(name + " is empty");
+		}
 
-      E removedItem = lastNode.data; // retrieve data being removed
+		E removedItem = lastNode.data; // retrieve data being removed
 
-      // update references firstNode and lastNode
-      if (firstNode == lastNode) {
-         firstNode = lastNode = null;
-      }
-      else { // locate new last node
-         ListNode<E> current = firstNode;
+		// update references firstNode and lastNode
+		if (firstNode == lastNode) {
+			firstNode = lastNode = null;
+		} else { // locate new last node
+			ListNode<E> current = firstNode;
 
-         // loop while current node does not refer to lastNode
-         while (current.nextNode != lastNode) {
-            current = current.nextNode;
-         }
-   
-         lastNode = current; // current is new lastNode
-         current.nextNode = null;
-      } 
+			// loop while current node does not refer to lastNode
+			while (current.nextNode != lastNode) {
+				current = current.nextNode;
+			}
 
-      return removedItem; // return removed node data
-   } 
+			lastNode = current; // current is new lastNode
+			current.nextNode = null;
+		}
 
-   // determine whether list is empty; returns true if so
-   public boolean isEmpty() {return firstNode == null;}
+		return removedItem; // return removed node data
+	}
 
-   // output list contents
-   public void print() {
-      if (isEmpty()) {
-         System.out.printf("Empty %s%n", name);
-         return;
-      } 
+	/**
+	 * isEmpty method returns boolean 'true' if List is empty
+	 * 
+	 * @return
+	 */
+	public boolean isEmpty() {
+		return firstNode == null;
+	}
 
-      System.out.printf("The %s is: \n ", name);
-      ListNode<E> current = firstNode;
+	/**
+	 * print method prints all elements in the list
+	 */
+	public void print() {
+		if (isEmpty()) {
+			System.out.printf("Empty %s%n", name);
+			return;
+		}
 
-      // while not at end of list, output current node's data
-      while (current != null) {
-         System.out.printf("%s \n", current.data);
-         current = current.nextNode;
-      } 
+		System.out.printf("The %s is: \n ", name);
+		ListNode<E> current = firstNode;
 
-      System.out.println();
-   } 
-   
-   public int numInQueue() {
-	   int num = 0;
-	   if(isEmpty()) {
-		   return 0;
-	   }
-	   ListNode<E> current = firstNode;
-	   
-	   while(current != null) {
-		   num = num +1;
-		   current = current.nextNode;
-	   }
-	   return num;	   
-   }
-   
-}//end of class 
+		// while not at end of list, output current node's data
+		while (current != null) {
+			System.out.printf("%s \n", current.data);
+			current = current.nextNode;
+		}
 
+		System.out.println();
+	}
 
-/**************************************************************************
- * (C) Copyright 1992-2018 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
- * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
- *************************************************************************/
+	/**
+	 * numInQueue method returns total elements in List
+	 * 
+	 * @return int num
+	 */
+	public int numInQueue() {
+		int num = 0;
+		if (isEmpty()) {
+			return 0;
+		}
+		ListNode<E> current = firstNode;
+
+		while (current != null) {
+			num = num + 1;
+			current = current.nextNode;
+		}
+		return num;
+	}
+
+}
