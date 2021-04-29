@@ -57,10 +57,11 @@ public class Bids {
 
 		this.backlogg = new Queue<>();
 		this.bidHistory = new Queue<>();
-		
-		try {//Update the db, to add a new bid
+
+		try {// Update the db, to add a new bid
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addBid(\'null\',"+ currentBid + " , 0, \'"+pup.getName()+"\', \'"+dateToString(startBy)+"\', \'"+dateToString(endBy)+"\')");
+			SQLMethods.stmt.executeUpdate("CALL addBid(\'null\'," + currentBid + " , 0, \'" + pup.getName() + "\', \'"
+					+ dateToString(startBy) + "\', \'" + dateToString(endBy) + "\')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,9 +111,9 @@ public class Bids {
 	private void newBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		String bh = (pup.getName() + "'s Bid History");
-		try {//Update the db and arraylist, to set update bidhist
+		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'"+ pup.getName() +"\', \'"+ bh +"\')");
+			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -120,20 +121,20 @@ public class Bids {
 			System.out.println("Update failed.");
 		}
 		bh = ("Bidder \t\tResult \t\t\tWinner\t\tBid\t\t\tCurrent Price \t\tMax willing to pay");
-		try {//Update the db and arraylist, to set update bidhist
+		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'"+ pup.getName() +"\', \'"+ bh +"\')");
+			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Update failed.");
 		}
-		bh = (u.getUserName() + "\t\tFirst bid\t\t" + u.getUserName() + "\t\t"+nf.format(newBid)+"\t\t" + nf.format(currentBid) + "\t\t\t"
-				+ nf.format(maxBid));
-		try {//Update the db and arraylist, to set update bidhist
+		bh = (u.getUserName() + "\t\tFirst bid\t\t" + u.getUserName() + "\t\t" + nf.format(newBid) + "\t\t"
+				+ nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
+		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'"+ pup.getName() +"\', \'"+ bh +"\')");
+			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -145,11 +146,11 @@ public class Bids {
 	// use if the same customer increases their bid, if they are already winning
 	private void updateBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName() + "\t\tUpdated bid \t\t" + winner.getUserName() + "\t\t" +nf.format(newBid)+ "\t\t" + nf.format(currentBid)
-				+ "\t\t\t" + nf.format(maxBid));
-		try {//Update the db and arraylist, to set update bidhist
+		String bh = (u.getUserName() + "\t\tUpdated bid \t\t" + winner.getUserName() + "\t\t" + nf.format(newBid)
+				+ "\t\t" + nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
+		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'"+ pup.getName() +"\', \'"+ bh +"\')");
+			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -161,11 +162,11 @@ public class Bids {
 	// use if a new user wins
 	private void newWinBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName() + "\t\tNew winner \t\t" + winner.getUserName() + "\t\t" +nf.format(newBid)+ "\t\t" + nf.format(currentBid)
-				+ "\t\t\t" + nf.format(maxBid));
-		try {//Update the db and arraylist, to set update bidhist
+		String bh = (u.getUserName() + "\t\tNew winner \t\t" + winner.getUserName() + "\t\t" + nf.format(newBid)
+				+ "\t\t" + nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
+		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'"+ pup.getName() +"\', \'"+ bh +"\')");
+			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -177,11 +178,11 @@ public class Bids {
 	// use if there is a new bid, but it isn't enough to win
 	private void notEnoughBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (u.getUserName() + "\t\tRejected (too low) \t" + winner.getUserName() + "\t\t" +nf.format(newBid)+ "\t\t"
-				+ nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
-		try {//Update the db and arraylist, to set update bidhist
+		String bh = (u.getUserName() + "\t\tRejected (too low) \t" + winner.getUserName() + "\t\t" + nf.format(newBid)
+				+ "\t\t" + nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
+		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'"+ pup.getName() +"\', \'"+ bh +"\')");
+			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -191,27 +192,27 @@ public class Bids {
 	}
 
 	public void checkBid(User cust, double newBid) {
-		
+
 		if (winner.getUserName().equalsIgnoreCase("null")) { // do this if the bid is the first bid
 			winner = cust;
 			maxBid = newBid;
 			newBHQueue(cust, newBid);
 
 		} else if (winner == cust) { // do this if the customer is upping their bid on the same dog
-			if (newBid>maxBid) { // if the bid is more than the current max bid
+			if (newBid > maxBid) { // if the bid is more than the current max bid
 				maxBid = newBid;
 				updateBHQueue(cust, newBid);
-			} else if (newBid<=maxBid){				// if the bid is less than or equals to the max bid
+			} else if (newBid <= maxBid) { // if the bid is less than or equals to the max bid
 				notEnoughBHQueue(cust, newBid);
 			}
 
-		} else {									// if neither of the above situations apply then do this:
-			if (newBid <= maxBid) {					// if the newBid is less than or equals to maxBid
+		} else { // if neither of the above situations apply then do this:
+			if (newBid <= maxBid) { // if the newBid is less than or equals to maxBid
 				currentBid = newBid;
 				notEnoughBHQueue(cust, newBid);
-			} else if (newBid > maxBid) {			// if the newBid is greater than maxBid
+			} else if (newBid > maxBid) { // if the newBid is greater than maxBid
 				winner = cust;
-				currentBid = maxBid+increment;
+				currentBid = maxBid + increment;
 				maxBid = newBid;
 				newWinBHQueue(cust, newBid);
 			}
@@ -222,9 +223,9 @@ public class Bids {
 		// Variable Declaration
 		String savedBid = cust.getUserName() + " " + newBid;
 		backlogg.enqueue(savedBid);
-		try {//Update the db and arraylist, to add a backlogg
+		try {// Update the db and arraylist, to add a backlogg
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addBackLog(\'"+ pup.getName() +"\', \'"+ savedBid +"\')");
+			SQLMethods.stmt.executeUpdate("CALL addBackLog(\'" + pup.getName() + "\', \'" + savedBid + "\')");
 			backlogg.enqueue(savedBid);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

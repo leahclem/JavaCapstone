@@ -25,7 +25,7 @@ public class CustomerMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Customer user " + curUser.getUserName());
 		System.out.println("1. View puppies: ");
-		System.out.println("2. Place bid on Puppy: ");//up_g update db puppy data with winner curbid
+		System.out.println("2. Place bid on Puppy: ");// up_g update db puppy data with winner curbid
 		System.out.println("3. Display active auctions: ");
 		System.out.println("4. Display all my winning auctions:");
 		System.out.println("5. Pay for puppy:");
@@ -111,7 +111,7 @@ public class CustomerMenu extends MainMenu {
 							scan.nextLine();
 						}
 					}
-					
+
 					// check if time is between nine to five pm
 					if (LocalDateTime.now().getHour() >= 9 && LocalDateTime.now().getHour() <= 16) {
 						pupBid.checkBid(customer, maxBid);
@@ -160,13 +160,13 @@ public class CustomerMenu extends MainMenu {
 		int counter2 = 0;
 		System.out.println("The puppies you need to pay for are: ");
 		for (Bids b : ah.getAllBids()) {
-		//prints out puppies that are won and not yet paid for by this user
-			if (b.isActive() == false && b.isPaidFor() == false 
+			// prints out puppies that are won and not yet paid for by this user
+			if (b.isActive() == false && b.isPaidFor() == false
 					&& b.getWinner().getUserName().equalsIgnoreCase(curUser.getUserName())) {
 				System.out.println(b.getPup());
 				counter++;
 			}
-		}//end for
+		} // end for
 		if (counter != 0) {
 			System.out.println("Which puppy would you like to pay for? ");
 			pup = scan.nextLine();
@@ -175,7 +175,7 @@ public class CustomerMenu extends MainMenu {
 					buyPup = b;
 					counter2++;
 				}
-			}//end for
+			} // end for
 			if (counter2 == 0) {
 				System.out.println("Could not find a puppy with that name.");
 				return;
@@ -185,7 +185,7 @@ public class CustomerMenu extends MainMenu {
 			System.out.println("Do we have your permission to bill this account? (yes/no)");
 			confirm = scan.nextLine();
 			if (confirm.equalsIgnoreCase("yes")) {
-				try {//Update the db, to puppy paid for
+				try {// Update the db, to puppy paid for
 					SQLMethods.checkConnect();
 					SQLMethods.stmt.executeUpdate("CALL updatePaid(\'" + pup + "\')");
 				} catch (SQLException e) {
@@ -198,7 +198,7 @@ public class CustomerMenu extends MainMenu {
 			} else {
 				System.out.println("If the puppy is not paid for soon it will be put back on the market.");
 			}
-		} else 
+		} else
 			System.out.println("You have no puppies to pay for.");
 	}
 

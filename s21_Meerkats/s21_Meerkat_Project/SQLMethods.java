@@ -6,10 +6,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+/**
+ * SQLMethods class: contains all methods used to connect/disconnect with SQL
+ * database
+ *
+ */
 public class SQLMethods {
 	static Connection con = null;
 	static Statement stmt = null;
 
+	/**
+	 * makeAConnection method makes a connection with SQL database. Please note that
+	 * the password and database name is hard-coded for ease of use.
+	 * 
+	 * @return Connection
+	 */
 	public static Connection makeAConnection() {
 		Connection connection = null;
 
@@ -45,6 +56,10 @@ public class SQLMethods {
 		return connection;
 	}
 
+	/**
+	 * closeConnection method is used to close the connection with SQL database upon
+	 * log out.
+	 */
 	public static void closeConnection() {
 		if (con != null) {
 			try {
@@ -58,11 +73,14 @@ public class SQLMethods {
 		}
 	}
 
+	/**
+	 * checkConnect method checks for valid connection with SQL database, if not
+	 * detected will attempt to create a connections using makeAConnection() method.
+	 */
 	public static void checkConnect() {
 		if (con == null) {
 			con = makeAConnection();
-		} else
-			System.out.println("A connection already existed so we will use it");
+		}
 
 		if (stmt == null) { // ?
 			try {

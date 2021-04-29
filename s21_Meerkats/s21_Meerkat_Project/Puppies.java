@@ -87,6 +87,7 @@ public class Puppies {
 	 * toString method used to return a String containing all the fields of the
 	 * Puppies object
 	 * 
+	 * @see java.lang.Object#toString()
 	 * @return String
 	 */
 	public String toString() {

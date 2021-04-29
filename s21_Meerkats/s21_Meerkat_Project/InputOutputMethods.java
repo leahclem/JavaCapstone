@@ -294,7 +294,6 @@ public class InputOutputMethods {
 		User winner = null;
 		Customer win = null;
 		Bids added = null;
-		
 
 		// for all the auctions loop through a line and collect all data
 		for (int i = 0; i < bids; i++) {
@@ -309,7 +308,7 @@ public class InputOutputMethods {
 			for (int j = 0; j < 11; j++) {
 				// assign variables accordingly
 				switch (j) {
-				case 0://pupname
+				case 0:// pupname
 					pupname = st.nextToken();
 					// find the puppy
 					for (Puppies p : pupList) {
@@ -319,22 +318,22 @@ public class InputOutputMethods {
 					} // end of for loop through all users
 						// if no pup found null will be entered which should never happen
 					break;
-				case 1://startdate
+				case 1:// startdate
 					startDate = strToDate(st.nextToken());
 					break;
-				case 2://endDate
+				case 2:// endDate
 					endDate = strToDate(st.nextToken());
 					break;
-				case 3://current bid
+				case 3:// current bid
 					cbid = Double.parseDouble(st.nextToken());
 					break;
-				case 4://max bid
+				case 4:// max bid
 					mbid = Double.parseDouble(st.nextToken());
 					break;
-				case 5://increment
+				case 5:// increment
 					incr = Double.parseDouble(st.nextToken());
 					break;
-				case 6://winner
+				case 6:// winner
 					username = st.nextToken();
 					// check if no winner
 					count = 0;// reset count variable
@@ -346,7 +345,7 @@ public class InputOutputMethods {
 							if (username.equalsIgnoreCase(u.getUserName())) {
 								count++;
 								winner = u;
-								if(winner instanceof Customer)
+								if (winner instanceof Customer)
 									win = (Customer) winner;
 							}
 						} // end of for loop through all users
@@ -357,45 +356,45 @@ public class InputOutputMethods {
 					} // end of else to find current winner
 
 					break;
-				case 7://is active
+				case 7:// is active
 					active = Boolean.parseBoolean(st.nextToken());
 					break;
-				case 8://is paidfor
+				case 8:// is paidfor
 					isPaidFor = Boolean.parseBoolean(st.nextToken());
 					break;
-				case 9://bidhist
+				case 9:// bidhist
 					backlog = Integer.parseInt(st.nextToken());
 					break;
-				case 10://backlog
+				case 10:// backlog
 					bidHist = Integer.parseInt(st.nextToken());
 					break;
 				}// end of switch case
 
 			} // end of for all data for a puppy
 			added = new Bids(pup, endDate, startDate, cbid, mbid, incr, winner, active, isPaidFor);
-			//add the backlogg data
-			for(int j = 0 ; j < backlog ; j++) {
-				try {//grab the next line of backlog
+			// add the backlogg data
+			for (int j = 0; j < backlog; j++) {
+				try {// grab the next line of backlog
 					line = bf.readLine();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				//add backlog to queue
+				// add backlog to queue
 				added.getBacklogg().enqueue(line);
 			}
-			//add the bidHistory data
-			for(int j = 0 ; j < bidHist ; j++) {
-				try {//grab the next line of backlog
+			// add the bidHistory data
+			for (int j = 0; j < bidHist; j++) {
+				try {// grab the next line of backlog
 					line = bf.readLine();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				//add bidHist to queue
+				// add bidHist to queue
 				added.getBidHistory().enqueue(line);
 			}
 			auctions.add(added);
-//			win.addHighBid(added);//adds high bid to customer object
-			
+			// win.addHighBid(added);//adds high bid to customer object
+
 		} // end of for auction lines loop
 
 		return bf;
@@ -407,12 +406,12 @@ public class InputOutputMethods {
 		ArrayList<Admin> adminList = new ArrayList<>();
 		int pupSize = pupList.size();
 		int auctSize = auctions.size();
-		
+
 		for (User u : users) {
 			if (u instanceof Customer) {
-				custList.add((Customer) u); 
+				custList.add((Customer) u);
 			} else if (u instanceof Admin) {
-				adminList.add((Admin) u); 
+				adminList.add((Admin) u);
 			}
 		}
 
@@ -429,20 +428,20 @@ public class InputOutputMethods {
 				out.println(c.toStringF());
 			}
 
-			for(Puppies p : pupList) {
+			for (Puppies p : pupList) {
 				out.println(p.toStringF());
 			}
-			
-			for(Bids b : auctions) {
+
+			for (Bids b : auctions) {
 				out.println(b.toStringF());
-				while(!b.getBacklogg().isEmpty()) {
+				while (!b.getBacklogg().isEmpty()) {
 					out.println(b.getBacklogg().dequeue().toString());
 				}
-				while(!b.getBidHistory().isEmpty()) {
+				while (!b.getBidHistory().isEmpty()) {
 					out.println(b.getBidHistory().dequeue().toString());
 				}
 			}
-					
+
 		} finally {
 			try {
 				out.close();

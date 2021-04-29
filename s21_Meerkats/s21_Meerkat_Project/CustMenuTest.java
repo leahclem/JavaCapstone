@@ -13,12 +13,12 @@ class CustMenuTest {
 
 	private ArrayList<Bids> curBid = new ArrayList<>();
 
- 	@BeforeEach
+	@BeforeEach
 	void setUp() throws Exception {
- 		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false);
+		Puppies pupA = new Puppies("Jolly", "poodle", "male", true, 2000.0, false);
 		Puppies pupB = new Puppies("Happy", "beagle", "male", true, 1000.0, false);
 		Puppies pupC = new Puppies("Sugar", "German Shepherd", "female", true, 1500.0, false);
-		
+
 		curBid.add(new Bids(pupA, LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
 		curBid.add(new Bids(pupB, LocalDateTime.now().plusMinutes(0).withSecond(0).withNano(0)));
 		curBid.add(new Bids(pupC, LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
@@ -36,7 +36,7 @@ class CustMenuTest {
 		double winner = 0;
 		double increment = 25.00;
 		double currentBid = 0;
-		
+
 		for (int i = 0; i < curBid.size(); i++) {
 			if (curBid.get(i).getPup().getName().equals("Jolly")) {
 				pupBid = curBid.get(i);
@@ -48,23 +48,25 @@ class CustMenuTest {
 			pupBid.setMaxBid(maxBid);
 			winner = pupBid.getMaxBid();
 		}
-		//The maxBid from the customer, if larger than the current bid + increment, should be the winner
+		// The maxBid from the customer, if larger than the current bid + increment,
+		// should be the winner
 		assertEquals(maxBid, winner);
-		//The new price should not be the same as the maxBid. In auction the max bid is
-		//amount willing to bid and not actual price of the item
-		assertNotEquals(maxBid, newPrice);		
+		// The new price should not be the same as the maxBid. In auction the max bid is
+		// amount willing to bid and not actual price of the item
+		assertNotEquals(maxBid, newPrice);
 	}
 
 	@Test
 	void shouldBeNullIfSold() {
 		Bids pupBid = null;
-		
+
 		for (int i = 0; i < curBid.size(); i++) {
 			if (curBid.get(i).getPup().getName().equals("Happy")) {
 				pupBid = curBid.get(i);
 			}
 		}
-		//If the puppy auction has ended which for Happy it has, then Happy should be null or removed
+		// If the puppy auction has ended which for Happy it has, then Happy should be
+		// null or removed
 		assertNull(pupBid);
 	}
 }

@@ -17,8 +17,6 @@ public class AuctionHouse {
 	public AuctionHouse() {
 
 	}
-	
-	
 
 	// for use until we have Bids
 	public AuctionHouse(boolean open, ArrayList<Puppies> pup, ArrayList<User> user) {
@@ -26,7 +24,7 @@ public class AuctionHouse {
 		this.allPups = pup;
 		this.allUsers = user;
 	}
-	
+
 	public AuctionHouse(boolean open, ArrayList<Bids> allBids, ArrayList<Puppies> allPups, ArrayList<User> allUsers) {
 		this.open = open;
 		this.allBids = allBids;
@@ -40,20 +38,19 @@ public class AuctionHouse {
 		if (this.allBids != null) {// if there are any bids active
 			for (Bids b : this.allBids) {
 				if (b.getEndBy().isBefore(curTime) && b.isActive() == true) {// Checks if the current time is
-																						// before the end date and the
-																						// bid is active
+																				// before the end date and the
+																				// bid is active
 					// print and call something in bids to end this bid
-					if(b.getWinner().getUserName().equalsIgnoreCase("null")) {
+					if (b.getWinner().getUserName().equalsIgnoreCase("null")) {
 						win = "no one";
 					} else {
 						win = b.getWinner().getUserName().toString();
 					}
-					System.out.println("The bid for " + b.getPup().getName() + " is over the winner is "
-							+ win);
-					
-					try {//Update the db and arraylist, to set the bid inactive
+					System.out.println("The bid for " + b.getPup().getName() + " is over the winner is " + win);
+
+					try {// Update the db and arraylist, to set the bid inactive
 						SQLMethods.checkConnect();
-						SQLMethods.stmt.executeUpdate("CALL updateActive(\'"+ b.getPup().getName() +"\')");
+						SQLMethods.stmt.executeUpdate("CALL updateActive(\'" + b.getPup().getName() + "\')");
 						b.setActive(false);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -79,20 +76,20 @@ public class AuctionHouse {
 		}
 
 	}// end of method
-	
+
 	public void closedBids() { // prints all closed bids
-		if(this.allBids.size() != 0) { // if there are any bids
-			for(Bids b : this.allBids) {
+		if (this.allBids.size() != 0) { // if there are any bids
+			for (Bids b : this.allBids) {
 				if (b.getEndBy().isBefore(LocalDateTime.now())) { // if bids that are past the endBy date
 					System.out.println(b.toString());
 				} // end if
 			} // end for
-			
-		}else {
+
+		} else {
 			System.out.println("There are no closed bids yet. ");
 		}
 	}
-	
+
 	public void addBid(Bids bid) {
 		this.allBids.add(bid);
 	}

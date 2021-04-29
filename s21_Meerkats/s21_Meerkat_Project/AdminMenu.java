@@ -23,12 +23,12 @@ public class AdminMenu extends MainMenu {
 		int value = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
-		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");//up_g add dequeue backlogg db update
+		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");// up_g add dequeue backlogg db update
 		System.out.println("2. Search puppies: ");
 		System.out.println("3. Logout: ");
 		System.out.println("4. Add a new puppy for sale: ");
 		System.out.println("5. Display active auctions: ");
-		System.out.println("6. Create new auction: ");//up_g add auction update db
+		System.out.println("6. Create new auction: ");// up_g add auction update db
 		System.out.println("7. Create new Admin: ");
 		System.out.println("8. View closed auctions: ");
 		System.out.println("9. View bid history queue");
@@ -124,7 +124,7 @@ public class AdminMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		// option 9 view bidHistory
 		int choice = 0;
-		
+
 		System.out.println("Do you want to: \n1. View all auctions \n2. Search by puppy name \nChoice: ");
 
 		boolean valid = false;
@@ -148,18 +148,18 @@ public class AdminMenu extends MainMenu {
 					boolean found = false;
 					System.out.println("What is the puppy's name?");
 					String name = scan.nextLine();
-					while(!found) {
-						for (int j = 0; j<ah.getAllBids().size();j++) {
-							if(name.equalsIgnoreCase(ah.getAllBids().get(j).getPup().getName())) {
+					while (!found) {
+						for (int j = 0; j < ah.getAllBids().size(); j++) {
+							if (name.equalsIgnoreCase(ah.getAllBids().get(j).getPup().getName())) {
 								found = true;
-								if(ah.getAllBids().get(j).getPup().getName().isEmpty()) {
-									System.out.println(
-											ah.getAllBids().get(j).getPup().getName() + " has no bidding history yet. ");
+								if (ah.getAllBids().get(j).getPup().getName().isEmpty()) {
+									System.out.println(ah.getAllBids().get(j).getPup().getName()
+											+ " has no bidding history yet. ");
 								} else {
 									ah.getAllBids().get(j).getBidHistory().print();
 								}
-								
-							} else if ((j==ah.getAllBids().size()-1) && found == false) {
+
+							} else if ((j == ah.getAllBids().size() - 1) && found == false) {
 								System.out.println("I don't see a puppy with that name. ");
 								found = true;
 							}
@@ -186,7 +186,7 @@ public class AdminMenu extends MainMenu {
 
 	}
 
-	public void loadbacklog(AuctionHouse ah) {//up_g add dequeue backlogg db update
+	public void loadbacklog(AuctionHouse ah) {// up_g add dequeue backlogg db update
 		// load backlog data, and add to bidhistory
 		// Variable Declaration
 		ArrayList<Bids> auctions = ah.getAllBids();
@@ -216,7 +216,9 @@ public class AdminMenu extends MainMenu {
 							maxbid = Double.parseDouble(stz.nextToken());
 							// get the customer
 							for (int j = 0; j < ah.getAllUsers().size(); j++) {// loop through all users
-								if (ah.getAllUsers().get(j).getUserName().equalsIgnoreCase(custName)) {// if the usernames are the same
+								if (ah.getAllUsers().get(j).getUserName().equalsIgnoreCase(custName)) {// if the
+																										// usernames are
+																										// the same
 									cust = ah.getAllUsers().get(j);
 								}
 							} // end of customer loop
@@ -235,7 +237,7 @@ public class AdminMenu extends MainMenu {
 					}
 				}
 			} // end of for loop through all auctions
-			try {//Update the db, to set dequeue backlogg
+			try {// Update the db, to set dequeue backlogg
 				SQLMethods.checkConnect();
 				SQLMethods.stmt.executeUpdate("CALL dequePups()");
 			} catch (SQLException e) {
@@ -385,39 +387,41 @@ public class AdminMenu extends MainMenu {
 
 		System.out.print("Enter the first name of the new Admin: ");
 		fname = scan.nextLine();
-		mm.checkValid(fname); 
-		
+		mm.checkValid(fname);
+
 		System.out.print("Enter the last name of the new Admin: ");
 		lname = scan.nextLine();
 		mm.checkValid(lname);
-		
+
 		System.out.println("Enter the user name of the new Admin: ");
 		userName = scan.nextLine();
 		mm.checkValid(userName);
-		//loop to check for duplicate username and also validate new entry for the word "null" or pipes
-		for (int i =0; i< users.size(); i++) {
+		// loop to check for duplicate username and also validate new entry for the word
+		// "null" or pipes
+		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getUserName().equals(userName)) {
 				System.out.println("That username is already taken, try a different one. ");
 				userName = scan.nextLine();
 				mm.checkValid(userName);
 			}
 		}
-		
+
 		System.out.println("Finally enter the password of the new Admin: ");
 		password = scan.nextLine();
 		mm.checkValid(password);
-		try {//Update the db and arraylist, to add a new admin
+		try {// Update the db and arraylist, to add a new admin
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addAdmin(\'"+ userName +"\', \'"+ password +"\', \'" +fname +"\', \'" +lname+"\')");
-			
+			SQLMethods.stmt.executeUpdate(
+					"CALL addAdmin(\'" + userName + "\', \'" + password + "\', \'" + fname + "\', \'" + lname + "\')");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Update failed.");
 		}
 		users.add(new Admin(userName, password, fname, lname));
-		
+
 		System.out.println("Created user: " + userName);
 	}// end of create admin
-	
+
 }

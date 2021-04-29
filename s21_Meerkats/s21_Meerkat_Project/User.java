@@ -60,6 +60,17 @@ public class User {
 	}
 
 	/**
+	 * toString method used to return a String containing all the fields of the User
+	 * object
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "The username is: " + userName + ". \nThe password is: " + password
+				+ ". The type is (A)min or (C)ustomer: " + userType;
+	}
+
+	/**
 	 * getUserType method
 	 * 
 	 * @return userType char

@@ -2,9 +2,8 @@ package s21_Meerkat_Project;
 
 import java.util.NoSuchElementException;
 
-
 /**
- * List class used to create list objects for use in Queue
+ * List class used to create list objects for use with Queue class
  *
  * @param <E>
  *            generic element
@@ -58,7 +57,7 @@ class ListNode<E> {
 	/**
 	 * getNext method, returns reference to next node in list
 	 * 
-	 * @return
+	 * @return nextNode
 	 */
 	ListNode<E> getNext() {
 		return nextNode;
@@ -96,7 +95,8 @@ public class List<E> {
 	/**
 	 * Constructor for List, using listName (String) as name
 	 * 
-	 * @param listName
+	 * @param String
+	 *            listName
 	 */
 	public List(String listName) {
 		name = listName;
@@ -117,11 +117,11 @@ public class List<E> {
 		}
 	}
 
-	// insert item at end of List
 	/**
 	 * insertAtBack method used to add an item to the back of the List
 	 * 
 	 * @param insertItem
+	 *            <E>
 	 */
 	public void insertAtBack(E insertItem) {
 		if (isEmpty()) { // firstNode and lastNode refer to same object
@@ -188,7 +188,7 @@ public class List<E> {
 	/**
 	 * isEmpty method returns boolean 'true' if List is empty
 	 * 
-	 * @return
+	 * @return boolean (true if empty)
 	 */
 	public boolean isEmpty() {
 		return firstNode == null;
@@ -216,9 +216,9 @@ public class List<E> {
 	}
 
 	/**
-	 * numInQueue method returns total elements in List
+	 * numInQueue method returns total elements in List (see size in Queue class)
 	 * 
-	 * @return int num
+	 * @return int num (total items in queue)
 	 */
 	public int numInQueue() {
 		int num = 0;
