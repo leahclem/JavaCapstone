@@ -47,11 +47,11 @@ public class MainMenu {
 	 *            the int returned from the menu method
 	 * @param ah
 	 *            the AuctionHouse class
-	 * @param io
-	 *            the InputOutputMethods class
+	 * 
 	 * @return User returns the user who is currently logged in
 	 */
-	public User menuChoice(int choice, AuctionHouse ah, InputOutputMethods io) {
+	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io @param io
+		//the InputOutputMethods class
 		User loggedIn = null;
 
 		if (choice == 1) {
@@ -63,7 +63,7 @@ public class MainMenu {
 		} else if (choice == 4) {
 			ah.activeBids();
 		} else if (choice == 5) {
-			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
+			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 			;

@@ -25,22 +25,21 @@ public class Puppies_Run_Me {
 		// Variable Declaration
 		// $db opens database connection and loads and
 		User loggedIn = null;
-		InputOutputMethods io = new InputOutputMethods();
+		//InputOutputMethods io = new InputOutputMethods();
 		MainMenu mm = new MainMenu();
 		ArrayList<Bids> bid = new ArrayList<Bids>();
 		ArrayList<Puppies> pupList = new ArrayList<Puppies>();
 		ArrayList<User> users = new ArrayList<User>();
-
-		io.loadData(pupList, users, bid);// load in saved data
-
+		//io.loadData(pupList, users, bid);// load in saved data
 		AuctionHouse ah = new AuctionHouse(true, bid, pupList, users); // set open to true
-
+		InputOutputMethods.DbRead(ah);//load in db info
+		
 		int choice = 0;
 		while (choice >= 0) {
 			if (loggedIn == null) {
 				choice = mm.menu();// moved menu to main menu so I can overwrite it for each menu
 				// moved the choices to the main menu to be overwritten by other menus
-				loggedIn = mm.menuChoice(choice, ah, io);// in main menu, if no one is signed in null is returned
+				loggedIn = mm.menuChoice(choice, ah);// in main menu, if no one is signed in null is returned
 			} else {
 				// set up a new Menu
 				MainMenu cm;
@@ -56,7 +55,7 @@ public class Puppies_Run_Me {
 				// get the user choice
 				choice = cm.menu();
 				// do the user choice
-				loggedIn = cm.menuChoice(choice, ah, io);
+				loggedIn = cm.menuChoice(choice, ah);//removed io
 
 			}
 			ah.checkTime(); // this checks if the bids are over

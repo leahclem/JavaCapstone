@@ -66,7 +66,7 @@ public class SQLMethods {
 				con.close();
 				con = null;
 				// stmt.close();
-				System.out.println("The connectionwas successfully closed");
+				System.out.println("The connection was successfully closed");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

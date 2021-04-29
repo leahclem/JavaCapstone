@@ -43,7 +43,7 @@ public class AdminMenu extends MainMenu {
 		return value;
 	}
 
-	public User menuChoice(int choice, AuctionHouse ah, InputOutputMethods io) {
+	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io
 		User loggedIn = this.curUser;
 
 		if (choice == 1) {
@@ -66,7 +66,7 @@ public class AdminMenu extends MainMenu {
 		} else if (choice == 9) {
 			checkAuctionHist(ah);
 		} else if (choice == 10) {
-			io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
+			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			System.exit(0);
 		} else {

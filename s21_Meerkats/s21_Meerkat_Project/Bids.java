@@ -23,7 +23,7 @@ public class Bids {
 
 	}
 
-	public Bids(Puppies pup, LocalDateTime end, LocalDateTime start, double currentBid, double maxBid, double increment,
+	public Bids(Puppies pup, LocalDateTime end, LocalDateTime start, double currentBid, double maxBid,
 			User winner, boolean active, boolean paidFor)// will be to bring in bids already made before
 	{
 		this.pup = pup;
@@ -31,7 +31,11 @@ public class Bids {
 		this.startBy = start;
 		this.maxBid = maxBid;
 		this.currentBid = currentBid;
-		this.increment = increment;
+		if (pup.getPrice() < 1000) {
+			increment = 10;
+		} else {
+			increment = 50;
+		}
 		this.winner = winner;
 		this.active = active;
 		this.paidFor = paidFor;
