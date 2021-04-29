@@ -2,21 +2,31 @@ package s21_Meerkat_Project;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+
+/**
+ * The MainMenu class stores methods used for the MainMenu
+ */
 
 public class MainMenu {
 
 	private Scanner scan = new Scanner(System.in);
 
+	/**
+	 * menu method prints the main menu to console and queries the user for an int
+	 * selecting a menu option
+	 * 
+	 * @return an int from user which selects a menu option
+	 */
 	public int menu() {
 		int value = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven!");
 		System.out.println("1. Search puppies: ");
-		System.out.println("2. Sign in: ");//up_g update db for creating a customer
-		System.out.println("3. Load sample data: (for testing/grading purposes: dynamic dates)"); // Program autoloads sample data for testing purposes
+		System.out.println("2. Sign in: ");// up_g update db for creating a customer
+		System.out.println("3. Load sample data: (for testing/grading purposes: dynamic dates)"); // Program autoloads
+																									// sample data for
+																									// testing purposes
 		System.out.println("4. Display active bids: ");
 		System.out.println("5. Exit: ");
 		System.out.print("Choice: ");
@@ -29,6 +39,18 @@ public class MainMenu {
 		return value;
 	}
 
+	/**
+	 * menuChoice method takes an int for the menu choice, and uses AuctionHouse and
+	 * InputOutputMethods to process user response
+	 * 
+	 * @param choice
+	 *            the int returned from the menu method
+	 * @param ah
+	 *            the AuctionHouse class
+	 * @param io
+	 *            the InputOutputMethods class
+	 * @return User returns the user who is currently logged in
+	 */
 	public User menuChoice(int choice, AuctionHouse ah, InputOutputMethods io) {
 		User loggedIn = null;
 
@@ -52,6 +74,13 @@ public class MainMenu {
 		return loggedIn;
 	}
 
+	/**
+	 * printPups method prints the puppies sorted by price or breed, based on User
+	 * input 1 for breed and 2 for price
+	 * 
+	 * @param pupList
+	 *            uses the ArrayList pupList to list puppies
+	 */
 	public void printPups(ArrayList<Puppies> pupList) {
 		Scanner scan = new Scanner(System.in);
 		int selection = 0;
@@ -129,6 +158,14 @@ public class MainMenu {
 
 	}
 
+	/**
+	 * logInMenu asks user to provide either int 1 or 2 to 1: sign in, points to
+	 * returningUser method 2: create a new customer account, points to createCust
+	 * method
+	 * 
+	 * @param users
+	 * @return a User based on log in credentials
+	 */
 	public User loginInMenu(ArrayList<User> users) {
 		// Variable Declaration
 		Scanner scan = new Scanner(System.in);
@@ -157,6 +194,13 @@ public class MainMenu {
 
 	}
 
+	/**
+	 * returningUser allows an existent Customer to log in using their Username and
+	 * Password
+	 * 
+	 * @param users
+	 * @return User object
+	 */
 	public User returningUser(ArrayList<User> users) {
 		// Variable Declaration
 		String userName;
@@ -189,6 +233,13 @@ public class MainMenu {
 		return new User();// never runs
 	}
 
+	/**
+	 * createCust method allows the user to create a new customer profile asks for
+	 * username, password, and PayPal email address
+	 * 
+	 * @param users
+	 * @return User object
+	 */
 	public User createCust(ArrayList<User> users) {
 		// Variable Declaration
 		Scanner scan = new Scanner(System.in);
@@ -199,31 +250,33 @@ public class MainMenu {
 		System.out.println("Enter your username:");
 		username = scan.nextLine();
 		checkValid(username);
-		//loop to check for duplicate username and also validate new entry for the word "null" or pipes
-		for (int i =0; i< users.size(); i++) {
+		// loop to check for duplicate username and also validate new entry for the word
+		// "null" or pipes
+		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getUserName().equals(username)) {
 				System.out.println("That username is already taken, try a different one. ");
 				username = scan.nextLine();
 				checkValid(username);
 			}
 		}
-		
+
 		System.out.println("Enter your password:");
 		password = scan.nextLine();
-		checkValid(password); 
-		
+		checkValid(password);
+
 		System.out.println("Enter your address so we can ship your purchased products:");
 		address = scan.nextLine();
 		checkValid(address);
-		
+
 		System.out.println("What is your Paypal email address? ");
 		String payPal = scan.nextLine();
 		checkValid(payPal);
 
-		try {//Update the db, to add a new bid
+		try {// Update the db, to add a new bid
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addCust(\'"+username+"\',\'"+ password + "\', \'"+payPal+"\', \'"+address+"\')");
-			users.add(new Customer(username, password, address, payPal));		
+			SQLMethods.stmt.executeUpdate(
+					"CALL addCust(\'" + username + "\',\'" + password + "\', \'" + payPal + "\', \'" + address + "\')");
+			users.add(new Customer(username, password, address, payPal));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -233,9 +286,15 @@ public class MainMenu {
 		return returningUser(users);
 	}
 
+	/**
+	 * sampleData method loads some sample data for testing purposes method is used
+	 * to create Puppies object and Bids objects with dynamic ending times
+	 * 
+	 * @param ah
+	 */
 	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
-		//Check to see if these dogs are already in the database
-		if(pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah) 
+		// Check to see if these dogs are already in the database
+		if (pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah)
 				|| pupExists("Goldy", ah) || pupExists("Hank", ah) || pupExists("Camilla", ah)) {
 			System.out.println("Cannot load sample data one or more dogs already in database.");
 		} else {
@@ -261,11 +320,21 @@ public class MainMenu {
 			ah.addBid(new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0)));
 			ah.addBid(new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0)));
 			ah.addBid(new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0)));
-		}//end of else
+		} // end of else
 	}
 
-	// this method is be used only by sample data
-	private Puppies findPup(String name, AuctionHouse ah) {
+	/**
+	 * findPup method is used by the sampleData method as a safeguard to ensure that
+	 * multiple Puppies objects with the same name are not created
+	 * 
+	 * @param name
+	 *            String: Puppy name
+	 * @param ah
+	 *            ArrayList: AuctionHouse
+	 * @return Puppies object or null
+	 */
+
+	private Puppies findPup(String name, AuctionHouse ah) { // this method is be used only by sample data method above
 		for (Puppies p : ah.getAllPups()) {
 			if (p.getName().equalsIgnoreCase(name)) {
 				return p;
@@ -275,7 +344,17 @@ public class MainMenu {
 		System.out.println("Error in findPup.");
 		return null;
 	}
-	
+
+	/**
+	 * pupExists method is used by the sampleData method as a safeguard to ensure
+	 * that multiple Puppies objects with the same name are not created
+	 * 
+	 * @param name
+	 *            String: Puppy name
+	 * @param ah
+	 *            ArrayList: AuctionHouse
+	 * @return boolean
+	 */
 	private boolean pupExists(String name, AuctionHouse ah) {
 		for (Puppies p : ah.getAllPups()) {
 			if (p.getName().equalsIgnoreCase(name)) {
@@ -284,6 +363,16 @@ public class MainMenu {
 		} // end of for loop
 		return false;
 	}
+
+	/**
+	 * addPup method is to allow the Admin(user) to create a new Puppies object,
+	 * queries the Admin for String name, String breed, String sex, boolean
+	 * pedigree, boolean hypo, double price
+	 * 
+	 * @param ah
+	 *            AuctionHouse
+	 * @return Puppies object
+	 */
 
 	public Puppies addPup(AuctionHouse ah) {
 		String name = "";
@@ -389,21 +478,29 @@ public class MainMenu {
 				scan.nextLine();
 			}
 		}
-		try {//Update the db, to add a new puppy
+		try {// Update the db, to add a new puppy
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ name + "\', \'"+breed+"\', \'"+sex+"\', "+ped+", " + price+", " +hypo+ ")");
+			SQLMethods.stmt.executeUpdate("CALL addPup(\'" + name + "\', \'" + breed + "\', \'" + sex + "\', " + ped
+					+ ", " + price + ", " + hypo + ")");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Update failed.");
 		}
-		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo);//note removed available
+		Puppies pup = new Puppies(name, breed, sex, ped, price, hypo);// note removed available
 		return pup;
 	}
-	
+
+	/**
+	 * checkValid method is a method to analyze a String to ensure it does not
+	 * contain either '|' or 'null' used in both addPup and createCust methods
+	 * 
+	 * @param input
+	 *            String
+	 */
 	public void checkValid(String input) {
 		Scanner scan = new Scanner(System.in);
-		
+
 		while (input.contains("|") || input.equals("null")) {
 			System.out.println("Your input cannot include the word 'null' or the pipe symbol '|'");
 			input = scan.nextLine();
