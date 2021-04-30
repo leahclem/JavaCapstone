@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Puppies_Run_Me {
 
 	/**
-	 * Main method of Meerkats project, takes in *.txt file with saved data,
+	 * Main method of Meerkats project
 	 * generates menu based on User credentials (not logged in, Admin or Customer),
 	 *
 	 */

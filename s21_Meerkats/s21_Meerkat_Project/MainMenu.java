@@ -16,7 +16,7 @@ public class MainMenu {
 	 * menu method prints the main menu to console and queries the user for an int
 	 * selecting a menu option
 	 * 
-	 * @return an int from user which selects a menu option
+	 * @return value
 	 */
 	public int menu() {
 		int value = 0;
@@ -44,11 +44,8 @@ public class MainMenu {
 	 * InputOutputMethods to process user response
 	 * 
 	 * @param choice
-	 *            the int returned from the menu method
 	 * @param ah
-	 *            the AuctionHouse class
-	 * 
-	 * @return User returns the user who is currently logged in
+	 * @return User 
 	 */
 	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io @param io
 		//the InputOutputMethods class
@@ -79,7 +76,6 @@ public class MainMenu {
 	 * input 1 for breed and 2 for price
 	 * 
 	 * @param pupList
-	 *            uses the ArrayList pupList to list puppies
 	 */
 	public void printPups(ArrayList<Puppies> pupList) {
 		Scanner scan = new Scanner(System.in);
@@ -164,7 +160,7 @@ public class MainMenu {
 	 * method
 	 * 
 	 * @param users
-	 * @return a User based on log in credentials
+	 * @return User
 	 */
 	public User loginInMenu(ArrayList<User> users) {
 		// Variable Declaration
@@ -199,7 +195,7 @@ public class MainMenu {
 	 * Password
 	 * 
 	 * @param users
-	 * @return User object
+	 * @return User
 	 */
 	public User returningUser(ArrayList<User> users) {
 		// Variable Declaration
@@ -238,7 +234,7 @@ public class MainMenu {
 	 * username, password, and PayPal email address
 	 * 
 	 * @param users
-	 * @return User object
+	 * @return User
 	 */
 	public User createCust(ArrayList<User> users) {
 		// Variable Declaration
@@ -328,10 +324,8 @@ public class MainMenu {
 	 * multiple Puppies objects with the same name are not created
 	 * 
 	 * @param name
-	 *            String: Puppy name
 	 * @param ah
-	 *            ArrayList: AuctionHouse
-	 * @return Puppies object or null
+	 * @return Puppies 
 	 */
 
 	private Puppies findPup(String name, AuctionHouse ah) { // this method is be used only by sample data method above
@@ -350,9 +344,7 @@ public class MainMenu {
 	 * that multiple Puppies objects with the same name are not created
 	 * 
 	 * @param name
-	 *            String: Puppy name
 	 * @param ah
-	 *            ArrayList: AuctionHouse
 	 * @return boolean
 	 */
 	private boolean pupExists(String name, AuctionHouse ah) {
@@ -368,10 +360,9 @@ public class MainMenu {
 	 * addPup method is to allow the Admin(user) to create a new Puppies object,
 	 * queries the Admin for String name, String breed, String sex, boolean
 	 * pedigree, boolean hypo, double price
-	 * 
+	 *
 	 * @param ah
-	 *            AuctionHouse
-	 * @return Puppies object
+	 * @return Puppies 
 	 */
 
 	public Puppies addPup(AuctionHouse ah) {
@@ -498,7 +489,6 @@ public class MainMenu {
 	 * contain either '|' or 'null' used in both addPup and createCust methods
 	 * 
 	 * @param input
-	 *            String
 	 */
 	public void checkValid(String input) {
 		Scanner scan = new Scanner(System.in);

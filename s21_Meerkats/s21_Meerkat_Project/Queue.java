@@ -45,9 +45,9 @@ public class Queue<E> {
 
 	// determine if queue is empty
 	/**
-	 * isEmpty method, used to determine if the queue is empty
+	 * isEmpty method, used to determine if the queue is empty, returns 'true' if empty, 'false' if not empty
 	 * 
-	 * @return
+	 * @return 
 	 */
 	public boolean isEmpty() {
 		return queueList.isEmpty();
@@ -64,7 +64,7 @@ public class Queue<E> {
 	/**
 	 * size method to return an int of the size of the queued items
 	 * 
-	 * @return int size
+	 * @return size
 	 */
 	public int size() {
 		return queueList.numInQueue();

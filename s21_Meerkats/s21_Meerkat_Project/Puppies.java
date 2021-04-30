@@ -50,7 +50,7 @@ public class Puppies {
 	 * A constructor using only the name String
 	 * 
 	 * @param name
-	 *            String
+	 *         
 	 */
 	public Puppies(String name) {
 		super();
@@ -61,17 +61,11 @@ public class Puppies {
 	 * Full constructor using name, breed, sex, pedigree, price, and hypo.
 	 * 
 	 * @param name
-	 *            String
 	 * @param breed
-	 *            String
 	 * @param sex
-	 *            String
 	 * @param pedigree
-	 *            boolean
 	 * @param price
-	 *            double
 	 * @param hypo
-	 *            boolean
 	 */
 	public Puppies(String name, String breed, String sex, boolean pedigree, double price, boolean hypo) {
 		super();
@@ -114,7 +108,7 @@ public class Puppies {
 	/**
 	 * getName method
 	 * 
-	 * @return String name
+	 * @return  name
 	 */
 	public String getName() {
 		return name;
@@ -124,7 +118,6 @@ public class Puppies {
 	 * setName method
 	 * 
 	 * @param name
-	 *            String
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -133,7 +126,7 @@ public class Puppies {
 	/**
 	 * getBreed method
 	 * 
-	 * @return breed String
+	 * @return breed
 	 */
 	public String getBreed() {
 		return breed;
@@ -143,7 +136,6 @@ public class Puppies {
 	 * setBreed method
 	 * 
 	 * @param breed
-	 *            String
 	 */
 	public void setBreed(String breed) {
 		this.breed = breed;
@@ -152,7 +144,7 @@ public class Puppies {
 	/**
 	 * getSex method
 	 * 
-	 * @return sex String
+	 * @return sex
 	 */
 	public String getSex() {
 		return sex;
@@ -162,7 +154,6 @@ public class Puppies {
 	 * setSex method
 	 * 
 	 * @param sex
-	 *            String
 	 */
 	public void setSex(String sex) {
 		this.sex = sex;
@@ -171,7 +162,7 @@ public class Puppies {
 	/**
 	 * isPedigree method
 	 * 
-	 * @return pedigree boolean
+	 * @return pedigree 
 	 */
 	public boolean isPedigree() {
 		return pedigree;
@@ -181,7 +172,6 @@ public class Puppies {
 	 * setPedigree method
 	 * 
 	 * @param pedigree
-	 *            boolean
 	 */
 	public void setPedigree(boolean pedigree) {
 		this.pedigree = pedigree;
@@ -190,7 +180,7 @@ public class Puppies {
 	/**
 	 * getPrice method
 	 * 
-	 * @return price double
+	 * @return price
 	 */
 	public double getPrice() {
 		return price;
@@ -200,7 +190,6 @@ public class Puppies {
 	 * setPrice method
 	 * 
 	 * @param price
-	 *            double
 	 */
 	public void setPrice(double price) {
 		this.price = price;
@@ -209,7 +198,7 @@ public class Puppies {
 	/**
 	 * isHypo method
 	 * 
-	 * @return hypo boolean
+	 * @return hypo
 	 */
 	public boolean isHypo() {
 		return hypo;
@@ -219,7 +208,6 @@ public class Puppies {
 	 * setHypo method
 	 * 
 	 * @param hypo
-	 *            boolean
 	 */
 	public void setHypo(boolean hypo) {
 		this.hypo = hypo;

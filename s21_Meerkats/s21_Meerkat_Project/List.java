@@ -6,12 +6,11 @@ import java.util.NoSuchElementException;
  * List class used to create list objects for use with Queue class
  *
  * @param <E>
- *            generic element
  */
 class ListNode<E> {
 	// package access members; List can access these directly
 	/**
-	 * E data field
+	 * data field
 	 */
 	E data; // data for this node
 
@@ -37,8 +36,8 @@ class ListNode<E> {
 	/**
 	 * Constructor for List class
 	 * 
-	 * @param object
-	 * @param node
+	 * @param data
+	 * @param nextNode
 	 */
 	ListNode(E object, ListNode<E> node) {
 		data = object;
@@ -48,7 +47,7 @@ class ListNode<E> {
 	/**
 	 * getData method
 	 * 
-	 * @return data (generic)
+	 * @return data 
 	 */
 	E getData() {
 		return data;
@@ -65,11 +64,11 @@ class ListNode<E> {
 }
 
 // class List definition
+
 /**
- * Class List contains: firstNode lastNode
+ * Class List contains: firstNode lastNode name
  *
  * @param <E>
- *            generic element
  */
 public class List<E> {
 	/**
@@ -95,8 +94,7 @@ public class List<E> {
 	/**
 	 * Constructor for List, using listName (String) as name
 	 * 
-	 * @param String
-	 *            listName
+	 * @param listName
 	 */
 	public List(String listName) {
 		name = listName;
@@ -107,7 +105,7 @@ public class List<E> {
 	 * insertAtFront method used to add an item to the front of the List
 	 * 
 	 * @param insertItem
-	 *            <E>
+	 *            
 	 */
 	public void insertAtFront(E insertItem) {
 		if (isEmpty()) { // firstNode and lastNode refer to same object
@@ -121,7 +119,7 @@ public class List<E> {
 	 * insertAtBack method used to add an item to the back of the List
 	 * 
 	 * @param insertItem
-	 *            <E>
+	 *           
 	 */
 	public void insertAtBack(E insertItem) {
 		if (isEmpty()) { // firstNode and lastNode refer to same object
@@ -134,7 +132,7 @@ public class List<E> {
 	/**
 	 * removeFromFront method used to remove an item from the front of the List
 	 * 
-	 * @return removedItem <E>
+	 * @return removedItem 
 	 * @throws NoSuchElementException
 	 */
 	public E removeFromFront() throws NoSuchElementException {
@@ -157,7 +155,7 @@ public class List<E> {
 	/**
 	 * removeFromBack method used to remove an item from the back of the List
 	 * 
-	 * @return removedItem <E>
+	 * @return removedItem
 	 * @throws NoSuchElementException
 	 */
 	public E removeFromBack() throws NoSuchElementException {
@@ -188,7 +186,7 @@ public class List<E> {
 	/**
 	 * isEmpty method returns boolean 'true' if List is empty
 	 * 
-	 * @return boolean (true if empty)
+	 * @return boolean 
 	 */
 	public boolean isEmpty() {
 		return firstNode == null;
@@ -218,7 +216,7 @@ public class List<E> {
 	/**
 	 * numInQueue method returns total elements in List (see size in Queue class)
 	 * 
-	 * @return int num (total items in queue)
+	 * @return num 
 	 */
 	public int numInQueue() {
 		int num = 0;

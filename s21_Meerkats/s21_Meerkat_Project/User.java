@@ -45,11 +45,8 @@ public class User {
 	 * Full constructor containing userName, password, type
 	 * 
 	 * @param userName
-	 *            String
 	 * @param password
-	 *            String
 	 * @param type
-	 *            char
 	 */
 	User(String userName, String password, char type) {
 		this.userName = userName;
@@ -73,7 +70,7 @@ public class User {
 	/**
 	 * getUserType method
 	 * 
-	 * @return userType char
+	 * @return userType
 	 */
 	public char getUserType() {
 		return this.userType;
@@ -83,7 +80,6 @@ public class User {
 	 * setUserType
 	 * 
 	 * @param userType
-	 *            char
 	 */
 	public void setUserType(char userType) {
 		this.userType = userType;
@@ -92,7 +88,7 @@ public class User {
 	/**
 	 * getUserName method
 	 * 
-	 * @return userName String
+	 * @return userName
 	 */
 	public String getUserName() {
 		return userName;
@@ -102,7 +98,6 @@ public class User {
 	 * setUserName method
 	 * 
 	 * @param userName
-	 *            String
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -111,7 +106,7 @@ public class User {
 	/**
 	 * getPassword
 	 * 
-	 * @return password String
+	 * @return password
 	 */
 	public String getPassword() {
 		return this.password;
@@ -121,7 +116,6 @@ public class User {
 	 * setPassword
 	 * 
 	 * @param password
-	 *            String
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -130,7 +124,7 @@ public class User {
 	/**
 	 * getID method
 	 * 
-	 * @return ID String
+	 * @return ID
 	 */
 	public String getId() {
 		return this.id;
@@ -140,7 +134,6 @@ public class User {
 	 * setID method
 	 * 
 	 * @param id
-	 *            String
 	 */
 	public void setId(String id) {
 		this.id = id;
