@@ -35,7 +35,7 @@ public class AdminMenu extends MainMenu {
 
 	/**
 	 * menu method - prints the menu options to the console and queries user for integer value to indicate choice.
-	 * @return value int choice 
+	 * @return value int user's selected menu choice
 	 */
 	public int menu() {
 		int value = 0;
@@ -60,7 +60,13 @@ public class AdminMenu extends MainMenu {
 		}
 		return value;
 	}
-
+	/**
+	 * menuChoice method - takes current user's menu choice to perform specified menu action.
+	 * 
+	 * @param choice int - the current user's selected menu choice
+	 * @param ah AuctionHouse object 
+	 * @return loggedIn User object - keeps track of the current user's login status until they select logout option
+	 */
 	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io
 		User loggedIn = this.curUser;
 
@@ -94,6 +100,12 @@ public class AdminMenu extends MainMenu {
 		return loggedIn;
 	}
 
+	/**
+	 * createBid method - takes in AuctionHouse bid statuses and creates a new bid for a puppy object.
+	 * Checks current bid status of selected puppy and if the puppy is not up for auction it creates a bid. 
+	 * Then stores that bid into AuctionHouse for bid tracking.
+	 * @param ah AuctionHouse object 
+	 */
 	public void createBid(AuctionHouse ah) {
 		Scanner scan = new Scanner(System.in);
 		// query admin for which puppy to create a bid for, using name as the primary
@@ -137,7 +149,12 @@ public class AdminMenu extends MainMenu {
 		}
 
 	}
-
+	/**
+	 * checkAuctionHist method - option to search for the stored auction history of all puppies or a specified puppy by name.
+	 * Checks AuctionHouse for all of the past, current, and winning bids on the puppy.
+	 * Also checks auction's status of open or closed. Prints information to the console.
+	 * @param ah AuctionHouse object 
+	 */
 	public void checkAuctionHist(AuctionHouse ah) {
 		Scanner scan = new Scanner(System.in);
 		// option 9 view bidHistory
@@ -196,14 +213,22 @@ public class AdminMenu extends MainMenu {
 
 		}
 	}
-
+	/** 
+	 * listPups method - prints all puppies to the console. 
+	 * @param ah AuctionHouse object 
+	 */
 	public void listPups(AuctionHouse ah) {
 		for (int i = 0; i < ah.getAllPups().size(); i++) {
 			System.out.println(ah.getAllPups().get(i).toString());
 		}
 
 	}
-
+	/**
+	 * loadbacklog method - stores bids made while auction site is closed between 9pm to 5pm.
+	 * Loads those bids onto the current auction once auction site is open and arranges all current bids.
+	 * Displays the backlog bid updates. Updates the database.
+	 * @param ah AuctionHouse object
+	 */
 	public void loadbacklog(AuctionHouse ah) {// up_g add dequeue backlogg db update
 		// load backlog data, and add to bidhistory
 		// Variable Declaration
@@ -268,7 +293,11 @@ public class AdminMenu extends MainMenu {
 			System.out.println("Error, try loading the backlog between 9-5pm, when we are open.");
 		}
 	}// end of loadbacklog
-
+	
+	/**
+	 * validDate method - runs Admin-entered date and time through multiple verification checks to return a valid date.
+	 * @return date LocalDateTime immutable object
+	 */
 	public LocalDateTime validDate() {
 		Scanner scan = new Scanner(System.in);
 
@@ -372,7 +401,12 @@ public class AdminMenu extends MainMenu {
 
 		return date;
 	}
-
+	/**
+	 * getNumberOfDays method - used to determine the number of days in a month.
+	 * @param month int value for month
+	 * @param year int value for year
+	 * @return days int number of days
+	 */
 	public int getNumberOfDays(int month, int year) {
 		// Local variable for the number of days,
 		// initialized to 31.
@@ -393,7 +427,11 @@ public class AdminMenu extends MainMenu {
 		// Return the number of days.
 		return days;
 	}
-
+	/**
+	 * createAdmin method - an Admin can only be created by a current logged-in Admin.
+	 * Method stores user input as identification in the User ArrayList and Admin database.
+	 * @param users ArrayList of User object
+	 */
 	public void createAdmin(ArrayList<User> users) {
 		MainMenu mm = new MainMenu();
 		// Ask for name and sign in information
@@ -415,7 +453,7 @@ public class AdminMenu extends MainMenu {
 		userName = scan.nextLine();
 		mm.checkValid(userName);
 		// loop to check for duplicate username and also validate new entry for the word
-		// "null" or pipes
+		// "null" or '|'
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getUserName().equals(userName)) {
 				System.out.println("That username is already taken, try a different one. ");
