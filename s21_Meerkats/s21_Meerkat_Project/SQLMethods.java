@@ -36,6 +36,7 @@ public class SQLMethods {
 		}
 		try {
 			connection = DriverManager.getConnection(url, "CSC202", "CSC202"); // url, uid, password
+			stmt = connection.createStatement();
 			System.out.println("Connection successful!");
 
 		} catch (SQLException e) {
