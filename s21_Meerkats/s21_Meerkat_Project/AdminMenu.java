@@ -8,17 +8,35 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * The AdminMenu class extends the MainMenu class and stores menu options for Admin user.
+ * When user logs in as an Admin they gain access to the Admin menu options.
+ */
 public class AdminMenu extends MainMenu {
-
+	// one private field 
+	
+	/**
+	 * User object - holds the user currently logged in
+	 */
 	private User curUser;
-
+	/**
+	 * Empty AdminMenu constructor
+	 */
 	AdminMenu() {
 	}
 
+	/**
+	 * Full Constructor - used to track actions of the current user
+	 * @param u User object
+	 */
 	AdminMenu(User u) {
 		this.curUser = u;
 	}
 
+	/**
+	 * menu method - prints the menu options to the console and queries user for integer value to indicate choice.
+	 * @return value int choice 
+	 */
 	public int menu() {
 		int value = 0;
 		Scanner scan = new Scanner(System.in);
