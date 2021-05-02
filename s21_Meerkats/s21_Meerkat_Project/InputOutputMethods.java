@@ -14,15 +14,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * The purpose of this static class is to upload all data from the Database on
+ * SQL to the array lists on Java. To set up an initial sync up with SQL.
+ */
 public class InputOutputMethods {
 
 	// public InputOutputMethods() {
 	//
 	// }
-
+	/**
+	 * This is the only program that is static in which is called and overheads the
+	 * process of loading the data from SQL.
+	 * 
+	 * @param ah
+	 *            - Auction House which stores all needed data throughout the
+	 *            program
+	 */
 	public static void DbRead(AuctionHouse ah) {
 		// Variable Declaration
-		ResultSet us = null, as = null, cs = null, ps = null, bs = null;
+		ResultSet us = null, as = null, cs = null, ps = null, bs = null, bas = null, bis = null;
 		Queue<User> users = new Queue<>();
 		ArrayList<Admin> admins = new ArrayList<>();
 		ArrayList<Customer> custs = new ArrayList<>();
@@ -31,9 +42,11 @@ public class InputOutputMethods {
 		String ct = "SELECT * FROM customer";
 		String pt = "SELECT * FROM puppies";
 		String bt = "SELECT * FROM bids";
+		String bat = "SELECT * FROM backlogg";
+		String bit = "SELECT * FROM bidhistory";
 		User curuser;
 		char type;
-		
+
 		// check and potentially create connection to the database
 		try {
 			SQLMethods.checkConnect();
@@ -43,6 +56,8 @@ public class InputOutputMethods {
 			cs = SQLMethods.stmt.executeQuery(ct);
 			ps = SQLMethods.stmt.executeQuery(pt);
 			bs = SQLMethods.stmt.executeQuery(bt);
+			bas = SQLMethods.stmt.executeQuery(bat);
+			bis = SQLMethods.stmt.executeQuery(bit);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("DB Read failure.");
@@ -53,36 +68,111 @@ public class InputOutputMethods {
 		// no passwords on admins and custs need to merge with users
 		admins = enAs(as);
 		custs = enCs(cs);
-		//merge users and add to arraylists
-		while(!users.isEmpty()) {
-			curuser = users.dequeue();//get current user
-			type = curuser.getUserType();//get their type
-			
-			if(type == 'A') {
-				//find the admin
-				for(int i = 0; i < admins.size() ; i++) {
-					if(admins.get(i).getUserName().equals(curuser.getUserName())) {
+		// merge users and add to arraylists
+		while (!users.isEmpty()) {
+			curuser = users.dequeue();// get current user
+			type = curuser.getUserType();// get their type
+
+			if (type == 'A') {
+				// find the admin
+				for (int i = 0; i < admins.size(); i++) {
+					if (admins.get(i).getUserName().equals(curuser.getUserName())) {
 						ah.getAllUsers().add(new Admin(curuser.getUserName(), curuser.getPassword(),
 								admins.get(i).getFname(), admins.get(i).getLname()));
-						break;//exit the for loop for the user has been found and assigned
+						break;// exit the for loop for the user has been found and assigned
 					}
 				}
-			} else {//type is 'C'
-				for(int i = 0; i < custs.size() ; i++) {
-					if(custs.get(i).getUserName().equals(curuser.getUserName())) {
+			} else {// type is 'C'
+				for (int i = 0; i < custs.size(); i++) {
+					if (custs.get(i).getUserName().equals(curuser.getUserName())) {
 						ah.getAllUsers().add(new Admin(curuser.getUserName(), curuser.getPassword(),
 								custs.get(i).getAddress(), custs.get(i).getPayPal()));
-						break;//exit the for loop for the user has been found and assigned
+						break;// exit the for loop for the user has been found and assigned
 					}
-				}//end of for loop
-			}//end of else statement
-			
-		}//end of user merging into auctionhouse loop
-		enPs(ps, ah);//add pups to the auctions house
-		enBs(bs, ah);//add bids to auction house
-		return;
-	}//end of method
+				} // end of for loop
+			} // end of else statement
 
+		} // end of user merging into auctionhouse loop
+		enPs(ps, ah);// add pups to the auctions house
+		enBs(bs, ah);// add bids to auction house
+		enBas(ah, bas);// add backlogg
+		enBis(ah, bis);// adds bidhistory
+		return;
+	}// end of method
+
+	/**
+	 * This function processes and loads in the backlogg data into the appropriate
+	 * bids.
+	 * 
+	 * @param ah
+	 *            - Auction House which stores all needed
+	 * @param bas
+	 *            - Contains the results of queries for the backlogg table
+	 */
+	private static void enBas(AuctionHouse ah, ResultSet bas) {
+		// Variable Declaration
+		Puppies curp;
+		Bids curb = null;
+		String pname, data;
+
+		try {
+			while (bas.next()) {// gather all user data while there is another user
+				// locate the bid
+				pname = bas.getString(1);
+				data = bas.getString(2);
+				// loop through all bids to find the one
+				for (int i = 0; i < ah.getAllBids().size(); i++) {
+					if (ah.getAllBids().get(i).getPup().getName().equalsIgnoreCase(pname)) {
+						curb = ah.getAllBids().get(i);
+						break;
+					}
+				} // end of for loop
+				curb.getBacklogg().enqueue(data);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}// end of method
+
+	/**
+	 * This function processes and loads in the bid history data into the appropriate
+	 * bids.
+	 * @param ah - Auction House which stores all needed
+	 * @param bis- Contains the results of queries for the bidhistory table
+	 */
+	private static void enBis(AuctionHouse ah, ResultSet bis) {
+		// Variable Declaration
+		Puppies curp;
+		Bids curb = null;
+		String pname, data;
+
+		try {
+			while (bis.next()) {// gather all user data while there is another user
+				// locate the bid
+				pname = bis.getString(1);
+				data = bis.getString(2);
+				// loop through all bids to find the one
+				for (int i = 0; i < ah.getAllBids().size(); i++) {
+					if (ah.getAllBids().get(i).getPup().getName().equalsIgnoreCase(pname)) {
+						curb = ah.getAllBids().get(i);
+						break;
+					}
+				} // end of for loop
+				curb.getBidHistory().enqueue(data);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}// end of method
+	/**
+	 * This function processes and loads in the Admin data without passwords.
+	 * 
+	 * @param as - Contains the results of queries for the Admin table
+	 * @return - A set of incomplete Admin data to be merged
+	 * with other data
+	 */
 	// loads db admins, with empty password
 	private static ArrayList<Admin> enAs(ResultSet as) {
 		// Variable Declaration
@@ -108,7 +198,11 @@ public class InputOutputMethods {
 		return aq;
 
 	}
-
+	/**
+	 * This function processes and loads in the user data with passwords.
+	 * @param us - Contains the results of queries for the users table
+	 * @return - A set of incomplete users data to be merged
+	 */
 	private static Queue<User> enUs(ResultSet us) {// enqueues all user data from result set
 		// Variable Declaration
 		Queue<User> uq = new Queue<>();
@@ -132,7 +226,11 @@ public class InputOutputMethods {
 
 		return uq;
 	}
-
+	/**
+	 * This function processes and loads in the customer data without passwords.
+	 * @param cs - Contains the results of queries for the customer table.
+	 * @return - A set of incomplete customers data to be merged
+	 */
 	private static ArrayList<Customer> enCs(ResultSet cs) {
 		// Variable Declaration
 		ArrayList<Customer> cq = new ArrayList<>();
@@ -157,7 +255,11 @@ public class InputOutputMethods {
 		return cq;
 
 	}
-
+	/**
+	 * This function processes and loads in Puppy data.
+	 * @param ps - Contains the results of queries for the puppies table
+	 * @param ah - Auction House which stores all needed data.
+	 */
 	private static void enPs(ResultSet ps, AuctionHouse ah) {
 		// Variable Declaration
 		String name, breed, gender;
@@ -191,7 +293,11 @@ public class InputOutputMethods {
 		}
 		return;
 	}
-	
+	/**
+	 * This function processes and loads in Auction data.
+	 * @param bs - Contains the results of queries for the bids table
+	 * @param ah - - Auction House which stores all needed data.
+	 */
 	private static void enBs(ResultSet bs, AuctionHouse ah) {
 		// Variable Declaration
 		String pname, uname;
@@ -213,30 +319,30 @@ public class InputOutputMethods {
 				pname = bs.getString(6);
 				a = bs.getInt(7);
 				p = bs.getInt(8);
-				if(a == 0) 
+				if (a == 0)
 					active = false;
 				else
 					active = true;
-				if(p == 0)
+				if (p == 0)
 					paidFor = false;
-				else 
+				else
 					paidFor = true;
-				//find the winner and puppy
-				if(uname.equals("null")) {//check if there is no winner
+				// find the winner and puppy
+				if (uname.equals("null")) {// check if there is no winner
 					winner = new User("null", "apple", 'C');
 				} else {
-					for(int i= 0; i < ah.getAllUsers().size() ; i++) {//find the winner
-						if(ah.getAllUsers().get(i).getUserName().equals(uname)) {
+					for (int i = 0; i < ah.getAllUsers().size(); i++) {// find the winner
+						if (ah.getAllUsers().get(i).getUserName().equals(uname)) {
 							winner = ah.getAllUsers().get(i);
 						}
-					}//end of if statement
-				}//end of else statement
-				//find the puppy
-				for(int i= 0; i < ah.getAllPups().size() ; i++) {//find the winner
-					if(ah.getAllPups().get(i).getName().equals(pname)) {
+					} // end of if statement
+				} // end of else statement
+					// find the puppy
+				for (int i = 0; i < ah.getAllPups().size(); i++) {// find the winner
+					if (ah.getAllPups().get(i).getName().equals(pname)) {
 						pup = ah.getAllPups().get(i);
 					}
-				}//end of if statement
+				} // end of if statement
 				u = new Bids(pup, end, start, currentBid, maxBid, winner, active, paidFor);
 				ah.getAllBids().add(u);
 			}
@@ -248,7 +354,13 @@ public class InputOutputMethods {
 		return;
 
 	}
-	
+	/**
+	 * This function take in a string in a given format 
+	 * and return its LocalDateTime equivalent
+	 * @param date - the string to be turned into a date
+	 * @return - the LocalDateTime variable derived from the
+	 * date param.
+	 */
 	private static LocalDateTime strToDate(String date) {
 		// "202103121443" Year month day hour minutes and no second/millisecs
 		int year, month, day, hour, min;
@@ -265,7 +377,7 @@ public class InputOutputMethods {
 
 		return rtDate;
 	}
-	
+
 	// I commented out all of the old methods for we may no longer need them,
 	// however so Mrs.Wolff can see them I'm leaving them commented out
 
