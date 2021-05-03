@@ -6,20 +6,38 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ * The CustomerMenu class extends the MainMenu class. It provides a User logged in as Customer to access Customer menu options.
+ * CustomerMenu has methods to 1. view puppies, 2. place a bid, 3. Display active auctions, 4. Display their winning auctions, and
+ * 5. Pay for a puppy they won.
+ *
+ */
 public class CustomerMenu extends MainMenu {
-
+	/**
+	 * User object - used to store the current logged in User
+	 */
 	private User curUser;
+	/**
+	 * Customer object - used to store the current customer
+	 */
 	private Customer curCust;
-
+	/**
+	 * Empty CustomerMenu constructor
+	 */
 	CustomerMenu() {
 	}
-
+	/**
+	 * Full CustomerMenu constructor - contains the current logged-in user and customer.
+	 * @param u User object
+	 */
 	CustomerMenu(User u) {
 		this.curUser = u;
 		this.curCust = (Customer) u;
 	}
-
+	/**
+	 * menu method - prints Customer menu options to the console and stores the user's menu selection.
+	 * @return value int user's option selection
+	 */
 	public int menu() {
 		int value = 0;
 		Scanner scan = new Scanner(System.in);
@@ -41,6 +59,12 @@ public class CustomerMenu extends MainMenu {
 		return value;
 	}
 
+	/**
+	 * menuChoice method - takes the user's int menu selection and calls the corresponding method. 
+	 * @param choice int user input 
+	 * @param ah AuctionHouse object
+	 * @return loggedIn status of current user
+	 */
 	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io
 		User loggedIn = this.curUser;
 		// apple
@@ -68,7 +92,12 @@ public class CustomerMenu extends MainMenu {
 
 		return loggedIn;
 	}
-
+	/**
+	 * newBid method - used for customer to place a new bid in an auction using the puppy's name. 
+	 * This method updates the bids database.
+	 * @param curBid ArrayList of Bids 
+	 * @param customer User object
+	 */
 	public static void newBid(ArrayList<Bids> curBid, User customer) {
 		boolean validNum = false;
 		double maxBid = 0;
@@ -128,7 +157,10 @@ public class CustomerMenu extends MainMenu {
 		else
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
-
+	/**
+	 * checkWinning method - check's the customer's win status on their active auctions and prints the results to the console. 
+	 * @param ah AuctionHouse object
+	 */
 	public void checkWinning(AuctionHouse ah) {
 		// Variable Declaration
 		boolean winCheck = false;// stays false if the user is not winning in any auctions
@@ -150,8 +182,13 @@ public class CustomerMenu extends MainMenu {
 			System.out.println("There are no auctions, have an admin set one up.");
 		}
 	}// end of method checkWinning
-
-	public void payment(AuctionHouse ah, User curUser) {// FIXME
+	/**
+	 * payment method - prints auctions the customer has won, they enter the puppy they wish to pay for and the confirm payment.
+	 * This method updates the bids database.
+	 * @param ah AuctionHouse object
+	 * @param curUser User object
+	 */
+	public void payment(AuctionHouse ah, User curUser) {
 		Scanner scan = new Scanner(System.in);
 		Bids buyPup = null;
 		String pup;

@@ -7,11 +7,11 @@ package s21_Meerkat_Project;
 public class Admin extends User {
 	// two private fields
 	/**
-	 * used to hold the Admin User's first name
+	 * String - used to hold the Admin User's first name
 	 */
 	private String fname;
 	/**
-	 * used to hold the Admin User's last name
+	 * String - used to hold the Admin User's last name
 	 */
 	private String lname;
 	/**
