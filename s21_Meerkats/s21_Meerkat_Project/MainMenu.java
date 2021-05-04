@@ -289,6 +289,9 @@ public class MainMenu {
 	 * @param ah
 	 */
 	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
+		//Variable Declaration
+		int ped, hyp;
+		
 		// Check to see if these dogs are already in the database
 		if (pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah)
 				|| pupExists("Goldy", ah) || pupExists("Hank", ah) || pupExists("Camilla", ah)) {
@@ -316,6 +319,52 @@ public class MainMenu {
 			ah.addBid(new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0)));
 			ah.addBid(new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0)));
 			ah.addBid(new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0)));
+			try {
+				SQLMethods.checkConnect();
+				if(pupG.isPedigree())
+					ped = 1;
+				else 
+					ped = 0;
+				if(pupG.isHypo())
+					hyp = 1;
+				else 
+					hyp = 0;
+				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupE.getName() +"\', \'" + pupE.getBreed() + "\', \'"
+						+ pupG.getSex() + "\', "+ ped +", "+ pupG.getPrice() +", "+ hyp +")");
+				if(pupF.isPedigree())
+					ped = 1;
+				else 
+					ped = 0;
+				if(pupF.isHypo())
+					hyp = 1;
+				else 
+					hyp = 0;
+				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupF.getName() +"\', \'" + pupF.getBreed() + "\', \'"
+						+ pupF.getSex() + "\', "+ ped +", "+ pupF.getPrice() +", "+ hyp +")");
+				if(pupG.isPedigree())
+					ped = 1;
+				else 
+					ped = 0;
+				if(pupG.isHypo())
+					hyp = 1;
+				else 
+					hyp = 0;
+				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupG.getName() +"\', \'" + pupG.getBreed() + "\', \'"
+						+ pupG.getSex() + "\', "+ ped +", "+ pupG.getPrice() +", "+ hyp +")");
+				if(pupF.isPedigree())
+					ped = 1;
+				else 
+					ped = 0;
+				if(pupF.isHypo())
+					hyp = 1;
+				else 
+					hyp = 0;
+				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupF.getName() +"\', \'" + pupF.getBreed() + "\', \'"
+						+ pupF.getSex() + "\', "+ ped +", "+ pupF.getPrice() +", "+ hyp +")");
+			} catch(SQLException sql) {
+				sql.printStackTrace();
+			}
+			
 		} // end of else
 	}
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2021 at 08:30 PM
+-- Generation Time: May 04, 2021 at 08:09 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -44,7 +44,7 @@ END$$
 DROP PROCEDURE IF EXISTS `addBid`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addBid` (IN `winner1` VARCHAR(15), IN `currentBid1` DOUBLE(7,2), IN `maxBid1` DOUBLE(7,2), IN `name1` VARCHAR(15), IN `startBy1` VARCHAR(12), IN `endBy1` VARCHAR(12))  BEGIN
 	INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paidFor) VALUES
-		(currentBid1, maxBid1, endBy1, startBy1By1, winner1, name1, 1, 0);
+		(currentBid1, maxBid1, endBy1, startBy1, winner1, name1, 1, 0);
 END$$
 
 DROP PROCEDURE IF EXISTS `addCust`$$
