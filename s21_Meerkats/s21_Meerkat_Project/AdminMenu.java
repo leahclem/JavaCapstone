@@ -366,7 +366,7 @@ public class AdminMenu extends MainMenu {
 
 		scan.nextLine();
 		validNum = false;
-		System.out.println("What is the ending hour? ");
+		System.out.println("What is the ending hour (in military time, from 9 to 16)? ");
 		while (!validNum) {
 			try {
 				hour = scan.nextInt();

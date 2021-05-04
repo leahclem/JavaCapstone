@@ -118,7 +118,7 @@ public class Bids {
 		startBy = LocalDateTime.now().withSecond(0).withNano(0);
 		endBy = end;
 
-		winner = new User("null", "apple", 'C'); // make sure this is fixed see checkBid method *)$
+		winner = new User("no one", "apple", 'C'); // make sure this is fixed see checkBid method *)$
 		active = true;
 
 		this.backlogg = new Queue<>();
@@ -126,7 +126,7 @@ public class Bids {
 
 		try {// Update the db, to add a new bid
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addBid(\'null\'," + currentBid + " , 0, \'" + pup.getName() + "\', \'"
+			SQLMethods.stmt.executeUpdate("CALL addBid(\'no one\'," + currentBid + " , 0, \'" + pup.getName() + "\', \'"
 					+ dateToString(startBy) + "\', \'" + dateToString(endBy) + "\')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -140,7 +140,7 @@ public class Bids {
 	 */
 	public String toString() {
 		String win = " ";
-		if (this.winner.getUserName().equalsIgnoreCase("null")) {
+		if (this.winner.getUserName().equalsIgnoreCase("no one")) {
 			win = "no one";
 		} else {
 			win = this.winner.getUserName().toString();
@@ -293,7 +293,7 @@ public class Bids {
 	 */
 	public void checkBid(User cust, double newBid) {
 
-		if (winner.getUserName().equalsIgnoreCase("null")) { // do this if the bid is the first bid
+		if (winner.getUserName().equalsIgnoreCase("no one")) { // do this if the bid is the first bid
 			winner = cust;
 			maxBid = newBid;
 			newBHQueue(cust, newBid);
