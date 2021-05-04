@@ -44,322 +44,220 @@ public class InputOutputMethods {
 		String bt = "SELECT * FROM bids";
 		String bat = "SELECT * FROM backlogg";
 		String bit = "SELECT * FROM bidhistory";
-		User curuser;
-		char type;
+		User curuser, u;
+		char type, userType;
+		String fname, lname, payPal, address, name, breed, gender, pname, uname, username, password, data;
+		Admin a;
+		Customer c;
+		int p, h, ac;
+		double price, currentBid, maxBid, increment;
+		Puppies pup = null, curp = null;
+		boolean ped, hypo, active, paidFor;
+		LocalDateTime start, end;
+		User winner = null;
+		Bids bid, curb = null;
+
 
 		// check and potentially create connection to the database
 		try {
 			SQLMethods.checkConnect();
 			// Get all result sets from all necessary tables from DB
 			us = SQLMethods.stmt.executeQuery(ut);
+			// Assign users to a queue
+			users = new Queue<>();
+			// loop through all data in us
+			try {
+				while (us.next()) {// gather all user data while there is another user
+					username = us.getString(1);
+					password = us.getString(2);
+					userType = us.getString(3).charAt(0);
+					u = new User(username, password, userType);
+					users.enqueue(u);
+					//System.out.println(u.getUserName() + u.getPassword() + u.getUserType());
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//Get admin data from DB
 			as = SQLMethods.stmt.executeQuery(at);
+			//Process admin data
+			admins = new ArrayList<>();
+			// loop through all data in as
+			try {
+				while (as.next()) {// gather all user data while there is another user
+					fname = as.getString(1);
+					lname = as.getString(2);
+					username = as.getString(3);
+					a = new Admin(username, "", fname, lname);
+					admins.add(a);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// Process customer data
 			cs = SQLMethods.stmt.executeQuery(ct);
+			custs = new ArrayList<>();
+			// loop through all data in cs
+			try {
+				while (cs.next()) {// gather all user data while there is another user
+					payPal = cs.getString(1);
+					address = cs.getString(2);
+					username = cs.getString(3);
+					c = new Customer(username, "", address, payPal);
+					custs.add(c);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// merge users and add to arraylists
+			while (!users.isEmpty()) {
+				curuser = users.dequeue();// get current user
+				type = curuser.getUserType();// get their type
+
+				if (type == 'A') {
+					// find the admin
+					for (int i = 0; i < admins.size(); i++) {
+						if (admins.get(i).getUserName().equals(curuser.getUserName())) {
+							ah.getAllUsers().add(new Admin(curuser.getUserName(), curuser.getPassword(),
+									admins.get(i).getFname(), admins.get(i).getLname()));
+							break;// exit the for loop for the user has been found and assigned
+						}
+					}
+				} else {// type is 'C'
+					for (int i = 0; i < custs.size(); i++) {
+						if (custs.get(i).getUserName().equals(curuser.getUserName())) {
+							ah.getAllUsers().add(new Customer(curuser.getUserName(), curuser.getPassword(),
+									custs.get(i).getAddress(), custs.get(i).getPayPal()));
+							break;// exit the for loop for the user has been found and assigned
+						}
+					} // end of for loop
+				} // end of else statement
+			} // end of user merging into auctionhouse loop
+			//Get the puppy data from DB
 			ps = SQLMethods.stmt.executeQuery(pt);
+			//process puppy data
+			// loop through all data in ps
+			try {
+				while (ps.next()) {// gather all user data while there is another user
+					name = ps.getString(1);
+					breed = ps.getString(2);
+					gender = ps.getString(3);
+					p = ps.getInt(4);
+					price = ps.getDouble(5);
+					h = ps.getInt(6);
+					if (h == 0)
+						hypo = false;
+					else
+						hypo = true;
+					if (p == 0)
+						ped = false;
+					else
+						ped = true;
+					pup = new Puppies(name, breed, gender, ped, price, hypo);
+					ah.getAllPups().add(pup);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}//get the Bids data from DB
 			bs = SQLMethods.stmt.executeQuery(bt);
+			try {//process bid data
+				while (bs.next()) {// gather all user data while there is another bid
+					currentBid = bs.getDouble(1);
+					maxBid = bs.getDouble(2);
+					end = strToDate(bs.getString(3));
+					start = strToDate(bs.getString(4));
+					uname = bs.getString(5);
+					pname = bs.getString(6);
+					ac = bs.getInt(7);
+					p = bs.getInt(8);
+					if (ac == 0)
+						active = false;
+					else
+						active = true;
+					if (p == 0)
+						paidFor = false;
+					else
+						paidFor = true;
+					// find the winner and puppy
+					if (uname.equals("null")) {// check if there is no winner
+						winner = new User("null", "apple", 'C');
+					} else {
+						for (int i = 0; i < ah.getAllUsers().size(); i++) {// find the winner
+							if (ah.getAllUsers().get(i).getUserName().equals(uname)) {
+								winner = ah.getAllUsers().get(i);
+							}
+						} // end of if statement
+					} // end of else statement
+						// find the puppy
+					for (int i = 0; i < ah.getAllPups().size(); i++) {// find the winner
+						if (ah.getAllPups().get(i).getName().equals(pname)) {
+							pup = ah.getAllPups().get(i);
+						}
+					} // end of if statement
+					bid = new Bids(pup, end, start, currentBid, maxBid, winner, active, paidFor);
+					ah.getAllBids().add(bid);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}//backlog data from DB
 			bas = SQLMethods.stmt.executeQuery(bat);
+			try {//process backlog
+				while (bas.next()) {// gather all user data while there is another user
+					// locate the bid
+					pname = bas.getString(1);
+					data = bas.getString(2);
+					// loop through all bids to find the one
+					for (int i = 0; i < ah.getAllBids().size(); i++) {
+						if (ah.getAllBids().get(i).getPup().getName().equalsIgnoreCase(pname)) {
+							curb = ah.getAllBids().get(i);
+							break;
+						}
+					} // end of for loop
+					curb.getBacklogg().enqueue(data);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}//Get BidHistory data from DB
 			bis = SQLMethods.stmt.executeQuery(bit);
+			try {//process bid history data
+				while (bis.next()) {// gather all user data while there is another user
+					// locate the bid
+					pname = bis.getString(1);
+					data = bis.getString(2);
+					// loop through all bids to find the one
+					for (int i = 0; i < ah.getAllBids().size(); i++) {
+						if (ah.getAllBids().get(i).getPup().getName().equalsIgnoreCase(pname)) {
+							curb = ah.getAllBids().get(i);
+							break;
+						}
+					} // end of for loop
+					curb.getBidHistory().enqueue(data);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("DB Read failure.");
 			System.exit(0);
 		}
-		// Start to enqueue onto each queue LL
-		users = enUs(us);
-		// no passwords on admins and custs need to merge with users
-		admins = enAs(as);
-		custs = enCs(cs);
-		// merge users and add to arraylists
-		while (!users.isEmpty()) {
-			curuser = users.dequeue();// get current user
-			type = curuser.getUserType();// get their type
-
-			if (type == 'A') {
-				// find the admin
-				for (int i = 0; i < admins.size(); i++) {
-					if (admins.get(i).getUserName().equals(curuser.getUserName())) {
-						ah.getAllUsers().add(new Admin(curuser.getUserName(), curuser.getPassword(),
-								admins.get(i).getFname(), admins.get(i).getLname()));
-						break;// exit the for loop for the user has been found and assigned
-					}
-				}
-			} else {// type is 'C'
-				for (int i = 0; i < custs.size(); i++) {
-					if (custs.get(i).getUserName().equals(curuser.getUserName())) {
-						ah.getAllUsers().add(new Admin(curuser.getUserName(), curuser.getPassword(),
-								custs.get(i).getAddress(), custs.get(i).getPayPal()));
-						break;// exit the for loop for the user has been found and assigned
-					}
-				} // end of for loop
-			} // end of else statement
-
-		} // end of user merging into auctionhouse loop
-		enPs(ps, ah);// add pups to the auctions house
-		enBs(bs, ah);// add bids to auction house
-		enBas(ah, bas);// add backlogg
-		enBis(ah, bis);// adds bidhistory
 		return;
 	}// end of method
 
 	/**
-	 * This function processes and loads in the backlogg data into the appropriate
-	 * bids.
+	 * This function take in a string in a given format and return its LocalDateTime
+	 * equivalent
 	 * 
-	 * @param ah
-	 *            - Auction House which stores all needed
-	 * @param bas
-	 *            - Contains the results of queries for the backlogg table
-	 */
-	private static void enBas(AuctionHouse ah, ResultSet bas) {
-		// Variable Declaration
-		Puppies curp;
-		Bids curb = null;
-		String pname, data;
-
-		try {
-			while (bas.next()) {// gather all user data while there is another user
-				// locate the bid
-				pname = bas.getString(1);
-				data = bas.getString(2);
-				// loop through all bids to find the one
-				for (int i = 0; i < ah.getAllBids().size(); i++) {
-					if (ah.getAllBids().get(i).getPup().getName().equalsIgnoreCase(pname)) {
-						curb = ah.getAllBids().get(i);
-						break;
-					}
-				} // end of for loop
-				curb.getBacklogg().enqueue(data);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}// end of method
-
-	/**
-	 * This function processes and loads in the bid history data into the appropriate
-	 * bids.
-	 * @param ah - Auction House which stores all needed
-	 * @param bis- Contains the results of queries for the bidhistory table
-	 */
-	private static void enBis(AuctionHouse ah, ResultSet bis) {
-		// Variable Declaration
-		Puppies curp;
-		Bids curb = null;
-		String pname, data;
-
-		try {
-			while (bis.next()) {// gather all user data while there is another user
-				// locate the bid
-				pname = bis.getString(1);
-				data = bis.getString(2);
-				// loop through all bids to find the one
-				for (int i = 0; i < ah.getAllBids().size(); i++) {
-					if (ah.getAllBids().get(i).getPup().getName().equalsIgnoreCase(pname)) {
-						curb = ah.getAllBids().get(i);
-						break;
-					}
-				} // end of for loop
-				curb.getBidHistory().enqueue(data);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}// end of method
-	/**
-	 * This function processes and loads in the Admin data without passwords.
-	 * 
-	 * @param as - Contains the results of queries for the Admin table
-	 * @return - A set of incomplete Admin data to be merged
-	 * with other data
-	 */
-	// loads db admins, with empty password
-	private static ArrayList<Admin> enAs(ResultSet as) {
-		// Variable Declaration
-		ArrayList<Admin> aq = new ArrayList<>();
-		String fname, lname;
-		String username;
-		Admin u;
-		// loop through all data in rs
-		try {
-			while (as.next()) {// gather all user data while there is another user
-				fname = as.getString(1);
-				lname = as.getString(2);
-				username = as.getString(3);
-				System.out.println(username);// bug test
-				u = new Admin(username, "", fname, lname);
-				aq.add(u);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return aq;
-
-	}
-	/**
-	 * This function processes and loads in the user data with passwords.
-	 * @param us - Contains the results of queries for the users table
-	 * @return - A set of incomplete users data to be merged
-	 */
-	private static Queue<User> enUs(ResultSet us) {// enqueues all user data from result set
-		// Variable Declaration
-		Queue<User> uq = new Queue<>();
-		String username, password;
-		char userType;
-		User u;
-		// loop through all data in rs
-		try {
-			while (us.next()) {// gather all user data while there is another user
-				username = us.getString(1);
-				password = us.getString(2);
-				userType = us.getString(3).charAt(0);
-				System.out.println(userType);// bug test
-				u = new User(username, password, userType);
-				uq.enqueue(u);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return uq;
-	}
-	/**
-	 * This function processes and loads in the customer data without passwords.
-	 * @param cs - Contains the results of queries for the customer table.
-	 * @return - A set of incomplete customers data to be merged
-	 */
-	private static ArrayList<Customer> enCs(ResultSet cs) {
-		// Variable Declaration
-		ArrayList<Customer> cq = new ArrayList<>();
-		String payPal, address;
-		String username;
-		Customer u;
-		// loop through all data in rs
-		try {
-			while (cs.next()) {// gather all user data while there is another user
-				payPal = cs.getString(1);
-				address = cs.getString(2);
-				username = cs.getString(3);
-				System.out.println(username);// bug test
-				u = new Customer(username, "", address, payPal);
-				cq.add(u);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return cq;
-
-	}
-	/**
-	 * This function processes and loads in Puppy data.
-	 * @param ps - Contains the results of queries for the puppies table
-	 * @param ah - Auction House which stores all needed data.
-	 */
-	private static void enPs(ResultSet ps, AuctionHouse ah) {
-		// Variable Declaration
-		String name, breed, gender;
-		int p, h;
-		double price;
-		Puppies u;
-		boolean ped, hypo;
-		// loop through all data in rs
-		try {
-			while (ps.next()) {// gather all user data while there is another user
-				name = ps.getString(1);
-				breed = ps.getString(2);
-				gender = ps.getString(3);
-				p = ps.getInt(4);
-				price = ps.getDouble(5);
-				h = ps.getInt(6);
-				if (h == 0)
-					hypo = false;
-				else
-					hypo = true;
-				if (p == 0)
-					ped = false;
-				else
-					ped = true;
-				u = new Puppies(name, breed, gender, ped, price, hypo);
-				ah.getAllPups().add(u);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return;
-	}
-	/**
-	 * This function processes and loads in Auction data.
-	 * @param bs - Contains the results of queries for the bids table
-	 * @param ah - - Auction House which stores all needed data.
-	 */
-	private static void enBs(ResultSet bs, AuctionHouse ah) {
-		// Variable Declaration
-		String pname, uname;
-		int a, p;
-		LocalDateTime start, end;
-		double currentBid, maxBid, increment;
-		User winner = null;
-		Bids u;
-		Puppies pup = null;
-		boolean active, paidFor;
-		// loop through all data in rs
-		try {
-			while (bs.next()) {// gather all user data while there is another bid
-				currentBid = bs.getDouble(1);
-				maxBid = bs.getDouble(2);
-				end = strToDate(bs.getString(3));
-				start = strToDate(bs.getString(4));
-				uname = bs.getString(5);
-				pname = bs.getString(6);
-				a = bs.getInt(7);
-				p = bs.getInt(8);
-				if (a == 0)
-					active = false;
-				else
-					active = true;
-				if (p == 0)
-					paidFor = false;
-				else
-					paidFor = true;
-				// find the winner and puppy
-				if (uname.equals("null")) {// check if there is no winner
-					winner = new User("null", "apple", 'C');
-				} else {
-					for (int i = 0; i < ah.getAllUsers().size(); i++) {// find the winner
-						if (ah.getAllUsers().get(i).getUserName().equals(uname)) {
-							winner = ah.getAllUsers().get(i);
-						}
-					} // end of if statement
-				} // end of else statement
-					// find the puppy
-				for (int i = 0; i < ah.getAllPups().size(); i++) {// find the winner
-					if (ah.getAllPups().get(i).getName().equals(pname)) {
-						pup = ah.getAllPups().get(i);
-					}
-				} // end of if statement
-				u = new Bids(pup, end, start, currentBid, maxBid, winner, active, paidFor);
-				ah.getAllBids().add(u);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return;
-
-	}
-	/**
-	 * This function take in a string in a given format 
-	 * and return its LocalDateTime equivalent
-	 * @param date - the string to be turned into a date
-	 * @return - the LocalDateTime variable derived from the
-	 * date param.
+	 * @param date
+	 *            - the string to be turned into a date
+	 * @return - the LocalDateTime variable derived from the date param.
 	 */
 	private static LocalDateTime strToDate(String date) {
 		// "202103121443" Year month day hour minutes and no second/millisecs

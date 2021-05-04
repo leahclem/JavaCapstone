@@ -62,8 +62,8 @@ public class MainMenu {
 		} else if (choice == 5) {
 			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
+			SQLMethods.closeConnection();
 			System.exit(0);
-			;
 		} else {
 			System.out.println("I don't understand, please enter a number from 1-5? ");
 		}

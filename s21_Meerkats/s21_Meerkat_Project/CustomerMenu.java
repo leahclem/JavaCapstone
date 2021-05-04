@@ -84,6 +84,7 @@ public class CustomerMenu extends MainMenu {
 		} else if (choice == 7) {// exits the program
 			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
+			SQLMethods.closeConnection();
 			System.exit(0);
 			;
 		} else {

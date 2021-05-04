@@ -43,13 +43,13 @@ public class AdminMenu extends MainMenu {
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
 		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");// up_g add dequeue backlogg db update
 		System.out.println("2. Search puppies: ");
-		System.out.println("3. Logout: ");
+		System.out.println("3. View bid history queue: ");
 		System.out.println("4. Add a new puppy for sale: ");
 		System.out.println("5. Display active auctions: ");
 		System.out.println("6. Create new auction: ");// up_g add auction update db
 		System.out.println("7. Create new Admin: ");
 		System.out.println("8. View closed auctions: ");
-		System.out.println("9. View bid history queue");
+		System.out.println("9. Logout: ");
 		System.out.println("10. Exit: ");
 		System.out.print("Choice: ");
 		try {
@@ -75,8 +75,7 @@ public class AdminMenu extends MainMenu {
 		} else if (choice == 2) {
 			listPups(ah);
 		} else if (choice == 3) {
-			loggedIn = null;
-			System.out.println("Bye Admin " + curUser.getUserName());
+			checkAuctionHist(ah);
 		} else if (choice == 4) {
 			ah.getAllPups().add(addPup(ah));
 		} else if (choice == 5) {
@@ -88,10 +87,12 @@ public class AdminMenu extends MainMenu {
 		} else if (choice == 8) {
 			ah.closedBids();
 		} else if (choice == 9) {
-			checkAuctionHist(ah);
+			loggedIn = null;
+			System.out.println("Bye Admin " + curUser.getUserName());
 		} else if (choice == 10) {
 			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
+			SQLMethods.closeConnection();
 			System.exit(0);
 		} else {
 			System.out.println("I don't understand, please enter a number from 1-6? ");
