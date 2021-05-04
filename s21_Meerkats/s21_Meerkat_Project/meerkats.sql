@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2021 at 08:09 PM
+-- Generation Time: May 04, 2021 at 09:20 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -195,7 +195,7 @@ CREATE TABLE bids (
   maxBid double(7,2) NOT NULL,
   endBy varchar(12) NOT NULL,
   startBy varchar(12) NOT NULL,
-  winner varchar(15),
+  winner varchar(15) NOT NULL,
   name varchar(15) NOT NULL,
   active tinyint(1) NOT NULL,
   paidFor tinyint(1) NOT NULL
@@ -206,8 +206,9 @@ CREATE TABLE bids (
 --
 
 INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paidFor) VALUES
-(2600.00, 3000.00, '202104301637', '202104191637', 'Jack', 'Jolly', 1, 0),
-(2000.00, 3100.00, '202104301641', '202104200137', 'customer2', 'Mack', 1, 0);
+(2600.00, 3000.00, '202104301637', '202104191637', 'Jack', 'Jolly', 0, 0),
+(2000.00, 3100.00, '202104301641', '202104200137', 'customer2', 'Mack', 0, 0),
+(1500.00, 0.00, '202105061659', '202105041508', 'no one', 'Randy', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -230,7 +231,8 @@ INSERT INTO customer (payPal, address, userID) VALUES
 ('customer1@smail.com', '123 Happy Lanes, Bowling Green KY', 'customer1'),
 ('customer2@smail.com', '149 Elm Street, Roanoke VA', 'customer2'),
 ('customer3@smail.com', '901 Surfside Lane, Malibu CA', 'customer3'),
-('dorsey@twitter.com', '10 Billionaire Drive, Palo Alto CA', 'Jack');
+('dorsey@twitter.com', '10 Billionaire Drive, Palo Alto CA', 'Jack'),
+('used for new bids only', 'used for new bids only', 'No one');
 
 -- --------------------------------------------------------
 
@@ -253,9 +255,11 @@ CREATE TABLE puppies (
 --
 
 INSERT INTO puppies (name, breed, sex, pedigree, price, hypo) VALUES
+('doug', 'asdfas', 'male', 1, 10000.00, 0),
 ('Hamilton', 'Great Dane', 'Male', 1, 1500.00, 0),
 ('Jolly', 'poodle', 'male', 1, 2000.00, 1),
 ('Mack', 'poodle', 'male', 1, 2000.00, 1),
+('Randy', 'corgi', 'male', 1, 1500.00, 0),
 ('Rover', 'Poodle', 'male', 1, 1500.00, 1),
 ('Sophie', 'maltese', 'female', 1, 1500.00, 1),
 ('Spike', 'dalmation', 'male', 1, 1000.00, 0);
@@ -285,7 +289,9 @@ INSERT INTO theuser (userID, password, userType) VALUES
 ('customer2', 'apple', 'C'),
 ('customer3', 'apple', 'C'),
 ('Jack', 'apple', 'C'),
-('Santa', 'apple', 'A');
+('No one', 'apple', 'C'),
+('Santa', 'apple', 'A'),
+('Willzy', 'apple', 'C');
 
 --
 -- Indexes for dumped tables
