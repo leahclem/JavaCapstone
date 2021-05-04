@@ -304,6 +304,12 @@ public class MainMenu {
 			Puppies pupE = new Puppies("Hank", "Pomeranian", "male", false, 600, true);
 			Puppies pupF = new Puppies("Goldy", "Golden Retriever", "female", true, 1200, true);
 			Puppies pupG = new Puppies("Camilla", "Samoyed", "female", true, 2500, true);
+			Bids bidA = new Bids(findPup("Ginger", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0));
+			Bids bidB = new Bids(findPup("Pepper", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0));
+			Bids bidC = new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0));  
+			Bids bidD = new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0));
+			Bids bidE = new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0));
+			Bids bidF = new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0));
 			ah.getAllPups().add(pupA);
 			ah.getAllPups().add(pupB);
 			ah.getAllPups().add(pupC);
@@ -313,61 +319,58 @@ public class MainMenu {
 			ah.getAllPups().add(pupG);
 			// plus different default times for testing purposes Jolly
 			// this could be a potential error since it is not referencing the
-			ah.addBid(new Bids(findPup("Ginger", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0)));
-			ah.addBid(new Bids(findPup("Pepper", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0)));
-			ah.addBid(new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0)));
-			ah.addBid(new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0)));
-			ah.addBid(new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0)));
-			ah.addBid(new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0)));
-			try {
-				SQLMethods.checkConnect();
-				if(pupG.isPedigree())
-					ped = 1;
-				else 
-					ped = 0;
-				if(pupG.isHypo())
-					hyp = 1;
-				else 
-					hyp = 0;
-				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupE.getName() +"\', \'" + pupE.getBreed() + "\', \'"
-						+ pupG.getSex() + "\', "+ ped +", "+ pupG.getPrice() +", "+ hyp +")");
-				if(pupF.isPedigree())
-					ped = 1;
-				else 
-					ped = 0;
-				if(pupF.isHypo())
-					hyp = 1;
-				else 
-					hyp = 0;
-				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupF.getName() +"\', \'" + pupF.getBreed() + "\', \'"
-						+ pupF.getSex() + "\', "+ ped +", "+ pupF.getPrice() +", "+ hyp +")");
-				if(pupG.isPedigree())
-					ped = 1;
-				else 
-					ped = 0;
-				if(pupG.isHypo())
-					hyp = 1;
-				else 
-					hyp = 0;
-				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupG.getName() +"\', \'" + pupG.getBreed() + "\', \'"
-						+ pupG.getSex() + "\', "+ ped +", "+ pupG.getPrice() +", "+ hyp +")");
-				if(pupF.isPedigree())
-					ped = 1;
-				else 
-					ped = 0;
-				if(pupF.isHypo())
-					hyp = 1;
-				else 
-					hyp = 0;
-				SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pupF.getName() +"\', \'" + pupF.getBreed() + "\', \'"
-						+ pupF.getSex() + "\', "+ ped +", "+ pupF.getPrice() +", "+ hyp +")");
-			} catch(SQLException sql) {
-				sql.printStackTrace();
-			}
-			
+			ah.addBid(bidA);
+			ah.addBid(bidB);
+			ah.addBid(bidC);
+			ah.addBid(bidD);
+			ah.addBid(bidE);
+			ah.addBid(bidF);
+			addpup(pupG);
+			addpup(pupF);
+			addpup(pupE);
+			addpup(pupD);
+			addpup(pupC);
+			addpup(pupB);
+			addpup(pupA);
 		} // end of else
 	}
-
+	/**
+	 * adds sample pups to the Database
+	 * @param pup - the pup added to the Database
+	 */
+	public void addpup(Puppies pup) {
+		//Variable Declaration
+		int ped, hyp;
+		try {
+			SQLMethods.checkConnect();
+			if(pup.isPedigree())
+				ped = 1;
+			else 
+				ped = 0;
+			if(pup.isHypo())
+				hyp = 1;
+			else 
+				hyp = 0;
+			SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pup.getName() +"\', \'" + pup.getBreed() + "\', \'"
+					+ pup.getSex() + "\', "+ ped +", "+ pup.getPrice() +", "+ hyp +")");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * adds a sample Auction to the Database
+	 * @param b - The bid to be added to the Database
+	 */
+	public void addbid(Bids b) {
+		try {
+			SQLMethods.checkConnect();
+			SQLMethods.stmt.executeUpdate("CALL addBid(\'null\'," + b.getCurrentBid() + ", 0, \'" + b.getPup().getName() + "\', \'" + 
+					dateToString(b.getStartBy()) + "\', \'" + dateToString(b.getEndBy()) + "\')");
+		} catch(SQLException sql) {
+			
+		}
+	}//end of method
 	/**
 	 * findPup method is used by the sampleData method as a safeguard to ensure that
 	 * multiple Puppies objects with the same name are not created
@@ -387,7 +390,22 @@ public class MainMenu {
 		System.out.println("Error in findPup.");
 		return null;
 	}
-
+	/**
+	 * Converts a given time to a string format
+	 * used in prepared a date to be sent a database or flat file
+	 * @param ldt - the date to be converted
+	 * @return - the converted date
+	 */
+	public String dateToString(LocalDateTime ldt) {
+		String year, month, day, hour, min;
+		String date = ldt.toString();
+		year = date.substring(0, 4);
+		month = date.substring(5, 7);
+		day = date.substring(8, 10);
+		hour = date.substring(11, 13);
+		min = date.substring(14, 16);
+		return year + month + day + hour + min;
+	}
 	/**
 	 * pupExists method is used by the sampleData method as a safeguard to ensure
 	 * that multiple Puppies objects with the same name are not created

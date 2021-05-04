@@ -195,7 +195,7 @@ CREATE TABLE bids (
   maxBid double(7,2) NOT NULL,
   endBy varchar(12) NOT NULL,
   startBy varchar(12) NOT NULL,
-  winner varchar(15) NOT NULL,
+  winner varchar(15),
   name varchar(15) NOT NULL,
   active tinyint(1) NOT NULL,
   paidFor tinyint(1) NOT NULL
