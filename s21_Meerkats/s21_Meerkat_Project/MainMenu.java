@@ -304,12 +304,6 @@ public class MainMenu {
 			Puppies pupE = new Puppies("Hank", "Pomeranian", "male", false, 600, true);
 			Puppies pupF = new Puppies("Goldy", "Golden Retriever", "female", true, 1200, true);
 			Puppies pupG = new Puppies("Camilla", "Samoyed", "female", true, 2500, true);
-			Bids bidA = new Bids(findPup("Ginger", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0));
-			Bids bidB = new Bids(findPup("Pepper", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0));
-			Bids bidC = new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0));  
-			Bids bidD = new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0));
-			Bids bidE = new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0));
-			Bids bidF = new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0));
 			ah.getAllPups().add(pupA);
 			ah.getAllPups().add(pupB);
 			ah.getAllPups().add(pupC);
@@ -317,6 +311,13 @@ public class MainMenu {
 			ah.getAllPups().add(pupE);
 			ah.getAllPups().add(pupF);
 			ah.getAllPups().add(pupG);
+			Bids bidA = new Bids(findPup("Ginger", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0));
+			Bids bidB = new Bids(findPup("Pepper", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0));
+			Bids bidC = new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0));  
+			Bids bidD = new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0));
+			Bids bidE = new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0));
+			Bids bidF = new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0));
+			
 			// plus different default times for testing purposes Jolly
 			// this could be a potential error since it is not referencing the
 			ah.addBid(bidA);
