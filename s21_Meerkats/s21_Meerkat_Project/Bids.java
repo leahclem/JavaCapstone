@@ -213,10 +213,11 @@ public class Bids {
 	// use for the first bidder
 	private void newBHQueue(User u, double newBid) {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		String bh = (pup.getName() + "'s Bid History");
+		String bh = (pup.getName() + " Bid History");
 		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
+			//SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
+			SQLMethods.stmt.executeUpdate("INSERT INTO bidhistory ('"+pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -226,7 +227,8 @@ public class Bids {
 		bh = ("Bidder \t\tResult \t\t\tWinner\t\tBid\t\t\tCurrent Price \t\tMax willing to pay");
 		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
+			//SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
+			SQLMethods.stmt.executeUpdate("INSERT INTO bidhistory ('"+pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -237,7 +239,8 @@ public class Bids {
 				+ nf.format(currentBid) + "\t\t\t" + nf.format(maxBid));
 		try {// Update the db and arraylist, to set update bidhist
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
+			//SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
+			SQLMethods.stmt.executeUpdate("INSERT INTO bidhistory ('"+pup.getName() + "\', \'" + bh + "\')");
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
