@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 /**
- * The CustomerMenu class extends the MainMenu class. It provides a User logged in as Customer to access Customer menu options.
- * CustomerMenu has methods to 1. view puppies, 2. place a bid, 3. Display active auctions, 4. Display their winning auctions, and
- * 5. Pay for a puppy they won.
+ * The CustomerMenu class extends the MainMenu class. It provides a User logged
+ * in as Customer to access Customer menu options. CustomerMenu has methods to
+ * 1. view puppies, 2. place a bid, 3. Display active auctions, 4. Display their
+ * winning auctions, and 5. Pay for a puppy they won.
  *
  */
 public class CustomerMenu extends MainMenu {
@@ -21,21 +23,29 @@ public class CustomerMenu extends MainMenu {
 	 * Customer object - used to store the current customer
 	 */
 	private Customer curCust;
+
 	/**
 	 * Empty CustomerMenu constructor
 	 */
 	CustomerMenu() {
 	}
+
 	/**
-	 * Full CustomerMenu constructor - contains the current logged-in user and customer.
-	 * @param u User object
+	 * Full CustomerMenu constructor - contains the current logged-in user and
+	 * customer.
+	 * 
+	 * @param u
+	 *            User object
 	 */
 	CustomerMenu(User u) {
 		this.curUser = u;
 		this.curCust = (Customer) u;
 	}
+
 	/**
-	 * menu method - prints Customer menu options to the console and stores the user's menu selection.
+	 * menu method - prints Customer menu options to the console and stores the
+	 * user's menu selection.
+	 * 
 	 * @return value int user's option selection
 	 */
 	public int menu() {
@@ -60,12 +70,16 @@ public class CustomerMenu extends MainMenu {
 	}
 
 	/**
-	 * menuChoice method - takes the user's int menu selection and calls the corresponding method. 
-	 * @param choice int user input 
-	 * @param ah AuctionHouse object
+	 * menuChoice method - takes the user's int menu selection and calls the
+	 * corresponding method.
+	 * 
+	 * @param choice
+	 *            int user input
+	 * @param ah
+	 *            AuctionHouse object
 	 * @return loggedIn status of current user
 	 */
-	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io
+	public User menuChoice(int choice, AuctionHouse ah) {// removed , InputOutputMethods io
 		User loggedIn = this.curUser;
 		// apple
 		if (choice == 1) {
@@ -82,7 +96,7 @@ public class CustomerMenu extends MainMenu {
 			loggedIn = null;
 			System.out.println("Bye Customer " + curUser.getUserName());
 		} else if (choice == 7) {// exits the program
-			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
+			// io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			SQLMethods.closeConnection();
 			System.exit(0);
@@ -93,11 +107,15 @@ public class CustomerMenu extends MainMenu {
 
 		return loggedIn;
 	}
+
 	/**
-	 * newBid method - used for customer to place a new bid in an auction using the puppy's name. 
-	 * This method updates the bids database.
-	 * @param curBid ArrayList of Bids 
-	 * @param customer User object
+	 * newBid method - used for customer to place a new bid in an auction using the
+	 * puppy's name. This method updates the bids database.
+	 * 
+	 * @param curBid
+	 *            ArrayList of Bids
+	 * @param customer
+	 *            User object
 	 */
 	public static void newBid(ArrayList<Bids> curBid, User customer) {
 		boolean validNum = false;
@@ -111,7 +129,7 @@ public class CustomerMenu extends MainMenu {
 		name = scan.nextLine();
 
 		int counter = 0;
-		if (curBid != null) {
+		if (!curBid.isEmpty()) { // changed from curBid!=null to !curBid.isEmpty()
 			for (int i = 0; i < curBid.size(); i++) {
 				if (curBid.get(i).getPup().getName().equalsIgnoreCase(name) && curBid.get(i).isActive()) {
 					pupBid = curBid.get(i);
@@ -155,12 +173,16 @@ public class CustomerMenu extends MainMenu {
 			} // end else if puppy is found
 
 		} // ends if(curBid!= null)
-		else
+		else if (curBid.isEmpty()) // changed from else to else if(curBid.isEmpty())
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
+
 	/**
-	 * checkWinning method - check's the customer's win status on their active auctions and prints the results to the console. 
-	 * @param ah AuctionHouse object
+	 * checkWinning method - check's the customer's win status on their active
+	 * auctions and prints the results to the console.
+	 * 
+	 * @param ah
+	 *            AuctionHouse object
 	 */
 	public void checkWinning(AuctionHouse ah) {
 		// Variable Declaration
@@ -183,11 +205,16 @@ public class CustomerMenu extends MainMenu {
 			System.out.println("There are no auctions, have an admin set one up.");
 		}
 	}// end of method checkWinning
+
 	/**
-	 * payment method - prints auctions the customer has won, they enter the puppy they wish to pay for and the confirm payment.
-	 * This method updates the bids database.
-	 * @param ah AuctionHouse object
-	 * @param curUser User object
+	 * payment method - prints auctions the customer has won, they enter the puppy
+	 * they wish to pay for and the confirm payment. This method updates the bids
+	 * database.
+	 * 
+	 * @param ah
+	 *            AuctionHouse object
+	 * @param curUser
+	 *            User object
 	 */
 	public void payment(AuctionHouse ah, User curUser) {
 		Scanner scan = new Scanner(System.in);

@@ -58,8 +58,10 @@ public class SQLMethods {
 		}
 
 	}
+
 	/**
 	 * Creates a connection driver to the Database
+	 * 
 	 * @return - The connection to the database
 	 */
 	public static Connection connect() {
@@ -67,17 +69,15 @@ public class SQLMethods {
 		String name = "meerkats";
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/" + name;
-		try 
-		{ // load the driver 
-		  Class.forName(driver).newInstance();
-		 // System.out.println("Known drivers that are registered:");
-		  Enumeration enumer = DriverManager.getDrivers();
-//		  while (enumer.hasMoreElements())
-//			  System.out.println(enumer.nextElement());	
-		}catch( Exception e ) 
-		{ // problem loading driver, class not exist?
-			  e.printStackTrace();
-			  
+		try { // load the driver
+			Class.forName(driver).newInstance();
+			// System.out.println("Known drivers that are registered:");
+			Enumeration enumer = DriverManager.getDrivers();
+			// while (enumer.hasMoreElements())
+			// System.out.println(enumer.nextElement());
+		} catch (Exception e) { // problem loading driver, class not exist?
+			e.printStackTrace();
+
 		}
 		try {
 			connection = DriverManager.getConnection(url, "CSC202", "CSC202");
@@ -88,6 +88,5 @@ public class SQLMethods {
 		}
 		return connection;
 	}
-
 
 }

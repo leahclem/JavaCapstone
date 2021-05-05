@@ -45,10 +45,10 @@ public class MainMenu {
 	 * 
 	 * @param choice
 	 * @param ah
-	 * @return User 
+	 * @return User
 	 */
-	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io @param io
-		//the InputOutputMethods class
+	public User menuChoice(int choice, AuctionHouse ah) {// removed , InputOutputMethods io @param io
+		// the InputOutputMethods class
 		User loggedIn = null;
 
 		if (choice == 1) {
@@ -60,7 +60,7 @@ public class MainMenu {
 		} else if (choice == 4) {
 			ah.activeBids();
 		} else if (choice == 5) {
-			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
+			// io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			SQLMethods.closeConnection();
 			System.exit(0);
@@ -78,6 +78,10 @@ public class MainMenu {
 	 * @param pupList
 	 */
 	public void printPups(ArrayList<Puppies> pupList) {
+		if (pupList.isEmpty()) {
+			System.out.println("There are no puppies available right now. ");
+			return;
+		}
 		Scanner scan = new Scanner(System.in);
 		int selection = 0;
 		System.out.println("Would you prefer to sort by breed or price? \n1. Breed\n2. Price ");
@@ -289,9 +293,9 @@ public class MainMenu {
 	 * @param ah
 	 */
 	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
-		//Variable Declaration
+		// Variable Declaration
 		int ped, hyp;
-		
+
 		// Check to see if these dogs are already in the database
 		if (pupExists("Ginger", ah) || pupExists("Pepper", ah) || pupExists("Red", ah) || pupExists("Weston", ah)
 				|| pupExists("Goldy", ah) || pupExists("Hank", ah) || pupExists("Camilla", ah)) {
@@ -313,11 +317,11 @@ public class MainMenu {
 			ah.getAllPups().add(pupG);
 			Bids bidA = new Bids(findPup("Ginger", ah), LocalDateTime.now().plusHours(2).withSecond(0).withNano(0));
 			Bids bidB = new Bids(findPup("Pepper", ah), LocalDateTime.now().plusMinutes(1).withSecond(0).withNano(0));
-			Bids bidC = new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0));  
+			Bids bidC = new Bids(findPup("Red", ah), LocalDateTime.now().plusMinutes(5).withSecond(0).withNano(0));
 			Bids bidD = new Bids(findPup("Camilla", ah), LocalDateTime.now().plusMinutes(30).withSecond(0).withNano(0));
 			Bids bidE = new Bids(findPup("Hank", ah), LocalDateTime.now().plusMinutes(20).withSecond(0).withNano(0));
 			Bids bidF = new Bids(findPup("Goldy", ah), LocalDateTime.now().plusMinutes(10).withSecond(0).withNano(0));
-			
+
 			// plus different default times for testing purposes Jolly
 			// this could be a potential error since it is not referencing the
 			ah.addBid(bidA);
@@ -335,50 +339,57 @@ public class MainMenu {
 			addpup(pupA);
 		} // end of else
 	}
+
 	/**
 	 * adds sample pups to the Database
-	 * @param pup - the pup added to the Database
+	 * 
+	 * @param pup
+	 *            - the pup added to the Database
 	 */
 	public void addpup(Puppies pup) {
-		//Variable Declaration
+		// Variable Declaration
 		int ped, hyp;
 		try {
 			SQLMethods.checkConnect();
-			if(pup.isPedigree())
+			if (pup.isPedigree())
 				ped = 1;
-			else 
+			else
 				ped = 0;
-			if(pup.isHypo())
+			if (pup.isHypo())
 				hyp = 1;
-			else 
+			else
 				hyp = 0;
-			SQLMethods.stmt.executeUpdate("CALL addPup(\'"+ pup.getName() +"\', \'" + pup.getBreed() + "\', \'"
-					+ pup.getSex() + "\', "+ ped +", "+ pup.getPrice() +", "+ hyp +")");
+			SQLMethods.stmt.executeUpdate("CALL addPup(\'" + pup.getName() + "\', \'" + pup.getBreed() + "\', \'"
+					+ pup.getSex() + "\', " + ped + ", " + pup.getPrice() + ", " + hyp + ")");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * adds a sample Auction to the Database
-	 * @param b - The bid to be added to the Database
+	 * 
+	 * @param b
+	 *            - The bid to be added to the Database
 	 */
 	public void addbid(Bids b) {
 		try {
 			SQLMethods.checkConnect();
-			SQLMethods.stmt.executeUpdate("CALL addBid(\'null\'," + b.getCurrentBid() + ", 0, \'" + b.getPup().getName() + "\', \'" + 
-					dateToString(b.getStartBy()) + "\', \'" + dateToString(b.getEndBy()) + "\')");
-		} catch(SQLException sql) {
-			
+			SQLMethods.stmt.executeUpdate("CALL addBid(\'null\'," + b.getCurrentBid() + ", 0, \'" + b.getPup().getName()
+					+ "\', \'" + dateToString(b.getStartBy()) + "\', \'" + dateToString(b.getEndBy()) + "\')");
+		} catch (SQLException sql) {
+
 		}
-	}//end of method
+	}// end of method
+
 	/**
 	 * findPup method is used by the sampleData method as a safeguard to ensure that
 	 * multiple Puppies objects with the same name are not created
 	 * 
 	 * @param name
 	 * @param ah
-	 * @return Puppies 
+	 * @return Puppies
 	 */
 
 	private Puppies findPup(String name, AuctionHouse ah) { // this method is be used only by sample data method above
@@ -391,10 +402,13 @@ public class MainMenu {
 		System.out.println("Error in findPup.");
 		return null;
 	}
+
 	/**
-	 * Converts a given time to a string format
-	 * used in prepared a date to be sent a database or flat file
-	 * @param ldt - the date to be converted
+	 * Converts a given time to a string format used in prepared a date to be sent a
+	 * database or flat file
+	 * 
+	 * @param ldt
+	 *            - the date to be converted
 	 * @return - the converted date
 	 */
 	public String dateToString(LocalDateTime ldt) {
@@ -407,6 +421,7 @@ public class MainMenu {
 		min = date.substring(14, 16);
 		return year + month + day + hour + min;
 	}
+
 	/**
 	 * pupExists method is used by the sampleData method as a safeguard to ensure
 	 * that multiple Puppies objects with the same name are not created
@@ -430,11 +445,11 @@ public class MainMenu {
 	 * pedigree, boolean hypo, double price
 	 *
 	 * @param ah
-	 * @return Puppies 
+	 * @return Puppies
 	 */
 
 	public Puppies addPup(AuctionHouse ah) {
-		Puppies pup = null;//Declared for the final pup added in the try statement
+		Puppies pup = null;// Declared for the final pup added in the try statement
 		String name = "";
 		String breed = "";
 		String sex = "";
@@ -548,7 +563,7 @@ public class MainMenu {
 			e.printStackTrace();
 			System.out.println("Update failed.");
 		}
-		
+
 		return pup;
 	}
 

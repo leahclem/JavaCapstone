@@ -57,7 +57,6 @@ public class InputOutputMethods {
 		User winner = null;
 		Bids bid, curb = null;
 
-
 		// check and potentially create connection to the database
 		try {
 			SQLMethods.checkConnect();
@@ -73,15 +72,15 @@ public class InputOutputMethods {
 					userType = us.getString(3).charAt(0);
 					u = new User(username, password, userType);
 					users.enqueue(u);
-					//System.out.println(u.getUserName() + u.getPassword() + u.getUserType());
+					// System.out.println(u.getUserName() + u.getPassword() + u.getUserType());
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//Get admin data from DB
+			// Get admin data from DB
 			as = SQLMethods.stmt.executeQuery(at);
-			//Process admin data
+			// Process admin data
 			admins = new ArrayList<>();
 			// loop through all data in as
 			try {
@@ -136,9 +135,9 @@ public class InputOutputMethods {
 					} // end of for loop
 				} // end of else statement
 			} // end of user merging into auctionhouse loop
-			//Get the puppy data from DB
+				// Get the puppy data from DB
 			ps = SQLMethods.stmt.executeQuery(pt);
-			//process puppy data
+			// process puppy data
 			// loop through all data in ps
 			try {
 				while (ps.next()) {// gather all user data while there is another user
@@ -162,9 +161,9 @@ public class InputOutputMethods {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}//get the Bids data from DB
+			} // get the Bids data from DB
 			bs = SQLMethods.stmt.executeQuery(bt);
-			try {//process bid data
+			try {// process bid data
 				while (bs.next()) {// gather all user data while there is another bid
 					currentBid = bs.getDouble(1);
 					maxBid = bs.getDouble(2);
@@ -204,9 +203,9 @@ public class InputOutputMethods {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}//backlog data from DB
+			} // backlog data from DB
 			bas = SQLMethods.stmt.executeQuery(bat);
-			try {//process backlog
+			try {// process backlog
 				while (bas.next()) {// gather all user data while there is another user
 					// locate the bid
 					pname = bas.getString(1);
@@ -223,9 +222,9 @@ public class InputOutputMethods {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}//Get BidHistory data from DB
+			} // Get BidHistory data from DB
 			bis = SQLMethods.stmt.executeQuery(bit);
-			try {//process bid history data
+			try {// process bid history data
 				while (bis.next()) {// gather all user data while there is another user
 					// locate the bid
 					pname = bis.getString(1);

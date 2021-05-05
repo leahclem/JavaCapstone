@@ -47,7 +47,7 @@ class ListNode<E> {
 	/**
 	 * getData method
 	 * 
-	 * @return data 
+	 * @return data
 	 */
 	E getData() {
 		return data;
@@ -105,7 +105,7 @@ public class List<E> {
 	 * insertAtFront method used to add an item to the front of the List
 	 * 
 	 * @param insertItem
-	 *            
+	 * 
 	 */
 	public void insertAtFront(E insertItem) {
 		if (isEmpty()) { // firstNode and lastNode refer to same object
@@ -119,7 +119,7 @@ public class List<E> {
 	 * insertAtBack method used to add an item to the back of the List
 	 * 
 	 * @param insertItem
-	 *           
+	 * 
 	 */
 	public void insertAtBack(E insertItem) {
 		if (isEmpty()) { // firstNode and lastNode refer to same object
@@ -132,7 +132,7 @@ public class List<E> {
 	/**
 	 * removeFromFront method used to remove an item from the front of the List
 	 * 
-	 * @return removedItem 
+	 * @return removedItem
 	 * @throws NoSuchElementException
 	 */
 	public E removeFromFront() throws NoSuchElementException {
@@ -186,7 +186,7 @@ public class List<E> {
 	/**
 	 * isEmpty method returns boolean 'true' if List is empty
 	 * 
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public boolean isEmpty() {
 		return firstNode == null;
@@ -216,7 +216,7 @@ public class List<E> {
 	/**
 	 * numInQueue method returns total elements in List (see size in Queue class)
 	 * 
-	 * @return num 
+	 * @return num
 	 */
 	public int numInQueue() {
 		int num = 0;

@@ -50,7 +50,7 @@ public class Puppies {
 	 * A constructor using only the name String
 	 * 
 	 * @param name
-	 *         
+	 * 
 	 */
 	public Puppies(String name) {
 		super();
@@ -108,7 +108,7 @@ public class Puppies {
 	/**
 	 * getName method
 	 * 
-	 * @return  name
+	 * @return name
 	 */
 	public String getName() {
 		return name;
@@ -162,7 +162,7 @@ public class Puppies {
 	/**
 	 * isPedigree method
 	 * 
-	 * @return pedigree 
+	 * @return pedigree
 	 */
 	public boolean isPedigree() {
 		return pedigree;

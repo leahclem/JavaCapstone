@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2021 at 09:20 PM
+-- Generation Time: May 05, 2021 at 03:01 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -36,9 +36,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addAdmin` (IN `userID` VARCHAR(15),
 	END$$
 
 DROP PROCEDURE IF EXISTS `addBackLog`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addBackLog` (IN `pupName1` VARCHAR(15), IN `String1` VARCHAR(255))  BEGIN
-	INSERT INTO backLogg (pupName, String) VALUES
-		(pupName1, String1);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addBackLog` (IN `pupName` VARCHAR(15), IN `String` VARCHAR(255))  BEGIN
+	INSERT INTO backLogg (pupName, String) 
+    VALUES
+		(pupName, String);
 END$$
 
 DROP PROCEDURE IF EXISTS `addBid`$$
@@ -57,7 +58,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `addHistory`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addHistory` (IN `pupName1` VARCHAR(15), IN `String1` VARCHAR(255))  BEGIN
-	INSERT INTO bidHitory (pupName, String) VALUES
+	INSERT INTO bidHistory (pupName1, String1) VALUES
 		(pupName1, String1);
 END$$
 
@@ -153,10 +154,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO admin (fname, lname, userID) VALUES
-('Sally', 'Jones', 'admin1'),
-('Tony', 'Loco', 'admin2'),
-('Oscar', 'Grouch', 'admin3'),
-('Santa', 'Klaus', 'Santa');
+('Diane', 'Wolff', 'Diane'),
+('Santa', 'Klaus', 'Santa'),
+('Will', 'McCoy', 'Willzy');
 
 -- --------------------------------------------------------
 
@@ -206,9 +206,12 @@ CREATE TABLE bids (
 --
 
 INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paidFor) VALUES
-(2600.00, 3000.00, '202104301637', '202104191637', 'Jack', 'Jolly', 0, 0),
-(2000.00, 3100.00, '202104301641', '202104200137', 'customer2', 'Mack', 0, 0),
-(1500.00, 0.00, '202105061659', '202105041508', 'no one', 'Randy', 1, 0);
+(1400.00, 0.00, '202106011659', '202105041613', 'no one', 'BooBoo', 1, 0),
+(1600.00, 0.00, '202106011659', '202105041614', 'no one', 'Bowser', 1, 0),
+(1500.00, 0.00, '202105171659', '202105041612', 'no one', 'Jolly', 1, 0),
+(100.00, 0.00, '202106011659', '202105041614', 'no one', 'Odie', 1, 0),
+(1000.00, 0.00, '202105151659', '202105041612', 'no one', 'Olly', 1, 0),
+(2000.00, 0.00, '202105151659', '202105041613', 'no one', 'Sophie', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -228,11 +231,13 @@ CREATE TABLE customer (
 --
 
 INSERT INTO customer (payPal, address, userID) VALUES
-('customer1@smail.com', '123 Happy Lanes, Bowling Green KY', 'customer1'),
-('customer2@smail.com', '149 Elm Street, Roanoke VA', 'customer2'),
-('customer3@smail.com', '901 Surfside Lane, Malibu CA', 'customer3'),
+('bill@windows.com', 'bill@windows.com', 'Bill'),
+('garfield@dave.com', '102 Garfield Lane', 'Dave'),
 ('dorsey@twitter.com', '10 Billionaire Drive, Palo Alto CA', 'Jack'),
-('used for new bids only', 'used for new bids only', 'No one');
+('Joe.Schmoe@null.com', '123 St. Joseph\'s Street', 'Joe'),
+('John@smail.com', '157 Spooner Street', 'John Doe'),
+('used for new bids only', 'used for new bids only', 'No one'),
+('sandra@smail.com', 'sandra.bullock@hollywood.com', 'Sandra');
 
 -- --------------------------------------------------------
 
@@ -255,14 +260,15 @@ CREATE TABLE puppies (
 --
 
 INSERT INTO puppies (name, breed, sex, pedigree, price, hypo) VALUES
-('doug', 'asdfas', 'male', 1, 10000.00, 0),
-('Hamilton', 'Great Dane', 'Male', 1, 1500.00, 0),
-('Jolly', 'poodle', 'male', 1, 2000.00, 1),
-('Mack', 'poodle', 'male', 1, 2000.00, 1),
-('Randy', 'corgi', 'male', 1, 1500.00, 0),
-('Rover', 'Poodle', 'male', 1, 1500.00, 1),
-('Sophie', 'maltese', 'female', 1, 1500.00, 1),
-('Spike', 'dalmation', 'male', 1, 1000.00, 0);
+('BooBoo', 'Maltese', 'male', 1, 1400.00, 1),
+('Bowser', 'Boxer', 'male', 1, 1600.00, 0),
+('Jolly', 'Pug', 'female', 1, 1500.00, 0),
+('Muffet', 'Mutt', 'female', 0, 200.00, 0),
+('Odie', 'Mutt', 'male', 0, 100.00, 0),
+('Olly', 'dalmation', 'male', 1, 1000.00, 0),
+('Schooner', 'Boxer', 'female', 1, 1300.00, 0),
+('Sophie', 'Maltese', 'female', 1, 2000.00, 1),
+('Tuffet', 'Mutt', 'male', 0, 200.00, 0);
 
 -- --------------------------------------------------------
 
@@ -282,16 +288,16 @@ CREATE TABLE theuser (
 --
 
 INSERT INTO theuser (userID, password, userType) VALUES
-('admin1', 'apple', 'A'),
-('admin2', 'apple', 'A'),
-('admin3', 'apple', 'A'),
-('customer1', 'apple', 'C'),
-('customer2', 'apple', 'C'),
-('customer3', 'apple', 'C'),
+('Bill', 'apple', 'C'),
+('Dave', 'apple', 'C'),
+('Diane', 'apple', 'A'),
 ('Jack', 'apple', 'C'),
+('Joe', 'apple', 'C'),
+('John Doe', 'apple', 'C'),
 ('No one', 'apple', 'C'),
+('Sandra', 'apple', 'C'),
 ('Santa', 'apple', 'A'),
-('Willzy', 'apple', 'C');
+('Willzy', 'apple', 'A');
 
 --
 -- Indexes for dumped tables
@@ -302,18 +308,6 @@ INSERT INTO theuser (userID, password, userType) VALUES
 --
 ALTER TABLE admin
   ADD PRIMARY KEY (userID);
-
---
--- Indexes for table backlogg
---
-ALTER TABLE backlogg
-  ADD PRIMARY KEY (pupName);
-
---
--- Indexes for table bidhistory
---
-ALTER TABLE bidhistory
-  ADD PRIMARY KEY (pupName);
 
 --
 -- Indexes for table bids
@@ -349,18 +343,6 @@ ALTER TABLE theuser
 --
 ALTER TABLE admin
   ADD CONSTRAINT admin_ibfk_1 FOREIGN KEY (userID) REFERENCES theuser (userID);
-
---
--- Constraints for table backlogg
---
-ALTER TABLE backlogg
-  ADD CONSTRAINT backlogg_ibfk_1 FOREIGN KEY (pupName) REFERENCES bids (name);
-
---
--- Constraints for table bidhistory
---
-ALTER TABLE bidhistory
-  ADD CONSTRAINT bidhistory_ibfk_1 FOREIGN KEY (pupName) REFERENCES bids (name);
 
 --
 -- Constraints for table bids

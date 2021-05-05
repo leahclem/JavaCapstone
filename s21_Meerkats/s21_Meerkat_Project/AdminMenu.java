@@ -9,16 +9,18 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
- * The AdminMenu class extends the MainMenu class and stores menu options for Admin user.
- * When user logs in as an Admin they gain access to the Admin menu options.
+ * The AdminMenu class extends the MainMenu class and stores menu options for
+ * Admin user. When user logs in as an Admin they gain access to the Admin menu
+ * options.
  */
 public class AdminMenu extends MainMenu {
-	// one private field 
-	
+	// one private field
+
 	/**
 	 * User object - holds the user currently logged in
 	 */
 	private User curUser;
+
 	/**
 	 * Empty AdminMenu constructor
 	 */
@@ -27,14 +29,18 @@ public class AdminMenu extends MainMenu {
 
 	/**
 	 * Full Constructor - used to track actions of the current user
-	 * @param u User object
+	 * 
+	 * @param u
+	 *            User object
 	 */
 	AdminMenu(User u) {
 		this.curUser = u;
 	}
 
 	/**
-	 * menu method - prints the menu options to the console and queries user for integer value to indicate choice.
+	 * menu method - prints the menu options to the console and queries user for
+	 * integer value to indicate choice.
+	 * 
 	 * @return value int user's selected menu choice
 	 */
 	public int menu() {
@@ -49,8 +55,9 @@ public class AdminMenu extends MainMenu {
 		System.out.println("6. Create new auction: ");// up_g add auction update db
 		System.out.println("7. Create new Admin: ");
 		System.out.println("8. View closed auctions: ");
-		System.out.println("9. Logout: ");
-		System.out.println("10. Exit: ");
+		System.out.println("9. View profit (database reporting): ");
+		System.out.println("10. Logout: ");
+		System.out.println("11. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -60,14 +67,19 @@ public class AdminMenu extends MainMenu {
 		}
 		return value;
 	}
+
 	/**
-	 * menuChoice method - takes current user's menu choice to perform specified menu action.
+	 * menuChoice method - takes current user's menu choice to perform specified
+	 * menu action.
 	 * 
-	 * @param choice int - the current user's selected menu choice
-	 * @param ah AuctionHouse object 
-	 * @return loggedIn User object - keeps track of the current user's login status until they select logout option
+	 * @param choice
+	 *            int - the current user's selected menu choice
+	 * @param ah
+	 *            AuctionHouse object
+	 * @return loggedIn User object - keeps track of the current user's login status
+	 *         until they select logout option
 	 */
-	public User menuChoice(int choice, AuctionHouse ah) {//removed , InputOutputMethods io
+	public User menuChoice(int choice, AuctionHouse ah) {// removed , InputOutputMethods io
 		User loggedIn = this.curUser;
 
 		if (choice == 1) {
@@ -87,10 +99,19 @@ public class AdminMenu extends MainMenu {
 		} else if (choice == 8) {
 			ah.closedBids();
 		} else if (choice == 9) {
+			try {// Update the db, to add a new bid
+				SQLMethods.checkConnect();
+				SQLMethods.stmt.executeUpdate("CALL profit()");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Update failed.");
+			}
+		} else if (choice == 10) {
 			loggedIn = null;
 			System.out.println("Bye Admin " + curUser.getUserName());
-		} else if (choice == 10) {
-			//io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
+		} else if (choice == 11) {
+			// io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			SQLMethods.closeConnection();
 			System.exit(0);
@@ -102,10 +123,13 @@ public class AdminMenu extends MainMenu {
 	}
 
 	/**
-	 * createBid method - takes in AuctionHouse bid statuses and creates a new bid for a puppy object.
-	 * Checks current bid status of selected puppy and if the puppy is not up for auction it creates a bid. 
-	 * Then stores that bid into AuctionHouse for bid tracking.
-	 * @param ah AuctionHouse object 
+	 * createBid method - takes in AuctionHouse bid statuses and creates a new bid
+	 * for a puppy object. Checks current bid status of selected puppy and if the
+	 * puppy is not up for auction it creates a bid. Then stores that bid into
+	 * AuctionHouse for bid tracking.
+	 * 
+	 * @param ah
+	 *            AuctionHouse object
 	 */
 	public void createBid(AuctionHouse ah) {
 		Scanner scan = new Scanner(System.in);
@@ -150,11 +174,15 @@ public class AdminMenu extends MainMenu {
 		}
 
 	}
+
 	/**
-	 * checkAuctionHist method - option to search for the stored auction history of all puppies or a specified puppy by name.
-	 * Checks AuctionHouse for all of the past, current, and winning bids on the puppy.
-	 * Also checks auction's status of open or closed. Prints information to the console.
-	 * @param ah AuctionHouse object 
+	 * checkAuctionHist method - option to search for the stored auction history of
+	 * all puppies or a specified puppy by name. Checks AuctionHouse for all of the
+	 * past, current, and winning bids on the puppy. Also checks auction's status of
+	 * open or closed. Prints information to the console.
+	 * 
+	 * @param ah
+	 *            AuctionHouse object
 	 */
 	public void checkAuctionHist(AuctionHouse ah) {
 		Scanner scan = new Scanner(System.in);
@@ -214,9 +242,12 @@ public class AdminMenu extends MainMenu {
 
 		}
 	}
-	/** 
-	 * listPups method - prints all puppies to the console. 
-	 * @param ah AuctionHouse object 
+
+	/**
+	 * listPups method - prints all puppies to the console.
+	 * 
+	 * @param ah
+	 *            AuctionHouse object
 	 */
 	public void listPups(AuctionHouse ah) {
 		for (int i = 0; i < ah.getAllPups().size(); i++) {
@@ -224,11 +255,15 @@ public class AdminMenu extends MainMenu {
 		}
 
 	}
+
 	/**
-	 * loadbacklog method - stores bids made while auction site is closed between 9pm to 5pm.
-	 * Loads those bids onto the current auction once auction site is open and arranges all current bids.
-	 * Displays the backlog bid updates. Updates the database.
-	 * @param ah AuctionHouse object
+	 * loadbacklog method - stores bids made while auction site is closed between
+	 * 9pm to 5pm. Loads those bids onto the current auction once auction site is
+	 * open and arranges all current bids. Displays the backlog bid updates. Updates
+	 * the database.
+	 * 
+	 * @param ah
+	 *            AuctionHouse object
 	 */
 	public void loadbacklog(AuctionHouse ah) {// up_g add dequeue backlogg db update
 		// load backlog data, and add to bidhistory
@@ -294,9 +329,11 @@ public class AdminMenu extends MainMenu {
 			System.out.println("Error, try loading the backlog between 9-5pm, when we are open.");
 		}
 	}// end of loadbacklog
-	
+
 	/**
-	 * validDate method - runs Admin-entered date and time through multiple verification checks to return a valid date.
+	 * validDate method - runs Admin-entered date and time through multiple
+	 * verification checks to return a valid date.
+	 * 
 	 * @return date LocalDateTime immutable object
 	 */
 	public LocalDateTime validDate() {
@@ -402,10 +439,14 @@ public class AdminMenu extends MainMenu {
 
 		return date;
 	}
+
 	/**
 	 * getNumberOfDays method - used to determine the number of days in a month.
-	 * @param month int value for month
-	 * @param year int value for year
+	 * 
+	 * @param month
+	 *            int value for month
+	 * @param year
+	 *            int value for year
 	 * @return days int number of days
 	 */
 	public int getNumberOfDays(int month, int year) {
@@ -428,10 +469,14 @@ public class AdminMenu extends MainMenu {
 		// Return the number of days.
 		return days;
 	}
+
 	/**
-	 * createAdmin method - an Admin can only be created by a current logged-in Admin.
-	 * Method stores user input as identification in the User ArrayList and Admin database.
-	 * @param users ArrayList of User object
+	 * createAdmin method - an Admin can only be created by a current logged-in
+	 * Admin. Method stores user input as identification in the User ArrayList and
+	 * Admin database.
+	 * 
+	 * @param users
+	 *            ArrayList of User object
 	 */
 	public void createAdmin(ArrayList<User> users) {
 		MainMenu mm = new MainMenu();
@@ -470,7 +515,7 @@ public class AdminMenu extends MainMenu {
 			SQLMethods.checkConnect();
 			SQLMethods.stmt.executeUpdate(
 					"CALL addAdmin(\'" + userName + "\', \'" + password + "\', \'" + fname + "\', \'" + lname + "\')");
-			users.add(new Admin(userName, password, fname, lname));//Add to the arraylist
+			users.add(new Admin(userName, password, fname, lname));// Add to the arraylist
 			System.out.println("Created user: " + userName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

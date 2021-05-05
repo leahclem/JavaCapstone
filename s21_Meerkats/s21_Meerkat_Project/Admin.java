@@ -1,8 +1,9 @@
 package s21_Meerkat_Project;
 
 /**
- * The Admin class extends the User class - used to create an Admin object.
- * An Admin object contains a first name, last name, user ID, password, and account type identifier 'A'.
+ * The Admin class extends the User class - used to create an Admin object. An
+ * Admin object contains a first name, last name, user ID, password, and account
+ * type identifier 'A'.
  */
 public class Admin extends User {
 	// two private fields
@@ -14,6 +15,7 @@ public class Admin extends User {
 	 * String - used to hold the Admin User's last name
 	 */
 	private String lname;
+
 	/**
 	 * Empty Admin constructor
 	 */
@@ -22,12 +24,17 @@ public class Admin extends User {
 	}
 
 	/**
-	 * Full Constructor - used to create a new Admin User containing parent class User fields:
-	 * username, password, and type of user
-	 * @param userName - Admin user name 
-	 * @param password - Admin password
-	 * @param fname - Admin first name
-	 * @param lname - Admin last name
+	 * Full Constructor - used to create a new Admin User containing parent class
+	 * User fields: username, password, and type of user
+	 * 
+	 * @param userName
+	 *            - Admin user name
+	 * @param password
+	 *            - Admin password
+	 * @param fname
+	 *            - Admin first name
+	 * @param lname
+	 *            - Admin last name
 	 * 
 	 */
 	Admin(String userName, String password, String fname, String lname) {
@@ -35,9 +42,11 @@ public class Admin extends User {
 		this.fname = fname;
 		this.lname = lname;
 	}
+
 	/**
 	 * toString method
-	 * @return String containing User and Admin fields 
+	 * 
+	 * @return String containing User and Admin fields
 	 */
 	public String toStringF() {
 		return getUserName().toString() + "|" + getPassword().toString() + "|" + fname + "|" + lname;// +"|"+baseAdmin;
@@ -47,6 +56,7 @@ public class Admin extends User {
 
 	/**
 	 * getFname method
+	 * 
 	 * @return fname String
 	 */
 	public String getFname() {
@@ -55,7 +65,9 @@ public class Admin extends User {
 
 	/**
 	 * setFname method
-	 * @param fname String
+	 * 
+	 * @param fname
+	 *            String
 	 */
 	public void setFname(String fname) {
 		this.fname = fname;
@@ -63,6 +75,7 @@ public class Admin extends User {
 
 	/**
 	 * getLname method
+	 * 
 	 * @return lname String
 	 */
 	public String getLname() {
@@ -71,7 +84,9 @@ public class Admin extends User {
 
 	/**
 	 * setLname method
-	 * @param lname String 
+	 * 
+	 * @param lname
+	 *            String
 	 */
 	public void setLname(String lname) {
 		this.lname = lname;
