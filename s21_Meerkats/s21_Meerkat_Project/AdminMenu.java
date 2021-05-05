@@ -48,7 +48,7 @@ public class AdminMenu extends MainMenu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" Welcome to Puppy Heaven! Admin user " + curUser.getUserName());
 		System.out.println("1. Process backlogged data for Auctions (9-5pm): ");// up_g add dequeue backlogg db update
-		System.out.println("2. Search puppies: ");
+		System.out.println("2. List puppies: ");
 		System.out.println("3. View bid history queue: ");
 		System.out.println("4. Add a new puppy for sale: ");
 		System.out.println("5. Display active auctions: ");

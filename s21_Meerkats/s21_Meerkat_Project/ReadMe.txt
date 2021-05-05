@@ -64,7 +64,7 @@ the Admin menu, later in the tutorial you can log in as a Customer and we will d
 Welcome dwolff
  Welcome to Puppy Heaven! Admin user dwolff
 1. Process backlogged data for Auctions (9-5pm): 
-2. Search puppies: 
+2. List puppies: 
 3. Logout:
 4. Add a new puppy for sale:
 5. Display active auctions:
@@ -79,7 +79,7 @@ Option 1. 	Works. Processes backlogged data for after hours auctions (5pm-9am). 
 			business hours (9am-5pm). If you are testing outside of that time frame you can manually update your 
 			computer's clock. 
 			
-Option 2. 	Works. Is the same method as in the main menu to search by puppy name or price.
+Option 2. 	Works. Prints all Puppies.
 
 Option 3. 	Works. Logs the Admin out, returns to Main Menu.
 

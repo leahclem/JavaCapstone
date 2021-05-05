@@ -129,7 +129,7 @@ public class CustomerMenu extends MainMenu {
 		name = scan.nextLine();
 
 		int counter = 0;
-		if (!curBid.isEmpty()) { // changed from curBid!=null to !curBid.isEmpty()
+		if (curBid!=null) { 
 			for (int i = 0; i < curBid.size(); i++) {
 				if (curBid.get(i).getPup().getName().equalsIgnoreCase(name) && curBid.get(i).isActive()) {
 					pupBid = curBid.get(i);
@@ -173,7 +173,7 @@ public class CustomerMenu extends MainMenu {
 			} // end else if puppy is found
 
 		} // ends if(curBid!= null)
-		else if (curBid.isEmpty()) // changed from else to else if(curBid.isEmpty())
+		else 
 			System.out.println("The bid does not exist, ask admin to add one.");
 	}
 

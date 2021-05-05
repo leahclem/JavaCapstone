@@ -324,7 +324,7 @@ public class Bids {
 	 * @param cust
 	 *            - the user who bidded
 	 * @param newBid
-	 *            - the amount the bidded
+	 *            - the bid amount 
 	 */
 	public void checkBid(User cust, double newBid) {
 
@@ -485,7 +485,7 @@ public class Bids {
 	 * Setter, allowing the change in current winner
 	 * 
 	 * @param winner
-	 *            - the won winning the Auction
+	 *            - the Customer winning the Auction
 	 */
 	public void setWinner(User winner) {
 		this.winner = winner;

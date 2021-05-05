@@ -87,10 +87,7 @@ public class Puppies {
 	public String toString() {
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		return "Named: " + name + " is a " + breed + ". Is " + sex + ". Is pedigreed: " + pedigree
-				+ ". Opening priced at: " + nf.format(price) + ". Is hypo-allergenic: " + hypo + ".";// Is available:
-																										// "+available+".";
-																										// //note
-																										// removed
+				+ ". Opening priced at: " + nf.format(price) + ". Is hypo-allergenic: " + hypo + ".";
 
 	}
 
@@ -101,8 +98,7 @@ public class Puppies {
 	 * @return String
 	 */
 	public String toStringF() {
-		return name + "|" + breed + "|" + sex + "|" + pedigree + "|" + price + "|" + hypo;// +"|"+available;//note
-																							// remove available
+		return name + "|" + breed + "|" + sex + "|" + pedigree + "|" + price + "|" + hypo;// 
 	}
 
 	/**

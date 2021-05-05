@@ -182,8 +182,8 @@ public class InputOutputMethods {
 					else
 						paidFor = true;
 					// find the winner and puppy
-					if (uname.equals("null")) {// check if there is no winner
-						winner = new User("null", "apple", 'C');
+					if (uname.equals("no one")) {// check if there is no winner CHANGED THIS FOR BUG FIX WILL
+						winner = new User("no one", "apple", 'C');
 					} else {
 						for (int i = 0; i < ah.getAllUsers().size(); i++) {// find the winner
 							if (ah.getAllUsers().get(i).getUserName().equals(uname)) {
@@ -276,7 +276,7 @@ public class InputOutputMethods {
 	}
 
 	// I commented out all of the old methods for we may no longer need them,
-	// however so Mrs.Wolff can see them I'm leaving them commented out
+	// however so Dr. Wolff can see them I'm leaving them commented out
 
 	// public BufferedReader openRead() {
 	// Frame f = new Frame();

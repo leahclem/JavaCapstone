@@ -16,8 +16,8 @@ public class AuctionHouse {
 	/**
 	 * boolean - indicates if the Auction House is open or closed.
 	 */
-	private boolean open; // this should be update based on a time stamp, implement later when we have
-							// business hours
+	private boolean open; 
+	
 	/**
 	 * ArrayList of Bid objects
 	 */
@@ -79,7 +79,7 @@ public class AuctionHouse {
 																				// before the end date and the
 																				// bid is active
 					// print and call something in bids to end this bid
-					if (b.getWinner().getUserName().equalsIgnoreCase("null")) {
+					if (b.getWinner().getUserName().equalsIgnoreCase("no one")) {
 						win = "no one";
 					} else {
 						win = b.getWinner().getUserName().toString();
