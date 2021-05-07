@@ -24,11 +24,11 @@ public class MainMenu {
 		System.out.println(" Welcome to Puppy Heaven!");
 		System.out.println("1. Search puppies: ");
 		System.out.println("2. Sign in: ");// up_g update db for creating a customer
-		System.out.println("3. Load sample data: (for testing/grading purposes: dynamic dates)"); // Program autoloads
+		//System.out.println("3. Load sample data: (for testing/grading purposes: dynamic dates)"); // Program autoloads
 																									// sample data for
 																									// testing purposes
-		System.out.println("4. Display active bids: ");
-		System.out.println("5. Exit: ");
+		System.out.println("3. Display active bids: ");
+		System.out.println("4. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -56,10 +56,8 @@ public class MainMenu {
 		} else if (choice == 2) {
 			loggedIn = loginInMenu(ah.getAllUsers());
 		} else if (choice == 3) {
-			sampleData(ah);
-		} else if (choice == 4) {
 			ah.activeBids();
-		} else if (choice == 5) {
+		} else if (choice == 4) {
 			// io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			SQLMethods.closeConnection();
@@ -68,6 +66,8 @@ public class MainMenu {
 			System.out.println("I don't understand, please enter a number from 1-5? ");
 		}
 
+	//} else if (choice == 3) { removed for now
+		//sampleData(ah);
 		return loggedIn;
 	}
 
