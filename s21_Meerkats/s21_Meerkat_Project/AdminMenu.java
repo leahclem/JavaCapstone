@@ -55,9 +55,8 @@ public class AdminMenu extends MainMenu {
 		System.out.println("6. Create new auction: ");// up_g add auction update db
 		System.out.println("7. Create new Admin: ");
 		System.out.println("8. View closed auctions: ");
-		System.out.println("9. View profit (database reporting): ");
-		System.out.println("10. Logout: ");
-		System.out.println("11. Exit: ");
+		System.out.println("9. Logout: ");
+		System.out.println("10. Exit: ");
 		System.out.print("Choice: ");
 		try {
 			value = scan.nextInt();
@@ -99,18 +98,9 @@ public class AdminMenu extends MainMenu {
 		} else if (choice == 8) {
 			ah.closedBids();
 		} else if (choice == 9) {
-			try {// Update the db, to add a new bid
-				SQLMethods.checkConnect();
-				SQLMethods.stmt.executeUpdate("CALL profit()");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("Update failed.");
-			}
-		} else if (choice == 10) {
 			loggedIn = null;
 			System.out.println("Bye Admin " + curUser.getUserName());
-		} else if (choice == 11) {
+		} else if (choice == 10) {
 			// io.outputData(ah.getAllPups(), ah.getAllUsers(), ah.getAllBids());
 			System.out.println("Bye!!!!!");
 			SQLMethods.closeConnection();
