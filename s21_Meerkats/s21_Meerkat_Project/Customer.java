@@ -67,18 +67,6 @@ public class Customer extends User {
 		this.payPal = payPal;
 	}
 
-/*	public ArrayList<Bids> getHiBids() {
-	return hiBids;
-	 }
-	
-	 //high bids needs more implementation
-	public void addHighBid(Bids added) {
-	 this.hiBids.add(added);
-	 }
-	
-	public void setHiBids(ArrayList<Bids> hiBids) {
-	 this.hiBids = hiBids;
-	}*/
 	
 	/**
 	 * getAddress method
