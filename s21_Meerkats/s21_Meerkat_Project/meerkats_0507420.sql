@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2021 at 09:32 PM
+-- Generation Time: May 07, 2021 at 10:20 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -27,6 +27,7 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `addAdmin`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addAdmin` (IN `userID` VARCHAR(15), IN `password` VARCHAR(15), IN `fname` VARCHAR(15), IN `lname` VARCHAR(15))  BEGIN
 		INSERT INTO theuser (userID, password, userType) VALUES
 		(userID, password, 'A');
@@ -34,17 +35,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addAdmin` (IN `userID` VARCHAR(15),
 		(fname, lname, userID); 
 	END$$
 
+DROP PROCEDURE IF EXISTS `addBackLog`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addBackLog` (IN `pupName` VARCHAR(15), IN `String` VARCHAR(255))  BEGIN
 	INSERT INTO backlogg (pupName, String) 
     VALUES
 		(pupName, String);
 END$$
 
+DROP PROCEDURE IF EXISTS `addBid`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addBid` (IN `winner1` VARCHAR(15), IN `currentBid1` DOUBLE(7,2), IN `maxBid1` DOUBLE(7,2), IN `name1` VARCHAR(15), IN `startBy1` VARCHAR(12), IN `endBy1` VARCHAR(12))  BEGIN
 	INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paidFor) VALUES
 		(currentBid1, maxBid1, endBy1, startBy1, winner1, name1, 1, 0);
 END$$
 
+DROP PROCEDURE IF EXISTS `addCust`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addCust` (IN `userID` VARCHAR(15), IN `password` VARCHAR(15), IN `email` VARCHAR(32), IN `address` VARCHAR(64))  BEGIN
 	INSERT INTO theuser (userID, password, userType) VALUES
 			(userID, password, 'C');
@@ -52,34 +56,40 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addCust` (IN `userID` VARCHAR(15), 
 			(email, address, userID);
 END$$
 
+DROP PROCEDURE IF EXISTS `addHistory`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addHistory` (IN `pupName` VARCHAR(15), IN `String` VARCHAR(255))  BEGIN
 	INSERT INTO bidHistory (pupName, String) 
     VALUES
 		(pupName, String);
 END$$
 
+DROP PROCEDURE IF EXISTS `addPup`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addPup` (IN `name` VARCHAR(15), IN `breed` VARCHAR(15), IN `sex` VARCHAR(15), IN `pedigree` TINYINT, IN `price` DOUBLE(7,2), IN `hypo` TINYINT)  BEGIN
 	INSERT INTO puppies (name, breed, sex, pedigree, price, hypo) VALUES
 		(name, breed, sex, pedigree, price, hypo);
 END$$
 
+DROP PROCEDURE IF EXISTS `adminInfo`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `adminInfo` ()  BEGIN
 	SELECT theuser.userID AS 'User ID', theuser.password AS 'Password', admin.fname AS 'First Name', admin.lname AS 'Last 		Name'
 	FROM theuser
 	INNER JOIN admin ON admin.userID=theuser.userID;
     END$$
 
+DROP PROCEDURE IF EXISTS `allBids`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `allBids` ()  BEGIN
 SELECT bids.name AS 'Puppy Name', bids.currentBid AS 'Current Bid', bids.winner AS 'Winner'
 FROM bids;
 END$$
 
+DROP PROCEDURE IF EXISTS `customerInfo`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `customerInfo` ()  BEGIN
 	SELECT theuser.userID AS 'User ID', theuser.password AS 'Password', customer.address AS 'Address', customer.payPal AS 'PayPal Address'
 	FROM theuser
 	INNER JOIN customer ON customer.userID=theuser.userID;
     END$$
 
+DROP PROCEDURE IF EXISTS `dequePups`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `dequePups` ()  BEGIN
 		DROP TABLE IF EXISTS backlogg;
 		CREATE TABLE backlogg (
@@ -88,6 +98,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `dequePups` ()  BEGIN
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 	END$$
 
+DROP PROCEDURE IF EXISTS `profit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `profit` ()  BEGIN
 		SELECT SUM(bids.currentBid) AS 'All Current Bids Value', SUM(puppies.price) AS 'All Puppies Price', 
 			(SUM(bids.currentBid)-SUM(puppies.price)) AS 'PROFIT'
@@ -95,12 +106,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `profit` ()  BEGIN
 		INNER JOIN puppies ON bids.name=puppies.name;
 	END$$
 
+DROP PROCEDURE IF EXISTS `updateActive`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateActive` (IN `name1` VARCHAR(15))  BEGIN
 	UPDATE bids
     	SET bids.active=0
     	WHERE bids.name=name1;
 	END$$
 
+DROP PROCEDURE IF EXISTS `updateBid`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateBid` (IN `winner1` VARCHAR(15), IN `currentBid1` DOUBLE(7,2), IN `maxBid1` DOUBLE(7,2), IN `name1` VARCHAR(15))  BEGIN
 	UPDATE bids
     SET bids.winner=winner1
@@ -113,6 +126,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `updateBid` (IN `winner1` VARCHAR(15
     WHERE bids.name=name1;
 END$$
 
+DROP PROCEDURE IF EXISTS `updatePaid`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updatePaid` (IN `name1` VARCHAR(15))  BEGIN
 	UPDATE bids
     	SET bids.paidFor=1
@@ -127,6 +141,7 @@ DELIMITER ;
 -- Table structure for table admin
 --
 
+DROP TABLE IF EXISTS admin;
 CREATE TABLE `admin` (
   fname varchar(15) NOT NULL,
   lname varchar(15) NOT NULL,
@@ -149,10 +164,19 @@ INSERT INTO admin (fname, lname, userID) VALUES
 -- Table structure for table backlogg
 --
 
+DROP TABLE IF EXISTS backlogg;
 CREATE TABLE backlogg (
   pupName varchar(15) NOT NULL,
   String varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table backlogg
+--
+
+INSERT INTO backlogg (pupName, String) VALUES
+('Olly', 'Dave 2500.00'),
+('Sophie', 'Bill 10000.00');
 
 -- --------------------------------------------------------
 
@@ -160,6 +184,7 @@ CREATE TABLE backlogg (
 -- Table structure for table bidhistory
 --
 
+DROP TABLE IF EXISTS bidhistory;
 CREATE TABLE bidhistory (
   pupName varchar(15) NOT NULL,
   String varchar(255) NOT NULL
@@ -183,6 +208,7 @@ INSERT INTO bidhistory (pupName, String) VALUES
 -- Table structure for table bids
 --
 
+DROP TABLE IF EXISTS bids;
 CREATE TABLE bids (
   currentBid double(7,2) NOT NULL,
   maxBid double(7,2) NOT NULL,
@@ -213,6 +239,7 @@ INSERT INTO bids (currentBid, maxBid, endBy, startBy, winner, name, active, paid
 -- Table structure for table customer
 --
 
+DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
   payPal varchar(32) NOT NULL,
   address varchar(64) NOT NULL,
@@ -238,6 +265,7 @@ INSERT INTO customer (payPal, address, userID) VALUES
 -- Table structure for table puppies
 --
 
+DROP TABLE IF EXISTS puppies;
 CREATE TABLE puppies (
   name varchar(15) NOT NULL,
   breed varchar(15) NOT NULL,
@@ -269,6 +297,7 @@ INSERT INTO puppies (name, breed, sex, pedigree, price, hypo) VALUES
 -- Table structure for table theuser
 --
 
+DROP TABLE IF EXISTS theuser;
 CREATE TABLE theuser (
   userID varchar(15) NOT NULL,
   password varchar(15) NOT NULL,
