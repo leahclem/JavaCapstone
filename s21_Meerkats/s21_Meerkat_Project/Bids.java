@@ -357,7 +357,15 @@ public class Bids {
 				//newWinBHQueue(cust, newBid);
 			}
 		}
-		
+		try {// Update the db and arraylist, to add a new admin
+			SQLMethods.checkConnect();
+			SQLMethods.stmt.executeUpdate(
+					"CALL updateBid(\'" + winner + "\', \'" + currentBid + "\', \'" + maxBid + "\', \'" + pup + "\')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Update failed.");
+		}
 		
 	}
 
