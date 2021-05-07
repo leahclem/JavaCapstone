@@ -37,7 +37,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addAdmin` (IN `userID` VARCHAR(15),
 
 DROP PROCEDURE IF EXISTS `addBackLog`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addBackLog` (IN `pupName` VARCHAR(15), IN `String` VARCHAR(255))  BEGIN
-	INSERT INTO backLogg (pupName, String) 
+	INSERT INTO backlogg (pupName, String) 
     VALUES
 		(pupName, String);
 END$$
@@ -58,7 +58,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `addHistory`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addHistory` (IN `pupName` VARCHAR(15), IN `String` VARCHAR(255))  BEGIN
-	INSERT INTO backLogg (pupName, String) 
+	INSERT INTO bidHistory (pupName, String) 
     VALUES
 		(pupName, String);
 END$$

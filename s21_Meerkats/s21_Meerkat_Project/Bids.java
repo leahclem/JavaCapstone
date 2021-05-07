@@ -219,7 +219,7 @@ public class Bids {
 			SQLMethods.stmt.executeUpdate("CALL addHistory(\'" + pup.getName() + "\', \'" + bh + "\')");
 //			SQLMethods.stmt.executeUpdate("INSERT INTO bidhistory (\'"+pup.getName() + "\', \'" + bh + "\')");
 //			System.out.println("INSERT INTO bidhistory (\'"+pup.getName() + "\', \'" + bh + "\')");
-			SQLMethods.stmt.executeUpdate("");
+			
 			bidHistory.enqueue(bh);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -336,31 +336,31 @@ public class Bids {
 		if (winner.getUserName().equalsIgnoreCase("no one")) { // do this if the bid is the first bid
 			winner = cust;
 			maxBid = newBid;
-			//newBHQueue(cust, newBid);
+			newBHQueue(cust, newBid);
 
 		} else if (winner == cust) { // do this if the customer is upping their bid on the same dog
 			if (newBid > maxBid) { // if the bid is more than the current max bid
 				maxBid = newBid;
-				//updateBHQueue(cust, newBid);
+				updateBHQueue(cust, newBid);
 			} else if (newBid <= maxBid) { // if the bid is less than or equals to the max bid
-				//notEnoughBHQueue(cust, newBid);
+				notEnoughBHQueue(cust, newBid);
 			}
 
 		} else { // if neither of the above situations apply then do this:
 			if (newBid <= maxBid) { // if the newBid is less than or equals to maxBid
 				currentBid = newBid;
-				//notEnoughBHQueue(cust, newBid);
+				notEnoughBHQueue(cust, newBid);
 			} else if (newBid > maxBid) { // if the newBid is greater than maxBid
 				winner = cust;
 				currentBid = maxBid + increment;
 				maxBid = newBid;
-				//newWinBHQueue(cust, newBid);
+				newWinBHQueue(cust, newBid);
 			}
 		}
-		try {// Update the db and arraylist, to add a new admin
+		try {// Update the db to add a new bid
 			SQLMethods.checkConnect();
 			SQLMethods.stmt.executeUpdate(
-					"CALL updateBid(\'" + winner + "\', \'" + currentBid + "\', \'" + maxBid + "\', \'" + pup + "\')");
+					"CALL updateBid(\'" + winner.getUserName() + "\', \'" + currentBid + "\', \'" + maxBid + "\', \'" + pup.getName() + "\')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
