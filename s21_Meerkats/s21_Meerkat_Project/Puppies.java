@@ -49,7 +49,7 @@ public class Puppies {
 	/**
 	 * A constructor using only the name String
 	 * 
-	 * @param name
+	 * @param name - Puppies name
 	 * 
 	 */
 	public Puppies(String name) {
@@ -60,12 +60,12 @@ public class Puppies {
 	/**
 	 * Full constructor using name, breed, sex, pedigree, price, and hypo.
 	 * 
-	 * @param name
-	 * @param breed
-	 * @param sex
-	 * @param pedigree
-	 * @param price
-	 * @param hypo
+	 * @param name - Puppies name
+	 * @param breed - Puppies breed
+	 * @param sex - Puppies sex
+	 * @param pedigree - Puppies pedrigree
+	 * @param price - Puppies price
+	 * @param hypo - Puppies hypo
 	 */
 	public Puppies(String name, String breed, String sex, boolean pedigree, double price, boolean hypo) {
 		super();
@@ -113,7 +113,7 @@ public class Puppies {
 	/**
 	 * setName method
 	 * 
-	 * @param name
+	 * @param name - puppies name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -122,7 +122,7 @@ public class Puppies {
 	/**
 	 * getBreed method
 	 * 
-	 * @return breed
+	 * @return breed - puppies breed
 	 */
 	public String getBreed() {
 		return breed;
@@ -131,7 +131,7 @@ public class Puppies {
 	/**
 	 * setBreed method
 	 * 
-	 * @param breed
+	 * @param breed - puppies breed
 	 */
 	public void setBreed(String breed) {
 		this.breed = breed;
@@ -140,7 +140,7 @@ public class Puppies {
 	/**
 	 * getSex method
 	 * 
-	 * @return sex
+	 * @return sex  - puppies sex
 	 */
 	public String getSex() {
 		return sex;
@@ -149,7 +149,7 @@ public class Puppies {
 	/**
 	 * setSex method
 	 * 
-	 * @param sex
+	 * @param sex - puppies sex
 	 */
 	public void setSex(String sex) {
 		this.sex = sex;
@@ -167,7 +167,7 @@ public class Puppies {
 	/**
 	 * setPedigree method
 	 * 
-	 * @param pedigree
+	 * @param pedigree - puppies pedigree
 	 */
 	public void setPedigree(boolean pedigree) {
 		this.pedigree = pedigree;
@@ -176,7 +176,7 @@ public class Puppies {
 	/**
 	 * getPrice method
 	 * 
-	 * @return price
+	 * @return price - puppies price
 	 */
 	public double getPrice() {
 		return price;
@@ -185,7 +185,7 @@ public class Puppies {
 	/**
 	 * setPrice method
 	 * 
-	 * @param price
+	 * @param price - puppies price
 	 */
 	public void setPrice(double price) {
 		this.price = price;
@@ -194,7 +194,7 @@ public class Puppies {
 	/**
 	 * isHypo method
 	 * 
-	 * @return hypo
+	 * @return hypo - puppies hypo (T/F)
 	 */
 	public boolean isHypo() {
 		return hypo;
@@ -203,7 +203,7 @@ public class Puppies {
 	/**
 	 * setHypo method
 	 * 
-	 * @param hypo
+	 * @param hypo - puppies hypo(T/F)
 	 */
 	public void setHypo(boolean hypo) {
 		this.hypo = hypo;

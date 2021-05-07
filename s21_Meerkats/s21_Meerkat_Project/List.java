@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 /**
  * List class used to create list objects for use with Queue class
  *
- * @param <E>
+ * @param List
  */
 class ListNode<E> {
 	// package access members; List can access these directly
@@ -15,7 +15,7 @@ class ListNode<E> {
 	E data; // data for this node
 
 	/**
-	 * ListNode<E> references next node in list
+	 * ListNode - references next node in list
 	 */
 	ListNode<E> nextNode; // reference to the next node in the list
 
@@ -24,7 +24,7 @@ class ListNode<E> {
 	/**
 	 * Constructor for List class
 	 * 
-	 * @param object
+	 * @param object - the object in the list
 	 */
 	ListNode(E object) {
 		this(object, null);
@@ -36,8 +36,8 @@ class ListNode<E> {
 	/**
 	 * Constructor for List class
 	 * 
-	 * @param data
-	 * @param nextNode
+	 * @param object - object being stored
+	 * @param node - the next node
 	 */
 	ListNode(E object, ListNode<E> node) {
 		data = object;
@@ -68,15 +68,15 @@ class ListNode<E> {
 /**
  * Class List contains: firstNode lastNode name
  *
- * @param <E>
+ * @param List
  */
 public class List<E> {
 	/**
-	 * field firstNode containing generic element <E>
+	 * field firstNode containing generic element 
 	 */
 	private ListNode<E> firstNode;
 	/**
-	 * field lastNode containing generic element <E>
+	 * field lastNode containing generic element
 	 */
 	private ListNode<E> lastNode;
 	/**
@@ -94,7 +94,7 @@ public class List<E> {
 	/**
 	 * Constructor for List, using listName (String) as name
 	 * 
-	 * @param listName
+	 * @param listName - String containing the list's name
 	 */
 	public List(String listName) {
 		name = listName;
@@ -104,7 +104,7 @@ public class List<E> {
 	/**
 	 * insertAtFront method used to add an item to the front of the List
 	 * 
-	 * @param insertItem
+	 * @param insertItem - inserts an item at the front of the list
 	 * 
 	 */
 	public void insertAtFront(E insertItem) {
@@ -118,7 +118,7 @@ public class List<E> {
 	/**
 	 * insertAtBack method used to add an item to the back of the List
 	 * 
-	 * @param insertItem
+	 * @param insertItem - inserts an item at the back of the List
 	 * 
 	 */
 	public void insertAtBack(E insertItem) {
@@ -156,7 +156,7 @@ public class List<E> {
 	 * removeFromBack method used to remove an item from the back of the List
 	 * 
 	 * @return removedItem
-	 * @throws NoSuchElementException
+	 * @throws NoSuchElementException - if list is empty throw this error
 	 */
 	public E removeFromBack() throws NoSuchElementException {
 		if (isEmpty()) { // throw exception if List is empty

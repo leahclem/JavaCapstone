@@ -36,7 +36,7 @@ public class Customer extends User {
 	 * @param userName - Customer user name
 	 * @param password - Customer password
 	 * @param address - Customer mailing address
-	 * @param paypal - Customer paypal address
+	 * @param payPal - Customer paypal address
 	 */
 	Customer(String userName, String password, String address, String payPal) {
 		super(userName, password, 'C');

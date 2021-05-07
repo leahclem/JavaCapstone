@@ -19,6 +19,7 @@ public class Puppies_Run_Me {
 	 * Main method of Meerkats project generates menu based on User credentials (not
 	 * logged in, Admin or Customer),
 	 *
+	 *@param args - arguments
 	 */
 
 	public static void main(String[] args) {

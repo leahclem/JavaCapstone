@@ -5,17 +5,17 @@ import java.util.NoSuchElementException;
 /**
  * Queue class used for linked list implementation with the List class
  *
- * @param <E>
+ * @param Queue
  */
 public class Queue<E> {
 	/**
-	 * queue class field containing generic List<E> as defined in List class
+	 * queue class field containing generic List as defined in List class
 	 */
 	private List<E> queueList;
 
 	// constructor
 	/**
-	 * Constructor method using a List of generic objects <E>
+	 * Constructor method using a List of generic objects
 	 */
 	public Queue() {
 		queueList = new List<E>("queue");
@@ -25,7 +25,7 @@ public class Queue<E> {
 	/**
 	 * enqueue method to add an object to the queue (FIFO)
 	 * 
-	 * @param object
+	 * @param object - object
 	 */
 	public void enqueue(E object) {
 		queueList.insertAtBack(object);
@@ -37,7 +37,7 @@ public class Queue<E> {
 	 * element
 	 * 
 	 * @return List object
-	 * @throws NoSuchElementException
+	 * @throws NoSuchElementException - if queue is empty
 	 */
 	public E dequeue() throws NoSuchElementException {
 		return queueList.removeFromFront();

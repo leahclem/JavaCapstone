@@ -43,9 +43,9 @@ public class MainMenu {
 	 * menuChoice method takes an int for the menu choice, and uses AuctionHouse and
 	 * InputOutputMethods to process user response
 	 * 
-	 * @param choice
-	 * @param ah
-	 * @return User
+	 * @param choice - user's selection
+	 * @param ah - AuctionHouse object
+	 * @return User - User object
 	 */
 	public User menuChoice(int choice, AuctionHouse ah) {// removed , InputOutputMethods io @param io
 		// the InputOutputMethods class
@@ -75,7 +75,7 @@ public class MainMenu {
 	 * printPups method prints the puppies sorted by price or breed, based on User
 	 * input 1 for breed and 2 for price
 	 * 
-	 * @param pupList
+	 * @param pupList - ArrayList of puppies
 	 */
 	public void printPups(ArrayList<Puppies> pupList) {
 		if (pupList.isEmpty()) {
@@ -163,8 +163,8 @@ public class MainMenu {
 	 * returningUser method 2: create a new customer account, points to createCust
 	 * method
 	 * 
-	 * @param users
-	 * @return User
+	 * @param users - User object
+	 * @return User - User object
 	 */
 	public User loginInMenu(ArrayList<User> users) {
 		// Variable Declaration
@@ -198,8 +198,8 @@ public class MainMenu {
 	 * returningUser allows an existent Customer to log in using their Username and
 	 * Password
 	 * 
-	 * @param users
-	 * @return User
+	 * @param users - User object
+	 * @return User - User object
 	 */
 	public User returningUser(ArrayList<User> users) {
 		// Variable Declaration
@@ -237,8 +237,8 @@ public class MainMenu {
 	 * createCust method allows the user to create a new customer profile asks for
 	 * username, password, and PayPal email address
 	 * 
-	 * @param users
-	 * @return User
+	 * @param users - User object
+	 * @return User - User object
 	 */
 	public User createCust(ArrayList<User> users) {
 		// Variable Declaration
@@ -290,7 +290,7 @@ public class MainMenu {
 	 * sampleData method loads some sample data for testing purposes method is used
 	 * to create Puppies object and Bids objects with dynamic ending times
 	 * 
-	 * @param ah
+	 * @param ah - AuctionHouse object
 	 */
 	public void sampleData(AuctionHouse ah) {// adds some extra puppies and auctions to the program
 		// Variable Declaration
@@ -387,9 +387,9 @@ public class MainMenu {
 	 * findPup method is used by the sampleData method as a safeguard to ensure that
 	 * multiple Puppies objects with the same name are not created
 	 * 
-	 * @param name
-	 * @param ah
-	 * @return Puppies
+	 * @param name - Puppy name
+	 * @param ah - AuctionHouse object
+	 * @return Puppies - Puppies object
 	 */
 
 	private Puppies findPup(String name, AuctionHouse ah) { // this method is be used only by sample data method above
@@ -426,9 +426,9 @@ public class MainMenu {
 	 * pupExists method is used by the sampleData method as a safeguard to ensure
 	 * that multiple Puppies objects with the same name are not created
 	 * 
-	 * @param name
-	 * @param ah
-	 * @return boolean
+	 * @param name - Puppie name
+	 * @param ah - AuctionHouse object
+	 * @return boolean - true or false, if pup exists 
 	 */
 	private boolean pupExists(String name, AuctionHouse ah) {
 		for (Puppies p : ah.getAllPups()) {
@@ -444,8 +444,8 @@ public class MainMenu {
 	 * queries the Admin for String name, String breed, String sex, boolean
 	 * pedigree, boolean hypo, double price
 	 *
-	 * @param ah
-	 * @return Puppies
+	 * @param ah - AuctionHouse object
+	 * @return Puppies - Puppies object
 	 */
 
 	public Puppies addPup(AuctionHouse ah) {
@@ -571,7 +571,7 @@ public class MainMenu {
 	 * checkValid method is a method to analyze a String to ensure it does not
 	 * contain either '|' or 'null' used in both addPup and createCust methods
 	 * 
-	 * @param input
+	 * @param input - String to validate 
 	 */
 	public void checkValid(String input) {
 		Scanner scan = new Scanner(System.in);

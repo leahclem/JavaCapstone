@@ -44,9 +44,9 @@ public class User {
 	/**
 	 * Full constructor containing userName, password, type
 	 * 
-	 * @param userName
-	 * @param password
-	 * @param type
+	 * @param userName - the user name
+	 * @param password - the user password
+	 * @param type - the type of user
 	 */
 	User(String userName, String password, char type) {
 		this.userName = userName;
@@ -79,7 +79,7 @@ public class User {
 	/**
 	 * setUserType
 	 * 
-	 * @param userType
+	 * @param userType - 'A'dmin or 'C'ustomer
 	 */
 	public void setUserType(char userType) {
 		this.userType = userType;
@@ -97,7 +97,7 @@ public class User {
 	/**
 	 * setUserName method
 	 * 
-	 * @param userName
+	 * @param userName - A or C
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -115,7 +115,7 @@ public class User {
 	/**
 	 * setPassword
 	 * 
-	 * @param password
+	 * @param password - User's password
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -133,7 +133,7 @@ public class User {
 	/**
 	 * setID method
 	 * 
-	 * @param id
+	 * @param id - unused
 	 */
 	public void setId(String id) {
 		this.id = id;
