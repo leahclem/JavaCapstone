@@ -12,66 +12,71 @@ THIRD:		We implemented a queue for backlog data and bid history. To test backlog
 			To process the backlogged data you must sign in as an Admin during 9:00 to 17:00 and select option 1. To view the bid history 
 			you must sign in as an Admin and select option 9.
 
+						(Checkpoint E update!!)
+FIRST:		Since we have implemented the database there is no need to save the SaveData.txt file to your computer. Instead please use SQL to
+		import the meerkats.sql database.
+SECOND:		Main Menu Option 3 is no longer necessary, so we removed that from the program.
+THIRD:		The database is 100% synced with the program. So, if you use the Java program, close it, and return all of the data is preserved. As 
+		you use the program it actively keeps the database updated.
+FOURTH:		It is very important that you change the system clock before or after you run the Java application for testing. If you change it while
+		in the application it will cause an error with the database connection.
+
 // Here is the initial menu:
 
  Welcome to Puppy Heaven!
 1. Search puppies: 
 2. Sign in: 
-3. Load sample data: (for testing/grading purposes: dynamic dates) 
-4. Display active bids: 
-5. Exit: 
+3. Display active bids: 
+4. Exit: 
 Choice: 
 
-Option 1: 	Working to search by name or price. Pre-loaded with several Puppies objects:
-			Puppies pupA = new Puppies("Ginger", "poodle", "male", true, 2000.0, false, true);
-			Puppies pupB = new Puppies("Pepper", "beagle", "male", true, 1000.0, false, true);
-			Puppies pupC = new Puppies("Red", "German Shepherd", "female", true, 1500.0, false, true);
-			Puppies pupD = new Puppies("Weston", "Alsation", "female", false, 200, true, true);
-		
-			The primary key for the puppies is the name (e.g. Jolly, Happy, etc.).
+Option 1: 	Working to search by name or price. Pre-loaded with several Puppies objects. Use this feature to find sample puppies objects.
 		
 Option 2: 	Sign in is working, we have several profiles created for Customers as well as Admins:
-			dwolff|CutePups|Diane|Wolff|true
-			assteroids|123|Leah|Clemens|true
-			willzy|apple|Will|McCoy|true
-			jdoe|apple|31 Old Warren Rd.|schmoe@gmail.com
-			dave|apple|7457 Grapetree Lane|dave@superdave.com
+		Customers: 	userID 		Password
+				Bill		apple
+				Dave		apple
+				Jack		apple
+				Joe		apple
+				John Doe	apple
+				Sandra		apple
+
+		Admins:		userID		Password
+				Diane		apple
+				Sammy		apple
+				Santa		apple
+				Willzy		apple
+
+		Note that userID and password are both case sensitive.
+
 		
-			The first three are Admins: e.g.: user name: dwolff, password: CutePups, First Name: Diane, Last name: Wolff, boolean for use later. 
+Option 3: 	Works, shows any active auctions.
 
-			The last two are customers: e.g.: user name: jdoe, password: apple, address, email for PayPal
-		
-Option 3: 	Works, program loads sample data from SavedData.txt file and displays auctions that have ended. However, this option
-			would not be in the end user program and is used for data (times) that are dynamic (e.g. end 5 minutes from program 
-			start).
-
-Option 4: 	Works, shows any active auctions.
-
-Option 5: 	Works, ends program.
+Option 4: 	Works, ends program.
 
 // Now you can select Option 2 to sign in. The following menu will be displayed:
 
 1. Sign in
 2. Create Customer Account
 
-Option 1: 	This option works. To sign in as Admin use option 1 and your UserName "dwolff", and password "CutePups".
+Option 1: 	This option works. To sign in as Admin use option 1 and your UserName "Diane", and password "apple".
 
 Option 2: 	This option works. This brings up a separate menu to set up a new Customer.
 
 // Choose option 1 then it will query you for user name and password, then bring up the following menu (you are an Admin, so this is 
 the Admin menu, later in the tutorial you can log in as a Customer and we will detail the Customer Menu):
 
-Welcome dwolff
+Welcome Diane
  Welcome to Puppy Heaven! Admin user dwolff
 1. Process backlogged data for Auctions (9-5pm): 
 2. List puppies: 
-3. Logout:
+3. View bid history queue
 4. Add a new puppy for sale:
 5. Display active auctions:
 6. Create new auction:
 7. Create new Admin: 
 8. View closed auctions:
-9. View bid history queue:
+9. Logout:
 10. Exit:
 Choice: 
 
@@ -81,7 +86,7 @@ Option 1. 	Works. Processes backlogged data for after hours auctions (5pm-9am). 
 			
 Option 2. 	Works. Prints all Puppies.
 
-Option 3. 	Works. Logs the Admin out, returns to Main Menu.
+Option 3.	Works. View bid history queue.
 
 Option 4. 	Works. Adds a new puppy to the ArrayList of Puppies objects. This prompts the Admin for all the fields for the new puppy object. 
 			This can be tested by using option 2 to search and enter a large value like 100000 for price. It will list any puppies under 
@@ -98,8 +103,7 @@ Option 7. 	Works. Allows the Admin to create a new Admin.
 
 Option 8. 	Works. Displays all auctions that have ended.
 
-Option 9. 	Works. Search by puppy name or view all bid history. This provides an annotated list of bids as per the project description
-			document.
+Option 9. 	Works. Logs out at the admin.
 
 Option 10. 	Works. Exits program.
 
