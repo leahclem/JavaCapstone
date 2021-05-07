@@ -2,15 +2,9 @@ package s21_Meerkat_Project;
 
 import java.util.NoSuchElementException;
 
-/**
- * Queue class used for linked list implementation with the List class
- *
- * @param Queue
- */
+
 public class Queue<E> {
-	/**
-	 * queue class field containing generic List as defined in List class
-	 */
+	
 	private List<E> queueList;
 
 	// constructor
@@ -48,7 +42,7 @@ public class Queue<E> {
 	 * isEmpty method, used to determine if the queue is empty, returns 'true' if
 	 * empty, 'false' if not empty
 	 * 
-	 * @return
+	 * @return boolean if Queue is empty
 	 */
 	public boolean isEmpty() {
 		return queueList.isEmpty();

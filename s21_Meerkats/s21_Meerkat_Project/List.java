@@ -2,11 +2,8 @@ package s21_Meerkat_Project;
 
 import java.util.NoSuchElementException;
 
-/**
- * List class used to create list objects for use with Queue class
- *
- * @param List
- */
+
+
 class ListNode<E> {
 	// package access members; List can access these directly
 	/**
@@ -65,15 +62,9 @@ class ListNode<E> {
 
 // class List definition
 
-/**
- * Class List contains: firstNode lastNode name
- *
- * @param List
- */
+
 public class List<E> {
-	/**
-	 * field firstNode containing generic element 
-	 */
+	
 	private ListNode<E> firstNode;
 	/**
 	 * field lastNode containing generic element
@@ -133,7 +124,7 @@ public class List<E> {
 	 * removeFromFront method used to remove an item from the front of the List
 	 * 
 	 * @return removedItem
-	 * @throws NoSuchElementException
+	 * @throws NoSuchElementException - if list is empty
 	 */
 	public E removeFromFront() throws NoSuchElementException {
 		if (isEmpty()) { // throw exception if List is empty
